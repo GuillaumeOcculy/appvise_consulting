@@ -14,6 +14,13 @@ stepsCompleted:
   - step-10-nonfunctional
   - step-11-polish
   - step-12-complete
+  - step-e-01-discovery
+  - step-e-02-review
+  - step-e-03-edit
+lastEdited: '2026-03-21'
+editHistory:
+  - date: '2026-03-21'
+    changes: 'Corrections rapport de validation : reformulation FRs système, séparation principes éditoriaux, contexte NFRs, ajout date frontmatter'
 inputDocuments:
   - _bmad-output/planning-artifacts/product-brief-appvise_consulting-2026-03-21.md
   - _bmad-output/brainstorming/brainstorming-session-2026-03-21-001.md
@@ -30,6 +37,7 @@ classification:
   complexity: low
   projectContext: greenfield
 date: '2026-03-21'
+workflow: 'edit'
 ---
 
 # Product Requirements Document - appvise_consulting
@@ -331,10 +339,6 @@ Navigateurs modernes uniquement :
 - **FR10 :** Le visiteur peut voir la section garantie paiement à la satisfaction avec le détail du modèle (acompte + solde à la satisfaction, itérations illimitées)
 - **FR11 :** Le visiteur peut voir une section "À propos" intégrée à l'accueil (photo Guillaume, positionnement, lien YouTube)
 
-### Principes de contenu
-
-- **FR28 :** Tout le contenu du site utilise un langage zéro jargon technique — parler en termes de résultats client, pas de technologies ("Vos factures se traitent seules" plutôt que "API + ERP intégrés")
-- **FR29 :** La page d'accueil nomme explicitement les anti-patterns des agences et freelances pour désamorcer la méfiance ("Pas de devis surprise. Pas de livraison bâclée. Pas de 2 allers-retours max.")
 
 ### Navigation & Structure
 
@@ -345,27 +349,32 @@ Navigateurs modernes uniquement :
 
 ### SEO & Découvrabilité
 
-- **FR16 :** Chaque page possède des balises meta (title, description) optimisées pour le référencement
-- **FR17 :** Le site génère automatiquement un sitemap XML
-- **FR18 :** Le site inclut des données structurées (Organization, LocalBusiness)
-- **FR19 :** Chaque page possède des balises Open Graph pour le partage LinkedIn
+- **FR16 :** Le visiteur peut trouver chaque page via les moteurs de recherche grâce aux balises meta optimisées (title, description)
+- **FR17 :** Les moteurs de recherche peuvent indexer l'ensemble du site via un sitemap XML généré automatiquement
+- **FR18 :** Les moteurs de recherche peuvent afficher des résultats enrichis grâce aux données structurées (Organization, LocalBusiness)
+- **FR19 :** Le visiteur qui partage une page sur LinkedIn peut voir un aperçu riche grâce aux balises Open Graph
 
 ### Intégrations & Automatisation
 
-- **FR20 :** Les soumissions de formulaires Tally sont transmises à Airtable (CRM leads) via webhook n8n
-- **FR21 :** Les réservations Zcal sont transmises à Airtable via webhook n8n
-- **FR22 :** Les complétions de quiz déclenchent un envoi de diagnostic automatisé par email via n8n
+- **FR20 :** Guillaume peut retrouver chaque soumission de formulaire Tally dans Airtable (CRM leads) via n8n
+- **FR21 :** Guillaume peut retrouver chaque réservation Zcal dans Airtable via n8n
+- **FR22 :** Le visiteur qui complète le quiz reçoit un diagnostic personnalisé par email via n8n
 - **FR23 :** Guillaume reçoit une notification quand un nouveau lead est capté (formulaire, booking ou quiz)
 
 ### Analytics & Suivi
 
-- **FR24 :** Le site track les événements de conversion (clic CTA, soumission formulaire, réservation audit, complétion quiz)
+- **FR24 :** Guillaume peut suivre les événements de conversion (clic CTA, soumission formulaire, réservation audit, complétion quiz) via un outil analytics
 - **FR25 :** Guillaume peut consulter les métriques de trafic et de conversion via un outil analytics
 
 ### Gestion de contenu
 
 - **FR26 :** Guillaume peut ajouter ou modifier une étude de cas sans intervention dev (contenu markdown)
-- **FR27 :** Guillaume peut modifier le contenu textuel des pages avec un redéploiement en moins de 5 minutes
+- **FR27 :** Guillaume peut modifier le contenu textuel des pages et redéployer en moins de 5 minutes
+
+## Principes éditoriaux
+
+- **PE1 :** Aucun terme technique non expliqué dans le contenu visible du site — parler en termes de résultats client, pas de technologies ("Vos factures se traitent seules" plutôt que "API + ERP intégrés")
+- **PE2 :** La page d'accueil nomme explicitement les anti-patterns des agences et freelances pour désamorcer la méfiance ("Pas de devis surprise. Pas de livraison bâclée. Pas de 2 allers-retours max.")
 
 ## Exigences non fonctionnelles
 
@@ -377,7 +386,7 @@ Navigateurs modernes uniquement :
 - **NFR4 :** Time to First Byte (TTFB) < 800ms sur mobile 4G
 - **NFR5 :** Score Lighthouse global > 90 (Performance, SEO, Accessibilité, Best Practices)
 - **NFR6 :** Poids total de la page d'accueil < 500 KB (hors embeds tiers)
-- **NFR7 :** Les embeds Tally et Zcal se chargent de manière asynchrone sans bloquer le rendu de la page
+- **NFR7 :** Les embeds Tally et Zcal se chargent de manière asynchrone en moins de 3 secondes sans bloquer le rendu de la page
 
 ### Accessibilité
 

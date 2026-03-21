@@ -21,7 +21,7 @@ validationStepsCompleted:
   - step-v-12-completeness
   - step-v-13-report-complete
 validationStatus: COMPLETE
-holisticQualityRating: '4/5 - Good'
+holisticQualityRating: '5/5 - Excellent'
 overallStatus: 'Pass'
 ---
 
@@ -29,6 +29,7 @@ overallStatus: 'Pass'
 
 **PRD validé :** _bmad-output/planning-artifacts/prd.md
 **Date de validation :** 2026-03-21
+**Note :** Validation post-édition (corrections issues rapport précédent)
 
 ## Documents d'entrée
 
@@ -49,7 +50,8 @@ overallStatus: 'Pass'
 5. Exigences spécifiques Web App
 6. Scoping projet & développement phasé
 7. Exigences fonctionnelles
-8. Exigences non fonctionnelles
+8. Principes éditoriaux
+9. Exigences non fonctionnelles
 
 **Sections BMAD Core présentes :**
 - Executive Summary : ✅ Présent
@@ -111,54 +113,37 @@ overallStatus: 'Pass'
 
 #### Exigences fonctionnelles
 
-**Total FRs analysées :** 29
+**Total FRs analysées :** 27
 
-**Violations de format (non "[Acteur] peut [capacité]") :** 10
-- FR16 : "Chaque page possède des balises meta..." (spécification système, ligne 346)
-- FR17 : "Le site génère automatiquement un sitemap XML" (spécification système, ligne 347)
-- FR18 : "Le site inclut des données structurées..." (spécification système, ligne 348)
-- FR19 : "Chaque page possède des balises Open Graph..." (spécification système, ligne 349)
-- FR20 : "Les soumissions de formulaires Tally sont transmises à Airtable..." (spécification intégration, ligne 354)
-- FR21 : "Les réservations Zcal sont transmises à Airtable..." (spécification intégration, ligne 355)
-- FR22 : "Les complétions de quiz déclenchent un envoi..." (spécification intégration, ligne 356)
-- FR24 : "Le site track les événements de conversion..." (spécification système, ligne 361)
-- FR28 : "Tout le contenu du site utilise un langage zéro jargon technique" (principe de contenu, ligne 335)
-- FR29 : "La page d'accueil nomme explicitement les anti-patterns..." (principe de contenu, ligne 336)
+**Violations de format (non "[Acteur] peut [capacité]") :** 0 — Toutes les FRs suivent le format BMAD ✅
 
-**Adjectifs subjectifs :** 2
-- FR27 : "sans redéploiement complexe" — "complexe" est subjectif (ligne 367)
-- FR28 : "langage zéro jargon technique" — non mesurable objectivement (ligne 335)
+**Adjectifs subjectifs :** 0
 
-**Quantificateurs vagues :** 1
-- FR25 : "via un outil analytics" — outil non spécifié (ligne 362)
+**Quantificateurs vagues :** 0
 
 **Fuite d'implémentation :** 0
-- Les mentions de Tally, Zcal, Airtable, n8n sont des services tiers requis, pas des choix d'implémentation
 
-**Total violations FR :** 13
+**Total violations FR :** 0
 
 #### Exigences non fonctionnelles
 
 **Total NFRs analysées :** 18
 
 **Métriques manquantes :** 1
-- NFR7 : "chargement asynchrone sans bloquer le rendu" — pas de métrique spécifique (ligne 379)
+- NFR7 : "chargement asynchrone sans bloquer le rendu" — pas de métrique de temps spécifique
 
-**Template incomplet (contexte manquant) :** 3
-- NFR2 : FID < 100ms — conditions de test non spécifiées (ligne 374)
-- NFR3 : CLS < 0.1 — conditions de test non spécifiées (ligne 375)
-- NFR4 : TTFB < 800ms — conditions de test non spécifiées (ligne 376)
+**Template incomplet (contexte manquant) :** 0 — NFR1-4 ont tous le contexte "sur mobile 4G"
 
-**Total violations NFR :** 4
+**Total violations NFR :** 1
 
 #### Évaluation globale
 
-**Total exigences :** 47 (29 FRs + 18 NFRs)
-**Total violations :** 17
+**Total exigences :** 45 (27 FRs + 18 NFRs)
+**Total violations :** 1
 
-**Sévérité :** ⚠️ Critical (>10 violations)
+**Sévérité :** ✅ Pass (1 violation mineure)
 
-**Recommandation :** La majorité des violations FR concernent des exigences système (SEO, intégrations, analytics) qui ne suivent pas le format "[Acteur] peut [capacité]". Ces FRs pourraient être reclassées en spécifications techniques ou reformulées. Les NFRs sont globalement bien mesurables — seul le contexte de test est manquant pour quelques Core Web Vitals.
+**Recommandation :** Les exigences sont désormais très bien mesurables. Seule NFR7 manque d'une métrique spécifique (considérer ajouter un seuil de temps de chargement pour les embeds).
 
 ### Validation de traçabilité
 
@@ -174,8 +159,7 @@ overallStatus: 'Pass'
 
 #### Éléments orphelins
 
-**FRs orphelines :** 1
-- FR28 : "langage zéro jargon technique" — principe de contenu transversal, pas traçable à un parcours spécifique (supporte la stratégie globale)
+**FRs orphelines :** 0 — Aucune FR orpheline (FR28/FR29 déplacées en Principes éditoriaux)
 
 **Critères de succès non supportés :** 0
 
@@ -191,11 +175,11 @@ overallStatus: 'Pass'
 | Marc (Méfiance→Audit) | FR1, FR7, FR8, FR10, FR14 |
 | Guillaume (Admin) | FR20-FR21, FR23, FR25, FR26, FR27 |
 
-**Total problèmes de traçabilité :** 1
+**Total problèmes de traçabilité :** 0
 
 **Sévérité :** ✅ Pass
 
-**Recommandation :** La chaîne de traçabilité est solide. Seule FR28 est un principe de contenu transversal qui pourrait être déplacé dans une section "Principes de contenu" plutôt que d'être un FR formel.
+**Recommandation :** La chaîne de traçabilité est intacte. Zéro élément orphelin.
 
 ### Validation de fuite d'implémentation
 
@@ -207,26 +191,21 @@ overallStatus: 'Pass'
 **Cloud Platforms :** 0 violation
 **Infrastructure :** 0 violation
 **Libraries :** 0 violation
-**Autres détails d'implémentation :** 1 violation mineure
-- FR20/FR21 : "via webhook n8n" — le terme "webhook" spécifie le mécanisme de transmission (HOW) plutôt que le besoin (WHAT). Pourrait être reformulé en "les données sont transmises à Airtable via n8n".
+**Autres détails d'implémentation :** 0 violation
 
 #### Synthèse
 
-**Total violations de fuite d'implémentation :** 1
+**Total violations de fuite d'implémentation :** 0
 
 **Sévérité :** ✅ Pass
 
-**Recommandation :** Pas de fuite d'implémentation significative. Les mentions de Tally, Zcal, Airtable, n8n sont des services tiers requis par le client et constituent des exigences de capacité, pas des choix d'implémentation.
-
-**Note :** La section "Considérations d'implémentation" mentionne des patterns d'architecture (MPA, SSG) mais elle est correctement séparée des FRs/NFRs.
+**Recommandation :** Aucune fuite d'implémentation. Les mentions de Tally, Zcal, Airtable, n8n sont des services tiers requis par le client et constituent des exigences de capacité, pas des choix d'implémentation. Le terme "webhook" a été retiré des FRs.
 
 ### Validation de conformité domaine
 
 **Domaine :** general
 **Complexité :** Faible (general/standard)
 **Évaluation :** N/A — Pas d'exigences de conformité réglementaire spécifiques
-
-**Note :** Ce PRD concerne un domaine standard (consulting/services B2B) sans contraintes réglementaires.
 
 ### Validation de conformité projet-type
 
@@ -257,17 +236,15 @@ overallStatus: 'Pass'
 
 **Sévérité :** ✅ Pass
 
-**Recommandation :** Toutes les sections requises pour un projet web_app sont présentes et bien documentées. Aucune section inappropriée n'est incluse.
-
 ### Validation SMART des exigences fonctionnelles
 
-**Total FRs :** 29
+**Total FRs :** 27
 
 #### Synthèse scoring
 
-**Tous scores ≥ 3 :** 93.1% (27/29)
-**Tous scores ≥ 4 :** 82.8% (24/29)
-**Score moyen global :** 4.7/5.0
+**Tous scores ≥ 3 :** 100% (27/27)
+**Tous scores ≥ 4 :** 100% (27/27)
+**Score moyen global :** 4.9/5.0
 
 #### Table de scoring
 
@@ -287,57 +264,48 @@ overallStatus: 'Pass'
 | FR12 | 4 | 5 | 5 | 5 | 4 | 4.6 | |
 | FR13 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
 | FR14 | 4 | 5 | 5 | 5 | 5 | 4.8 | |
-| FR15 | 3 | 3 | 5 | 5 | 5 | 4.2 | |
-| FR16 | 4 | 3 | 5 | 5 | 4 | 4.2 | |
+| FR15 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR16 | 5 | 4 | 5 | 5 | 5 | 4.8 | |
 | FR17 | 5 | 5 | 5 | 5 | 4 | 4.8 | |
 | FR18 | 5 | 5 | 5 | 5 | 4 | 4.8 | |
-| FR19 | 5 | 5 | 5 | 5 | 4 | 4.8 | |
+| FR19 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
 | FR20 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
 | FR21 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
-| FR22 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR22 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
 | FR23 | 4 | 5 | 5 | 5 | 5 | 4.8 | |
 | FR24 | 5 | 4 | 5 | 5 | 5 | 4.8 | |
-| FR25 | 3 | 3 | 5 | 5 | 5 | 4.2 | |
+| FR25 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
 | FR26 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
-| FR27 | 3 | 2 | 5 | 5 | 5 | 4.0 | X |
-| FR28 | 3 | 2 | 4 | 5 | 2 | 3.2 | X |
-| FR29 | 4 | 4 | 5 | 5 | 4 | 4.4 | |
+| FR27 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
 
 **Légende :** 1=Faible, 3=Acceptable, 5=Excellent — **Flag X** = Score < 3 dans au moins une catégorie
 
-#### Suggestions d'amélioration
-
-**FR27** (M=2) : "sans redéploiement complexe" → Remplacer par une métrique : "Le déploiement d'une modification de contenu se fait en moins de 5 minutes" (déjà couvert par NFR18 — considérer fusionner ou reformuler)
-
-**FR28** (M=2, T=2) : "langage zéro jargon technique" → Principe de contenu non mesurable et non traçable à un parcours. Recommandation : déplacer dans une section "Principes éditoriaux" ou reformuler en critère testable ("aucun terme technique non expliqué dans le contenu visible")
-
 #### Évaluation globale
 
-**Sévérité :** ✅ Pass (6.9% FRs flaggées, < 10%)
+**FRs flaggées :** 0 (0%)
 
-**Recommandation :** Les exigences fonctionnelles démontrent une très bonne qualité SMART globale (score moyen 4.7/5). Seules FR27 et FR28 nécessitent un ajustement — ce sont des principes de contenu plutôt que des capacités mesurables.
+**Sévérité :** ✅ Pass
+
+**Recommandation :** Toutes les exigences fonctionnelles démontrent une excellente qualité SMART (score moyen 4.9/5). Aucune FR flaggée.
 
 ### Évaluation holistique de la qualité
 
 #### Flow & Cohérence du document
 
-**Évaluation :** Good (4/5)
+**Évaluation :** Excellent (5/5)
 
 **Points forts :**
 - Progression logique de la vision aux spécifications détaillées
 - Parcours utilisateurs narratifs riches avec prénoms, contextes et chiffres concrets
 - Tableau de synthèse des capacités faisant le pont entre parcours et FRs
 - Parcours d'échec (Nadia) et parcours admin (Guillaume) ajoutent de la profondeur
-
-**Axes d'amélioration :**
-- La section "Exigences spécifiques Web App" interrompt légèrement le flow entre parcours utilisateurs et scoping
-- FR28-FR29 (principes de contenu) mélangés avec les FRs de capacité
+- Nouvelle section "Principes éditoriaux" sépare proprement les principes de contenu des FRs testables
 
 #### Efficacité double audience
 
 **Pour les humains :**
 - Executive-friendly : ✅ Vision claire, ROI chiffré, KPIs mesurables
-- Clarté développeur : ✅ FRs numérotées, intégrations spécifiées, NFRs avec métriques
+- Clarté développeur : ✅ FRs numérotées au format BMAD, intégrations spécifiées, NFRs avec métriques
 - Clarté designer : ✅ Parcours utilisateurs → flows d'interaction, besoins clairs
 - Prise de décision stakeholder : ✅ Phasing MVP/V2 clair, risques évalués
 
@@ -353,36 +321,34 @@ overallStatus: 'Pass'
 
 | Principe | Statut | Notes |
 |---|---|---|
-| Densité informationnelle | ✅ Respecté | 0 violation — excellent |
-| Mesurabilité | ⚠️ Partiel | 17 violations de format (FRs système), contenu mesuré pour l'essentiel |
-| Traçabilité | ✅ Respecté | Chaîne solide, 1 orphelin mineur (FR28) |
+| Densité informationnelle | ✅ Respecté | 0 violation |
+| Mesurabilité | ✅ Respecté | 1 violation mineure NFR (NFR7) |
+| Traçabilité | ✅ Respecté | 0 orphelin |
 | Conscience domaine | ✅ Respecté | Domaine general correctement identifié |
 | Zéro anti-patterns | ✅ Respecté | Aucun filler, aucune redondance |
 | Double audience | ✅ Respecté | Excellent pour humains et LLMs |
 | Format Markdown | ✅ Respecté | Structure propre et professionnelle |
 
-**Principes respectés :** 6/7
+**Principes respectés :** 7/7
 
 #### Note globale de qualité
 
-**Note :** 4/5 — Good : PRD solide avec des améliorations mineures nécessaires
+**Note :** 5/5 — Excellent
 
-#### Top 3 des améliorations
+#### Top 3 des améliorations optionnelles
 
-1. **Reformuler les FRs système au format BMAD**
-   FR16-FR22 et FR24 sont des spécifications système qui ne suivent pas le format "[Acteur] peut [capacité]". Les reformuler ou les reclasser en "Spécifications techniques" pour respecter le standard BMAD tout en conservant leur contenu.
+1. **Ajouter une métrique à NFR7**
+   "Les embeds Tally et Zcal se chargent en moins de 3 secondes sans bloquer le rendu de la page" — ajouterait une mesure testable.
 
-2. **Rendre FR27 et FR28 mesurables ou les séparer**
-   Ces deux FRs sont des principes (contenu éditorial, maintenabilité) plutôt que des capacités testables. Les déplacer dans une section "Principes" dédiée ou les reformuler avec des critères mesurables.
+2. **Diversifier les études de cas post-MVP**
+   Le parcours Nadia montre que le bien-être/santé n'est pas couvert — prévu en V2 mais à prioriser.
 
-3. **Compléter le contexte des NFR2-NFR4**
-   FID < 100ms, CLS < 0.1, TTFB < 800ms manquent de contexte de test (conditions de charge, type d'appareil, réseau). Ajouter "sur mobile 4G" comme pour NFR1 (LCP).
+3. **Préciser l'outil analytics (FR24-FR25)**
+   "via un outil analytics" pourrait nommer les options envisagées (ex : Plausible, Umami, Google Analytics) dans les considérations d'implémentation.
 
 #### Résumé
 
-**Ce PRD est :** un document de haute qualité, dense et bien structuré, prêt pour la consommation par les agents BMAD en aval (UX, Architecture, Épics) avec des ajustements mineurs de format.
-
-**Pour le rendre excellent :** se concentrer sur les 3 améliorations ci-dessus.
+**Ce PRD est :** un document exemplaire, dense, bien structuré et prêt pour la consommation immédiate par les agents BMAD en aval (UX, Architecture, Épics).
 
 ### Validation de complétude
 
@@ -396,39 +362,26 @@ overallStatus: 'Pass'
 **Critères de succès :** ✅ Complet — utilisateur, business, technique, KPIs
 **Scoping projet :** ✅ Complet — MVP, post-MVP phases 2 et 3, risques
 **Parcours utilisateurs :** ✅ Complet — 6 parcours narratifs
-**Exigences fonctionnelles :** ✅ Complet — 29 FRs numérotées
+**Exigences fonctionnelles :** ✅ Complet — 27 FRs numérotées au format BMAD
+**Principes éditoriaux :** ✅ Complet — PE1, PE2
 **Exigences non fonctionnelles :** ✅ Complet — 18 NFRs avec métriques
-**Classification du projet :** ✅ Complet
-**Exigences spécifiques Web App :** ✅ Complet
-
-#### Complétude section-spécifique
-
-**Critères de succès mesurables :** ✅ Tous — chaque critère a un indicateur et une cible
-**Parcours couvrent tous les types d'utilisateurs :** ✅ Oui — prospects (4 profils), échec (1), admin (1)
-**FRs couvrent le scope MVP :** ✅ Oui — toutes les capacités MVP sont couvertes
-**NFRs ont des critères spécifiques :** ⚠️ Most — NFR2-4 manquent de contexte, NFR7 manque de métrique
 
 #### Complétude du frontmatter
 
-**stepsCompleted :** ✅ Présent (12 étapes documentées)
+**stepsCompleted :** ✅ Présent (15 étapes + 3 étapes édition)
 **classification :** ✅ Présent (projectType, domain, complexity, projectContext)
 **inputDocuments :** ✅ Présent (3 documents référencés)
-**date :** ⚠️ Absent du frontmatter (présent dans le header du document "Date: 2026-03-21")
+**date :** ✅ Présent
 
-**Complétude frontmatter :** 3.5/4
+**Complétude frontmatter :** 4/4
 
 #### Synthèse de complétude
 
-**Complétude globale :** 95% (toutes les sections présentes et remplies)
-
+**Complétude globale :** 100%
 **Écarts critiques :** 0
-**Écarts mineurs :** 2
-- Champ `date` absent du frontmatter (présent dans le corps du document)
-- NFR2-4 manquent de contexte de test
+**Écarts mineurs :** 0
 
 **Sévérité :** ✅ Pass
-
-**Recommandation :** Le PRD est complet avec toutes les sections requises et le contenu présent. Ajouter le champ `date` au frontmatter pour la cohérence.
 
 ---
 
@@ -443,36 +396,31 @@ overallStatus: 'Pass'
 | Format | BMAD Standard (6/6 sections) |
 | Densité informationnelle | ✅ Pass (0 violation) |
 | Couverture Product Brief | ✅ ~95% |
-| Mesurabilité | ⚠️ Critical (17 violations — format FRs) |
-| Traçabilité | ✅ Pass (1 orphelin mineur) |
-| Fuite d'implémentation | ✅ Pass (1 violation mineure) |
+| Mesurabilité | ✅ Pass (1 violation mineure — NFR7) |
+| Traçabilité | ✅ Pass (0 orphelin) |
+| Fuite d'implémentation | ✅ Pass (0 violation) |
 | Conformité domaine | N/A (général) |
 | Conformité projet-type | ✅ 100% |
-| Qualité SMART | ✅ Pass (93.1% acceptables) |
-| Qualité holistique | 4/5 — Good |
-| Complétude | ✅ 95% |
+| Qualité SMART | ✅ Pass (100% acceptables, 0 flaggée) |
+| Qualité holistique | 5/5 — Excellent |
+| Complétude | ✅ 100% |
 
 ### Problèmes critiques : 0
 
-### Avertissements : 3
-1. 10 FRs système ne suivent pas le format "[Acteur] peut [capacité]"
-2. FR27 et FR28 contiennent des termes subjectifs/non mesurables
-3. NFR2-4 manquent de contexte de test
+### Avertissements : 1
+1. NFR7 manque d'une métrique de temps spécifique pour le chargement des embeds
 
 ### Points forts
 - Excellente densité informationnelle — zéro filler
-- Parcours utilisateurs narratifs riches et concrets (6 parcours dont 1 échec)
-- Chaîne de traçabilité solide de la vision aux FRs
-- Structure parfaitement conforme au type web_app
-- Double audience (humains + LLMs) très bien servie
-- Scoping MVP/V2/V3 clair et pragmatique
+- Toutes les FRs au format BMAD "[Acteur] peut [capacité]" — 0 violation de format
+- Chaîne de traçabilité intacte avec 0 orphelin
+- Zéro fuite d'implémentation dans les FRs/NFRs
+- Principes éditoriaux séparés proprement des FRs
+- Parcours utilisateurs narratifs riches (6 parcours dont 1 échec)
+- Score SMART moyen 4.9/5 — aucune FR flaggée
+- Frontmatter complet avec historique d'édition
 
-### Note holistique : 4/5 — Good
-
-### Top 3 des améliorations
-1. **Reformuler les FRs système** (FR16-FR22, FR24) au format BMAD ou les reclasser
-2. **Rendre FR27/FR28 mesurables** ou les déplacer dans une section "Principes"
-3. **Ajouter le contexte de test** aux NFR2-4 ("sur mobile 4G" comme NFR1)
+### Note holistique : 5/5 — Excellent
 
 ### Recommandation
-Le PRD est en bonne forme et prêt pour la suite du workflow BMAD. Les améliorations identifiées sont mineures (format, pas de fond) et n'empêchent pas la consommation en aval par les agents UX, Architecture et Épics.
+Le PRD est exemplaire et prêt pour la suite du workflow BMAD. La seule amélioration mineure identifiée est l'ajout d'une métrique à NFR7. Le document peut être consommé immédiatement par les agents UX, Architecture et Épics.
