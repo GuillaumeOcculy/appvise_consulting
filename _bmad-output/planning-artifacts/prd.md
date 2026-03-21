@@ -29,6 +29,7 @@ classification:
   domain: general
   complexity: low
   projectContext: greenfield
+date: '2026-03-21'
 ---
 
 # Product Requirements Document - appvise_consulting
@@ -364,16 +365,16 @@ Navigateurs modernes uniquement :
 ### Gestion de contenu
 
 - **FR26 :** Guillaume peut ajouter ou modifier une étude de cas sans intervention dev (contenu markdown)
-- **FR27 :** Guillaume peut modifier le contenu textuel des pages sans redéploiement complexe
+- **FR27 :** Guillaume peut modifier le contenu textuel des pages avec un redéploiement en moins de 5 minutes
 
 ## Exigences non fonctionnelles
 
 ### Performance
 
 - **NFR1 :** Largest Contentful Paint (LCP) < 2.5s sur mobile 4G
-- **NFR2 :** First Input Delay (FID) < 100ms
-- **NFR3 :** Cumulative Layout Shift (CLS) < 0.1
-- **NFR4 :** Time to First Byte (TTFB) < 800ms
+- **NFR2 :** First Input Delay (FID) < 100ms sur mobile 4G
+- **NFR3 :** Cumulative Layout Shift (CLS) < 0.1 sur mobile 4G
+- **NFR4 :** Time to First Byte (TTFB) < 800ms sur mobile 4G
 - **NFR5 :** Score Lighthouse global > 90 (Performance, SEO, Accessibilité, Best Practices)
 - **NFR6 :** Poids total de la page d'accueil < 500 KB (hors embeds tiers)
 - **NFR7 :** Les embeds Tally et Zcal se chargent de manière asynchrone sans bloquer le rendu de la page
