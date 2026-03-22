@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appvise Consulting — Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #bf0050;
+    --secondary: #0022ed;
+    --dark: #020F1E;
+    --dark-lighter: #0A1628;
+    --light: #F8F9FA;
+    --surface: #FFFFFF;
+    --text-muted: #6B7280;
+    --success: #10B981;
+    --border: #E5E7EB;
+    --font-heading: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: #111;
+    color: #fff;
+  }
+
+  /* === NAV SELECTOR === */
+  .direction-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(2,15,30,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(191,0,80,0.3);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .direction-nav h1 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+
+  .direction-nav button {
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .direction-nav button:hover { border-color: var(--primary); color: var(--primary); }
+  .direction-nav button.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  /* === MOCKUP CONTAINER === */
+  .mockup { display: none; padding-top: 60px; }
+  .mockup.active { display: block; }
+
+  .mockup-label {
+    text-align: center;
+    padding: 32px 24px 16px;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .mockup-desc {
+    text-align: center;
+    padding: 0 24px 40px;
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* === PHONE FRAME === */
+  .device-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .device-toggle button {
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .device-toggle button:hover { border-color: var(--primary); }
+  .device-toggle button.active { background: var(--primary); border-color: var(--primary); }
+
+  .frame-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0 24px 80px;
+  }
+
+  .phone-frame {
+    width: 390px;
+    max-height: 80vh;
+    border: 3px solid #333;
+    border-radius: 32px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--dark);
+    transition: width 0.3s;
+  }
+
+  .phone-frame.desktop {
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 12px;
+    max-height: 85vh;
+  }
+
+  .phone-frame::-webkit-scrollbar { width: 4px; }
+  .phone-frame::-webkit-scrollbar-thumb { background: rgba(191,0,80,0.4); border-radius: 4px; }
+
+  /* =========================================
+     DIRECTION 1 — HYBRID DARK/LIGHT
+     ========================================= */
+
+  .d1-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .d1-logo {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .d1-logo span { color: var(--primary); }
+
+  .d1-nav-cta {
+    font-size: 12px;
+    padding: 8px 16px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Hero */
+  .d1-hero {
+    background: var(--dark);
+    padding: 48px 20px 40px;
+    text-align: center;
+  }
+
+  .d1-hero h1 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .d1-hero h1 em {
+    color: var(--primary);
+    font-style: normal;
+  }
+
+  .d1-hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .d1-hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .d1-btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .d1-btn-secondary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  /* Trust bar */
+  .d1-trustbar {
+    background: var(--dark-lighter);
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .d1-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+  }
+
+  .d1-badge-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* Case studies - LIGHT section */
+  .d1-cases {
+    background: var(--light);
+    padding: 48px 20px;
+  }
+
+  .d1-cases h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .d1-cases-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .d1-case-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .d1-case-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .d1-case-name {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .d1-case-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(191,0,80,0.08);
+    color: var(--primary);
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .d1-case-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .d1-case-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .d1-stat-number {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--success);
+  }
+
+  .d1-stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Honesty section — DARK */
+  .d1-honesty {
+    background: var(--dark);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d1-honesty h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .d1-honesty-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+  }
+
+  .d1-honesty-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(191,0,80,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    color: var(--primary);
+  }
+
+  .d1-honesty-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  /* Method timeline — LIGHT */
+  .d1-method {
+    background: var(--surface);
+    padding: 48px 20px;
+  }
+
+  .d1-method h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .d1-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .d1-timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  }
+
+  .d1-step {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .d1-step-dot {
+    position: absolute;
+    left: -33px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .d1-step h3 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .d1-step p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Guarantee — DARK SPECIAL */
+  .d1-guarantee {
+    background: var(--dark-lighter);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d1-guarantee-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(191,0,80,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 20px;
+  }
+
+  .d1-guarantee h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .d1-guarantee p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto 24px;
+  }
+
+  .d1-guarantee-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .d1-guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .d1-check {
+    color: var(--success);
+    font-size: 16px;
+  }
+
+  /* CTA section — PRIMARY */
+  .d1-cta-section {
+    background: var(--primary);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d1-cta-section h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .d1-cta-section p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 24px;
+  }
+
+  .d1-cta-section .d1-btn-primary {
+    background: #fff;
+    color: var(--primary);
+    max-width: 280px;
+  }
+
+  .d1-cta-section .d1-btn-secondary {
+    border-color: rgba(255,255,255,0.4);
+    max-width: 280px;
+  }
+
+  /* About — DARK */
+  .d1-about {
+    background: var(--dark);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d1-about-photo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-heading);
+  }
+
+  .d1-about h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .d1-about p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .d1-yt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Sticky CTA mobile */
+  .d1-sticky {
+    position: sticky;
+    bottom: 0;
+    background: rgba(2,15,30,0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    gap: 8px;
+  }
+
+  .d1-sticky .d1-btn-primary {
+    flex: 1;
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .d1-sticky .d1-btn-secondary {
+    flex: 1;
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  /* =========================================
+     DIRECTION 2 — FULL DARK
+     ========================================= */
+
+  .d2-cases {
+    background: var(--dark-lighter);
+    padding: 48px 20px;
+  }
+
+  .d2-cases h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .d2-cases-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .d2-case-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .d2-case-name {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .d2-case-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(191,0,80,0.2);
+    color: var(--primary);
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .d2-case-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .d2-method {
+    background: var(--dark);
+    padding: 48px 20px;
+  }
+
+  .d2-method h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .d2-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .d2-timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  }
+
+  .d2-step {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .d2-step-dot {
+    position: absolute;
+    left: -33px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .d2-step h3 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .d2-step p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .d2-guarantee {
+    background: linear-gradient(135deg, rgba(191,0,80,0.15), rgba(0,34,237,0.1));
+    border-top: 1px solid rgba(191,0,80,0.2);
+    border-bottom: 1px solid rgba(191,0,80,0.2);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d2-cta-section {
+    background: var(--dark);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d2-cta-section h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .d2-cta-section p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+  }
+
+  /* =========================================
+     DIRECTION 3 — HERO IMMERSIF + GRADIENT
+     ========================================= */
+
+  .d3-hero {
+    background: linear-gradient(160deg, var(--dark) 0%, #1a0a1e 50%, var(--dark) 100%);
+    padding: 64px 20px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .d3-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(191,0,80,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .d3-hero h1 {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .d3-hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--primary), #ff2d78);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .d3-trustbar-alt {
+    background: var(--primary);
+    padding: 14px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .d3-badge {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* =========================================
+     DIRECTION 4 — CARDS HORIZONTALES
+     ========================================= */
+
+  .d4-cases {
+    background: var(--light);
+    padding: 48px 20px;
+  }
+
+  .d4-case-card {
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .d4-case-top {
+    background: var(--dark);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .d4-case-top h3 {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .d4-case-top .d1-case-tag {
+    background: rgba(191,0,80,0.3);
+  }
+
+  .d4-case-bottom {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .d4-case-bottom p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    flex: 1;
+    margin-right: 16px;
+  }
+
+  .d4-stat {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .d4-stat-num {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--success);
+  }
+
+  .d4-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* =========================================
+     DIRECTION 5 — FULL LIGHT MINIMAL
+     ========================================= */
+
+  .d5-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .d5-logo {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .d5-logo span { color: var(--primary); }
+
+  .d5-hero {
+    background: var(--surface);
+    padding: 48px 20px 40px;
+    text-align: center;
+  }
+
+  .d5-hero h1 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .d5-hero h1 em { color: var(--primary); font-style: normal; }
+
+  .d5-hero p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .d5-trustbar {
+    background: var(--light);
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .d5-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .d5-badge-icon {
+    width: 20px;
+    height: 20px;
+    background: rgba(191,0,80,0.1);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .d5-honesty {
+    background: var(--light);
+    padding: 48px 20px;
+  }
+
+  .d5-honesty h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .d5-honesty-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .d5-honesty-text {
+    font-size: 14px;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+
+  .d5-guarantee {
+    background: var(--surface);
+    padding: 48px 20px;
+    text-align: center;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .d5-cta-section {
+    background: var(--primary);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d5-about {
+    background: var(--surface);
+    padding: 48px 20px;
+    text-align: center;
+  }
+
+  .d5-sticky {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+  }
+
+  /* =========================================
+     DIRECTION 6 — SPLIT HERO
+     ========================================= */
+
+  .d6-hero {
+    background: var(--dark);
+    padding: 48px 20px 0;
+  }
+
+  .d6-hero-content {
+    text-align: left;
+    margin-bottom: 32px;
+  }
+
+  .d6-hero h1 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .d6-hero h1 em { color: var(--primary); font-style: normal; }
+
+  .d6-hero p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .d6-hero-photo {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--dark-lighter), rgba(191,0,80,0.1));
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 48px;
+    color: var(--primary);
+  }
+
+  /* Responsive tweaks for desktop frames */
+  .phone-frame.desktop .d1-hero h1,
+  .phone-frame.desktop .d3-hero h1,
+  .phone-frame.desktop .d5-hero h1,
+  .phone-frame.desktop .d6-hero h1 {
+    font-size: 48px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .phone-frame.desktop .d1-hero p,
+  .phone-frame.desktop .d5-hero p,
+  .phone-frame.desktop .d6-hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .phone-frame.desktop .d1-hero-ctas,
+  .phone-frame.desktop .d1-cta-section .d1-hero-ctas {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .phone-frame.desktop .d1-hero {
+    padding: 80px 48px 60px;
+  }
+
+  .phone-frame.desktop .d1-cases,
+  .phone-frame.desktop .d2-cases,
+  .phone-frame.desktop .d4-cases {
+    padding: 80px 48px;
+  }
+
+  .phone-frame.desktop .d1-sticky,
+  .phone-frame.desktop .d5-sticky {
+    display: none;
+  }
+
+  .phone-frame.desktop .d1-trustbar,
+  .phone-frame.desktop .d3-trustbar-alt,
+  .phone-frame.desktop .d5-trustbar {
+    gap: 32px;
+    padding: 20px 48px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="direction-nav">
+  <h1>Appvise — Design Directions</h1>
+  <button class="active" onclick="showMockup(1)">1. Hybrid Dark/Light</button>
+  <button onclick="showMockup(2)">2. Full Dark</button>
+  <button onclick="showMockup(3)">3. Hero Gradient</button>
+  <button onclick="showMockup(4)">4. Cards Header Dark</button>
+  <button onclick="showMockup(5)">5. Full Light Minimal</button>
+  <button onclick="showMockup(6)">6. Split Hero</button>
+</nav>
+
+<!-- ===================== DIRECTION 1 — HYBRID ===================== -->
+<div class="mockup active" id="mockup-1">
+  <div class="mockup-label">Direction 1 — Hybrid Dark/Light (Recommandée)</div>
+  <div class="mockup-desc">Hero et sections d'accroche en dark (#020F1E), sections de contenu en fond clair. Le rythme visuel dark/light maintient l'attention pendant le scroll de conviction. Conforme à la charte Appvise.</div>
+
+  <div class="device-toggle" data-mockup="1">
+    <button class="active" onclick="setDevice(1,'mobile')">Mobile</button>
+    <button onclick="setDevice(1,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-1">
+
+      <div class="d1-navbar">
+        <div class="d1-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d1-hero">
+        <h1>Tu perds <em>10h/semaine</em> sur des tâches que tu pourrais automatiser ?</h1>
+        <p>Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-trustbar">
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> +12 ans d'exp</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Double certif n8n</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Paiement à la satisfaction</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Audit gratuit</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Un seul interlocuteur</div>
+      </div>
+
+      <div class="d1-cases">
+        <h2>Ils ont résolu leur problème</h2>
+        <p class="d1-cases-subtitle">Des résultats concrets, pas des promesses</p>
+
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">Addotour 229</div>
+            <span class="d1-case-tag">Tourisme</span>
+          </div>
+          <p class="d1-case-desc">Automatisation complète des workflows admin. Plus de saisie manuelle, plus de relances oubliées.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">12h</span>
+            <span class="d1-stat-label">économisées par semaine</span>
+          </div>
+        </div>
+
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">SideCare</div>
+            <span class="d1-case-tag">Santé / IA</span>
+          </div>
+          <p class="d1-case-desc">Chatbot médical développé en Ruby on Rails. Vérification documentaire automatisée par IA.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">100%</span>
+            <span class="d1-stat-label">automatisé</span>
+          </div>
+        </div>
+
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">MH'D ASSUR & CONSEIL</div>
+            <span class="d1-case-tag">Assurance</span>
+          </div>
+          <p class="d1-case-desc">Site web + formulaire Tally + automatisation gestion données et envoi emails.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">Full-stack</span>
+            <span class="d1-stat-label">site + automatisation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-honesty">
+        <h2>Ce que je ne ferai pas</h2>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de devis surprise. Le budget est validé avant de commencer.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de livraison bâclée. Itérations illimitées jusqu'à ta satisfaction.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de jargon technique. Je t'explique en résultats, pas en acronymes.</div>
+        </div>
+      </div>
+
+      <div class="d1-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d1-timeline">
+          <div class="d1-step">
+            <div class="d1-step-dot">1</div>
+            <h3>Diagnostic</h3>
+            <p>Audit gratuit de 30 min. On identifie ensemble ce qui te fait perdre du temps.</p>
+          </div>
+          <div class="d1-step">
+            <div class="d1-step-dot">2</div>
+            <h3>Proposition</h3>
+            <p>Solution sur-mesure avec budget clair. Automatisation ou développement — selon ton besoin réel.</p>
+          </div>
+          <div class="d1-step">
+            <div class="d1-step-dot">3</div>
+            <h3>Réalisation</h3>
+            <p>Je développe, tu valides. Itérations illimitées jusqu'à ce que ça te convienne.</p>
+          </div>
+          <div class="d1-step">
+            <div class="d1-step-dot">4</div>
+            <h3>Paiement</h3>
+            <p>Tu ne paies le solde que quand tu es satisfait. Point final.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-guarantee">
+        <div class="d1-guarantee-icon">🛡️</div>
+        <h2>Paiement à la satisfaction</h2>
+        <p>Tu ne prends aucun risque. Le modèle est simple :</p>
+        <div class="d1-guarantee-details">
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Acompte au démarrage</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Solde uniquement à ta satisfaction</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Itérations illimitées incluses</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Un seul interlocuteur de A à Z</div>
+        </div>
+      </div>
+
+      <div class="d1-cta-section">
+        <h2>Prêt à récupérer tes heures ?</h2>
+        <p>Audit gratuit · 30 min · Sans engagement</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-about">
+        <div class="d1-about-photo">GO</div>
+        <h3>Guillaume Occuly</h3>
+        <p>12+ ans de développement web/mobile. Double certification n8n. Un seul objectif : te faire gagner du temps.</p>
+        <a href="#" class="d1-yt-link">▶ Ma chaîne YouTube</a>
+      </div>
+
+      <div class="d1-sticky">
+        <button class="d1-btn-primary">Audit gratuit</button>
+        <button class="d1-btn-secondary">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DIRECTION 2 — FULL DARK ===================== -->
+<div class="mockup" id="mockup-2">
+  <div class="mockup-label">Direction 2 — Full Dark</div>
+  <div class="mockup-desc">Tout le site en dark mode. Cohérent avec la charte graphique LinkedIn. Premium et tech. Les études de cas utilisent des cards avec bordures subtiles sur fond sombre.</div>
+
+  <div class="device-toggle" data-mockup="2">
+    <button class="active" onclick="setDevice(2,'mobile')">Mobile</button>
+    <button onclick="setDevice(2,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-2">
+
+      <div class="d1-navbar">
+        <div class="d1-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d1-hero">
+        <h1>Tu perds <em>10h/semaine</em> sur des tâches que tu pourrais automatiser ?</h1>
+        <p>Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-trustbar">
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> +12 ans d'exp</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Double certif n8n</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Paiement à la satisfaction</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Audit gratuit</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Un seul interlocuteur</div>
+      </div>
+
+      <div class="d2-cases">
+        <h2>Ils ont résolu leur problème</h2>
+        <p class="d2-cases-subtitle">Des résultats concrets, pas des promesses</p>
+
+        <div class="d2-case-card">
+          <div class="d1-case-header">
+            <div class="d2-case-name">Addotour 229</div>
+            <span class="d2-case-tag">Tourisme</span>
+          </div>
+          <p class="d2-case-desc">Automatisation complète des workflows admin. Plus de saisie manuelle, plus de relances oubliées.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">12h</span>
+            <span class="d1-stat-label" style="color:rgba(255,255,255,0.5)">économisées par semaine</span>
+          </div>
+        </div>
+
+        <div class="d2-case-card">
+          <div class="d1-case-header">
+            <div class="d2-case-name">SideCare</div>
+            <span class="d2-case-tag">Santé / IA</span>
+          </div>
+          <p class="d2-case-desc">Chatbot médical développé en Ruby on Rails. Vérification documentaire automatisée par IA.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">100%</span>
+            <span class="d1-stat-label" style="color:rgba(255,255,255,0.5)">automatisé</span>
+          </div>
+        </div>
+
+        <div class="d2-case-card">
+          <div class="d1-case-header">
+            <div class="d2-case-name">MH'D ASSUR & CONSEIL</div>
+            <span class="d2-case-tag">Assurance</span>
+          </div>
+          <p class="d2-case-desc">Site web + formulaire Tally + automatisation gestion données et envoi emails.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">Full-stack</span>
+            <span class="d1-stat-label" style="color:rgba(255,255,255,0.5)">site + automatisation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-honesty">
+        <h2>Ce que je ne ferai pas</h2>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de devis surprise. Le budget est validé avant de commencer.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de livraison bâclée. Itérations illimitées jusqu'à ta satisfaction.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de jargon technique. Je t'explique en résultats, pas en acronymes.</div>
+        </div>
+      </div>
+
+      <div class="d2-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d2-timeline">
+          <div class="d2-step">
+            <div class="d2-step-dot">1</div>
+            <h3>Diagnostic</h3>
+            <p>Audit gratuit de 30 min. On identifie ensemble ce qui te fait perdre du temps.</p>
+          </div>
+          <div class="d2-step">
+            <div class="d2-step-dot">2</div>
+            <h3>Proposition</h3>
+            <p>Solution sur-mesure avec budget clair. Automatisation ou développement — selon ton besoin réel.</p>
+          </div>
+          <div class="d2-step">
+            <div class="d2-step-dot">3</div>
+            <h3>Réalisation</h3>
+            <p>Je développe, tu valides. Itérations illimitées jusqu'à ce que ça te convienne.</p>
+          </div>
+          <div class="d2-step">
+            <div class="d2-step-dot">4</div>
+            <h3>Paiement</h3>
+            <p>Tu ne paies le solde que quand tu es satisfait. Point final.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d2-guarantee" style="text-align:center;">
+        <div class="d1-guarantee-icon">🛡️</div>
+        <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;">Paiement à la satisfaction</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6;max-width:400px;margin:0 auto 24px;">Tu ne prends aucun risque. Le modèle est simple :</p>
+        <div class="d1-guarantee-details">
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Acompte au démarrage</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Solde uniquement à ta satisfaction</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Itérations illimitées incluses</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Un seul interlocuteur de A à Z</div>
+        </div>
+      </div>
+
+      <div class="d2-cta-section">
+        <h2>Prêt à récupérer tes heures ?</h2>
+        <p>Audit gratuit · 30 min · Sans engagement</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-about">
+        <div class="d1-about-photo">GO</div>
+        <h3>Guillaume Occuly</h3>
+        <p>12+ ans de développement web/mobile. Double certification n8n. Un seul objectif : te faire gagner du temps.</p>
+        <a href="#" class="d1-yt-link">▶ Ma chaîne YouTube</a>
+      </div>
+
+      <div class="d1-sticky">
+        <button class="d1-btn-primary">Audit gratuit</button>
+        <button class="d1-btn-secondary">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DIRECTION 3 — HERO GRADIENT ===================== -->
+<div class="mockup" id="mockup-3">
+  <div class="mockup-label">Direction 3 — Hero Immersif + Gradient</div>
+  <div class="mockup-desc">Hero avec gradient radial subtil et texte en dégradé primary→rose clair. Trust bar sur fond primary plein. Reste du site en hybrid dark/light. Plus audacieux visuellement.</div>
+
+  <div class="device-toggle" data-mockup="3">
+    <button class="active" onclick="setDevice(3,'mobile')">Mobile</button>
+    <button onclick="setDevice(3,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-3">
+
+      <div class="d1-navbar">
+        <div class="d1-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d3-hero">
+        <h1 style="color:#fff;">Tu perds <span class="gradient-text">10h/semaine</span> sur des tâches que tu pourrais automatiser ?</h1>
+        <p style="font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:24px;position:relative;">Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+        <div class="d1-hero-ctas" style="position:relative;">
+          <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d3-trustbar-alt">
+        <div class="d3-badge">✓ +12 ans d'exp</div>
+        <div class="d3-badge">✓ Double certif n8n</div>
+        <div class="d3-badge">✓ Paiement satisfaction</div>
+        <div class="d3-badge">✓ Audit gratuit</div>
+      </div>
+
+      <div class="d1-cases">
+        <h2>Ils ont résolu leur problème</h2>
+        <p class="d1-cases-subtitle">Des résultats concrets, pas des promesses</p>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">Addotour 229</div>
+            <span class="d1-case-tag">Tourisme</span>
+          </div>
+          <p class="d1-case-desc">Automatisation complète des workflows admin.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">12h</span>
+            <span class="d1-stat-label">économisées / semaine</span>
+          </div>
+        </div>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">SideCare</div>
+            <span class="d1-case-tag">Santé / IA</span>
+          </div>
+          <p class="d1-case-desc">Chatbot médical + vérification documentaire IA.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">100%</span>
+            <span class="d1-stat-label">automatisé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-honesty">
+        <h2>Ce que je ne ferai pas</h2>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de devis surprise.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de livraison bâclée.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de jargon technique.</div>
+        </div>
+      </div>
+
+      <div class="d1-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d1-timeline">
+          <div class="d1-step"><div class="d1-step-dot">1</div><h3>Diagnostic</h3><p>Audit gratuit de 30 min.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">2</div><h3>Proposition</h3><p>Budget clair, solution adaptée.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">3</div><h3>Réalisation</h3><p>Itérations illimitées.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">4</div><h3>Paiement</h3><p>À ta satisfaction.</p></div>
+        </div>
+      </div>
+
+      <div class="d1-guarantee">
+        <div class="d1-guarantee-icon">🛡️</div>
+        <h2>Paiement à la satisfaction</h2>
+        <p>Tu ne prends aucun risque.</p>
+        <div class="d1-guarantee-details">
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Acompte au démarrage</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Solde à ta satisfaction</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Itérations illimitées</div>
+        </div>
+      </div>
+
+      <div class="d1-cta-section">
+        <h2>Prêt à récupérer tes heures ?</h2>
+        <p>Audit gratuit · 30 min · Sans engagement</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-sticky">
+        <button class="d1-btn-primary">Audit gratuit</button>
+        <button class="d1-btn-secondary">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DIRECTION 4 — CARDS HEADER DARK ===================== -->
+<div class="mockup" id="mockup-4">
+  <div class="mockup-label">Direction 4 — Cards avec Header Dark</div>
+  <div class="mockup-desc">Variante des études de cas : cards avec en-tête dark (nom + secteur) et corps clair (description + chiffre). Crée un contraste fort et une hiérarchie visuelle immédiate par cas client.</div>
+
+  <div class="device-toggle" data-mockup="4">
+    <button class="active" onclick="setDevice(4,'mobile')">Mobile</button>
+    <button onclick="setDevice(4,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-4">
+
+      <div class="d1-navbar">
+        <div class="d1-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d1-hero">
+        <h1>Tu perds <em>10h/semaine</em> sur des tâches que tu pourrais automatiser ?</h1>
+        <p>Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-trustbar">
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> +12 ans d'exp</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Double certif n8n</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Paiement satisfaction</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Audit gratuit</div>
+      </div>
+
+      <div class="d4-cases">
+        <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--dark);text-align:center;margin-bottom:8px;">Ils ont résolu leur problème</h2>
+        <p style="font-size:14px;color:var(--text-muted);text-align:center;margin-bottom:32px;">Des résultats concrets, pas des promesses</p>
+
+        <div class="d4-case-card">
+          <div class="d4-case-top">
+            <h3>Addotour 229</h3>
+            <span class="d1-case-tag" style="background:rgba(191,0,80,0.3);">Tourisme</span>
+          </div>
+          <div class="d4-case-bottom">
+            <p>Automatisation complète des workflows admin.</p>
+            <div class="d4-stat">
+              <div class="d4-stat-num">12h</div>
+              <div class="d4-stat-label">/ semaine</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d4-case-card">
+          <div class="d4-case-top">
+            <h3>SideCare</h3>
+            <span class="d1-case-tag" style="background:rgba(191,0,80,0.3);">Santé / IA</span>
+          </div>
+          <div class="d4-case-bottom">
+            <p>Chatbot médical + vérification documentaire IA.</p>
+            <div class="d4-stat">
+              <div class="d4-stat-num">100%</div>
+              <div class="d4-stat-label">automatisé</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d4-case-card">
+          <div class="d4-case-top">
+            <h3>MH'D ASSUR & CONSEIL</h3>
+            <span class="d1-case-tag" style="background:rgba(191,0,80,0.3);">Assurance</span>
+          </div>
+          <div class="d4-case-bottom">
+            <p>Site web + formulaire + automatisation emails.</p>
+            <div class="d4-stat">
+              <div class="d4-stat-num">Full</div>
+              <div class="d4-stat-label">stack</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d1-timeline">
+          <div class="d1-step"><div class="d1-step-dot">1</div><h3>Diagnostic</h3><p>Audit gratuit de 30 min.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">2</div><h3>Proposition</h3><p>Budget clair, solution adaptée.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">3</div><h3>Réalisation</h3><p>Itérations illimitées.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">4</div><h3>Paiement</h3><p>À ta satisfaction.</p></div>
+        </div>
+      </div>
+
+      <div class="d1-guarantee">
+        <div class="d1-guarantee-icon">🛡️</div>
+        <h2>Paiement à la satisfaction</h2>
+        <p>Tu ne prends aucun risque.</p>
+        <div class="d1-guarantee-details">
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Acompte + solde à satisfaction</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Itérations illimitées</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Un seul interlocuteur</div>
+        </div>
+      </div>
+
+      <div class="d1-cta-section">
+        <h2>Prêt à récupérer tes heures ?</h2>
+        <p>Audit gratuit · 30 min</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-sticky">
+        <button class="d1-btn-primary">Audit gratuit</button>
+        <button class="d1-btn-secondary">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DIRECTION 5 — FULL LIGHT ===================== -->
+<div class="mockup" id="mockup-5">
+  <div class="mockup-label">Direction 5 — Full Light Minimal</div>
+  <div class="mockup-desc">Approche opposée : fond blanc/gris clair sur tout le site. La couleur primary (#bf0050) est utilisée uniquement pour les accents et CTA. Style alan.com / maison-ayaba. Maximum de lisibilité.</div>
+
+  <div class="device-toggle" data-mockup="5">
+    <button class="active" onclick="setDevice(5,'mobile')">Mobile</button>
+    <button onclick="setDevice(5,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-5" style="background:var(--surface);">
+
+      <div class="d5-navbar">
+        <div class="d5-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d5-hero">
+        <h1>Tu perds <em>10h/semaine</em> sur des tâches que tu pourrais automatiser ?</h1>
+        <p>Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+          <button class="d1-btn-secondary" style="color:var(--dark);border-color:var(--border);">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d5-trustbar">
+        <div class="d5-badge"><div class="d5-badge-icon">✓</div> +12 ans d'exp</div>
+        <div class="d5-badge"><div class="d5-badge-icon">✓</div> Double certif n8n</div>
+        <div class="d5-badge"><div class="d5-badge-icon">✓</div> Paiement satisfaction</div>
+        <div class="d5-badge"><div class="d5-badge-icon">✓</div> Audit gratuit</div>
+      </div>
+
+      <div class="d1-cases">
+        <h2>Ils ont résolu leur problème</h2>
+        <p class="d1-cases-subtitle">Des résultats concrets, pas des promesses</p>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">Addotour 229</div>
+            <span class="d1-case-tag">Tourisme</span>
+          </div>
+          <p class="d1-case-desc">Automatisation complète des workflows admin.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">12h</span>
+            <span class="d1-stat-label">économisées / semaine</span>
+          </div>
+        </div>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">SideCare</div>
+            <span class="d1-case-tag">Santé / IA</span>
+          </div>
+          <p class="d1-case-desc">Chatbot médical + vérification documentaire IA.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">100%</span>
+            <span class="d1-stat-label">automatisé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d5-honesty">
+        <h2>Ce que je ne ferai pas</h2>
+        <div class="d5-honesty-item">
+          <div class="d1-honesty-icon" style="background:rgba(191,0,80,0.08);">✕</div>
+          <div class="d5-honesty-text">Pas de devis surprise. Le budget est validé avant de commencer.</div>
+        </div>
+        <div class="d5-honesty-item">
+          <div class="d1-honesty-icon" style="background:rgba(191,0,80,0.08);">✕</div>
+          <div class="d5-honesty-text">Pas de livraison bâclée. Itérations illimitées.</div>
+        </div>
+        <div class="d5-honesty-item">
+          <div class="d1-honesty-icon" style="background:rgba(191,0,80,0.08);">✕</div>
+          <div class="d5-honesty-text">Pas de jargon technique.</div>
+        </div>
+      </div>
+
+      <div class="d1-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d1-timeline">
+          <div class="d1-step"><div class="d1-step-dot">1</div><h3>Diagnostic</h3><p>Audit gratuit de 30 min.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">2</div><h3>Proposition</h3><p>Budget clair, solution adaptée.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">3</div><h3>Réalisation</h3><p>Itérations illimitées.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">4</div><h3>Paiement</h3><p>À ta satisfaction.</p></div>
+        </div>
+      </div>
+
+      <div class="d5-guarantee">
+        <div class="d1-guarantee-icon" style="background:rgba(191,0,80,0.08);">🛡️</div>
+        <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:12px;">Paiement à la satisfaction</h2>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.6;max-width:400px;margin:0 auto 24px;">Tu ne prends aucun risque.</p>
+        <div class="d1-guarantee-details" style="max-width:360px;margin:0 auto;">
+          <div class="d1-guarantee-item" style="color:var(--dark);"><span class="d1-check">✓</span> Acompte + solde à satisfaction</div>
+          <div class="d1-guarantee-item" style="color:var(--dark);"><span class="d1-check">✓</span> Itérations illimitées</div>
+          <div class="d1-guarantee-item" style="color:var(--dark);"><span class="d1-check">✓</span> Un seul interlocuteur</div>
+        </div>
+      </div>
+
+      <div class="d5-cta-section" style="background:var(--primary);padding:48px 20px;text-align:center;">
+        <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Prêt à récupérer tes heures ?</h2>
+        <p style="font-size:14px;color:rgba(255,255,255,0.85);margin-bottom:24px;">Audit gratuit · 30 min</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary" style="background:#fff;color:var(--primary);">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d5-about" style="background:var(--surface);padding:48px 20px;text-align:center;">
+        <div class="d1-about-photo">GO</div>
+        <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:600;color:var(--dark);margin-bottom:8px;">Guillaume Occuly</h3>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.6;max-width:400px;margin:0 auto;">12+ ans de développement web/mobile. Double certification n8n.</p>
+      </div>
+
+      <div class="d5-sticky">
+        <button class="d1-btn-primary" style="flex:1;padding:12px;font-size:13px;">Audit gratuit</button>
+        <button class="d1-btn-secondary" style="flex:1;padding:12px;font-size:13px;color:var(--dark);border-color:var(--border);">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DIRECTION 6 — SPLIT HERO ===================== -->
+<div class="mockup" id="mockup-6">
+  <div class="mockup-label">Direction 6 — Split Hero avec photo</div>
+  <div class="mockup-desc">Hero avec texte aligné à gauche et espace pour la photo de Guillaume à droite (desktop). Sur mobile, texte au-dessus, photo en dessous. Incarnation forte dès le premier écran.</div>
+
+  <div class="device-toggle" data-mockup="6">
+    <button class="active" onclick="setDevice(6,'mobile')">Mobile</button>
+    <button onclick="setDevice(6,'desktop')">Desktop</button>
+  </div>
+
+  <div class="frame-wrapper">
+    <div class="phone-frame" id="frame-6">
+
+      <div class="d1-navbar">
+        <div class="d1-logo">Appvise <span>Consulting</span></div>
+        <button class="d1-nav-cta">Audit gratuit</button>
+      </div>
+
+      <div class="d6-hero">
+        <div class="d6-hero-content">
+          <h1>Tu perds <em>10h/semaine</em> sur des tâches que tu pourrais automatiser ?</h1>
+          <p>Je les automatise pour toi en 2 semaines. Tu ne paies que si tu es satisfait.</p>
+          <div class="d1-hero-ctas" style="align-items:flex-start;">
+            <button class="d1-btn-primary">Réserver mon audit gratuit</button>
+            <button class="d1-btn-secondary">Écrire un message</button>
+          </div>
+        </div>
+        <div class="d6-hero-photo">GO</div>
+      </div>
+
+      <div class="d1-trustbar">
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> +12 ans d'exp</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Double certif n8n</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Paiement satisfaction</div>
+        <div class="d1-badge"><div class="d1-badge-icon">✓</div> Audit gratuit</div>
+      </div>
+
+      <div class="d1-cases">
+        <h2>Ils ont résolu leur problème</h2>
+        <p class="d1-cases-subtitle">Des résultats concrets, pas des promesses</p>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">Addotour 229</div>
+            <span class="d1-case-tag">Tourisme</span>
+          </div>
+          <p class="d1-case-desc">Automatisation complète des workflows admin.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">12h</span>
+            <span class="d1-stat-label">économisées / semaine</span>
+          </div>
+        </div>
+        <div class="d1-case-card">
+          <div class="d1-case-header">
+            <div class="d1-case-name">SideCare</div>
+            <span class="d1-case-tag">Santé / IA</span>
+          </div>
+          <p class="d1-case-desc">Chatbot médical + vérification documentaire IA.</p>
+          <div class="d1-case-stat">
+            <span class="d1-stat-number">100%</span>
+            <span class="d1-stat-label">automatisé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d1-honesty">
+        <h2>Ce que je ne ferai pas</h2>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de devis surprise.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de livraison bâclée.</div>
+        </div>
+        <div class="d1-honesty-item">
+          <div class="d1-honesty-icon">✕</div>
+          <div class="d1-honesty-text">Pas de jargon technique.</div>
+        </div>
+      </div>
+
+      <div class="d1-method">
+        <h2>Ma méthode en 4 étapes</h2>
+        <div class="d1-timeline">
+          <div class="d1-step"><div class="d1-step-dot">1</div><h3>Diagnostic</h3><p>Audit gratuit de 30 min.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">2</div><h3>Proposition</h3><p>Budget clair.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">3</div><h3>Réalisation</h3><p>Itérations illimitées.</p></div>
+          <div class="d1-step"><div class="d1-step-dot">4</div><h3>Paiement</h3><p>À ta satisfaction.</p></div>
+        </div>
+      </div>
+
+      <div class="d1-guarantee">
+        <div class="d1-guarantee-icon">🛡️</div>
+        <h2>Paiement à la satisfaction</h2>
+        <p>Tu ne prends aucun risque.</p>
+        <div class="d1-guarantee-details">
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Acompte + solde à satisfaction</div>
+          <div class="d1-guarantee-item"><span class="d1-check">✓</span> Itérations illimitées</div>
+        </div>
+      </div>
+
+      <div class="d1-cta-section">
+        <h2>Prêt à récupérer tes heures ?</h2>
+        <p>Audit gratuit · 30 min</p>
+        <div class="d1-hero-ctas">
+          <button class="d1-btn-primary">Réserver un créneau</button>
+          <button class="d1-btn-secondary">Écrire un message</button>
+        </div>
+      </div>
+
+      <div class="d1-sticky">
+        <button class="d1-btn-primary">Audit gratuit</button>
+        <button class="d1-btn-secondary">Message</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function showMockup(n) {
+    document.querySelectorAll('.mockup').forEach(m => m.classList.remove('active'));
+    document.getElementById('mockup-' + n).classList.add('active');
+    document.querySelectorAll('.direction-nav button').forEach((b, i) => {
+      b.classList.toggle('active', i === n - 1);
+    });
+  }
+
+  function setDevice(mockup, device) {
+    const frame = document.getElementById('frame-' + mockup);
+    if (device === 'desktop') {
+      frame.classList.add('desktop');
+    } else {
+      frame.classList.remove('desktop');
+    }
+    const toggle = document.querySelector(`[data-mockup="${mockup}"]`);
+    toggle.querySelectorAll('button').forEach((b, i) => {
+      b.classList.toggle('active', (device === 'mobile' && i === 0) || (device === 'desktop' && i === 1));
+    });
+  }
+</script>
+
+</body>
+</html>
