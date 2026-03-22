@@ -2,7 +2,7 @@
 title: 'Site vitrine Appvise Consulting — MVP complet'
 slug: 'site-vitrine-appvise-mvp'
 created: '2026-03-22'
-status: 'ready-for-dev'
+status: 'implementation-complete'
 stepsCompleted: [1, 2, 3, 4]
 tech_stack:
   - Next.js 16 (App Router, SSG)
@@ -169,7 +169,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 1 : Initialisation & Design System
 
-- [ ] **Task 1.1 — Init projet Next.js**
+- [x] **Task 1.1 — Init projet Next.js**
   - File: `appvise-consulting/` (racine nouveau projet)
   - Action: `pnpm create next-app@latest appvise-consulting --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --use-pnpm`
   - Action: `pnpm add @next/mdx @mdx-js/loader @mdx-js/react @types/mdx gray-matter lucide-react @vercel/analytics @vercel/speed-insights remark-frontmatter @tailwindcss/typography`
@@ -183,7 +183,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     ```
   - Notes: Le formulaire Tally fourni est `https://tally.so/r/7RXkg6`. Si le quiz et le formulaire de contact doivent être des formulaires Tally distincts, mettre à jour `NEXT_PUBLIC_TALLY_CONTACT_FORM_URL` avec l'URL du formulaire de contact séparé. Par défaut, les deux utilisent la même URL.
 
-- [ ] **Task 1.2 — Design tokens & globals.css**
+- [x] **Task 1.2 — Design tokens & globals.css**
   - File: `src/app/globals.css`
   - Action: Configurer les design tokens via `@theme` Tailwind v4 (qui génère automatiquement les utility classes `bg-*`, `text-*`, `font-*`, etc.) :
     ```css
@@ -213,7 +213,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     ```
   - Notes: `@theme` remplace `tailwind.config.ts` en Tailwind v4. Les variables `--font-space-grotesk` et `--font-inter` sont injectées par `next/font/google` via l'attribut `variable` sur `<html>`. Les utility classes `font-heading`, `font-body`, `bg-primary`, `text-dark`, `bg-guarantee`, etc. sont automatiquement générées par `@theme`.
 
-- [ ] **Task 1.3 — Configuration Next.js**
+- [x] **Task 1.3 — Configuration Next.js**
   - File: `next.config.ts`
   - Action: Configurer le plugin MDX (`@next/mdx` avec `@mdx-js/loader`), ajouter `remark-frontmatter` comme plugin remark pour stripper le YAML frontmatter à la compilation MDX :
     ```typescript
@@ -247,13 +247,13 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - `frame-src 'self' https://tally.so https://zcal.co`
   - Notes: `X-Frame-Options: DENY` empêche les AUTRES sites d'embarquer Appvise dans un iframe (protection clickjacking). `frame-src` dans la CSP contrôle quelles sources NOTRE site peut charger comme iframes (Tally, Zcal). Ce sont deux mécanismes complémentaires, pas contradictoires. Tailwind v4 n'a plus de `tailwind.config.ts` — config via CSS `@theme`.
 
-- [ ] **Task 1.4 — Fonts**
+- [x] **Task 1.4 — Fonts**
   - File: `src/app/layout.tsx`
   - Action: Importer Space Grotesk (700) et Inter (400, 500, 600) via `next/font/google`
   - Action: Appliquer Inter comme font par défaut sur `<html>`, Space Grotesk via classe CSS utilitaire `font-heading`
   - Notes: Déclarer `--font-heading` et `--font-body` comme CSS variables dans globals.css
 
-- [ ] **Task 1.5 — Constantes & Types**
+- [x] **Task 1.5 — Constantes & Types**
   - File: `src/lib/constants.ts`
   - Action: Exporter les constantes depuis `process.env` :
     ```typescript
@@ -284,7 +284,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     }
     ```
 
-- [ ] **Task 1.6 — Composants UI primitifs**
+- [x] **Task 1.6 — Composants UI primitifs**
   - File: `src/components/ui/Button.tsx`
   - Action: Composant polymorphique (rend `<Link>` si `href` interne, `<a>` si externe, `<button>` sinon)
   - Props: `variant: 'primary' | 'secondary' | 'ghost' | 'inverse'`, `size: 'default' | 'sm'`, `href?: string`, `target?: string`, `rel?: string`, `children`, `className?`
@@ -304,7 +304,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 2 : Layout
 
-- [ ] **Task 2.1 — Layout racine**
+- [x] **Task 2.1 — Layout racine**
   - File: `src/app/layout.tsx`
   - Action: Structure :
     ```tsx
@@ -322,7 +322,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     ```
   - Action: Export `metadata` avec title template `%s | Appvise Consulting`, description par défaut, Open Graph image par défaut
 
-- [ ] **Task 2.2 — Navbar**
+- [x] **Task 2.2 — Navbar**
   - File: `src/components/layout/Navbar.tsx` — `"use client"`
   - Action: `<nav aria-label="Navigation principale">` sticky `top-0 z-50`
   - Layout desktop: Logo (texte "Appvise" en font-heading, lien `/`) gauche → liens centre (Cas clients `/#cas-clients`, Quiz `TALLY_QUIZ_URL` `target="_blank"`, Contact `/contact`) → CTA droite Button primary sm "Appel gratuit" → `/contact`
@@ -332,7 +332,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Scroll behavior: `useEffect` + `scroll` event → si `scrollY > 50` → `bg-dark/90 backdrop-blur-md`, sinon `bg-transparent`
   - Breakpoint: hamburger visible `lg:hidden`, liens visibles `hidden lg:flex`
 
-- [ ] **Task 2.3 — Footer**
+- [x] **Task 2.3 — Footer**
   - File: `src/components/layout/Footer.tsx`
   - Action: `<footer className="bg-dark text-white py-16 lg:py-24">`
   - Layout desktop 3 colonnes: (1) Logo + description courte, (2) Liens navigation (Accueil, Cas clients, Contact), (3) Liens sociaux (LinkedIn, YouTube icônes)
@@ -340,7 +340,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Bas de footer: "Mentions légales" + "Politique de confidentialité" (liens placeholder) + "© 2026 Appvise Consulting"
   - Notes: LinkedIn et YouTube URLs en constantes (à configurer)
 
-- [ ] **Task 2.4 — StickyCTA**
+- [x] **Task 2.4 — StickyCTA**
   - File: `src/components/layout/StickyCTA.tsx` — `"use client"`
   - Action: `<div className="fixed bottom-0 inset-x-0 z-40 lg:hidden">`
   - Visibilité: `IntersectionObserver` sur l'élément `#hero`. Quand hero visible → masqué. Quand hero sort du viewport → visible avec transition `translate-y-0` (depuis `translate-y-full`), durée 300ms
@@ -349,7 +349,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 3 : Page d'accueil — Sections
 
-- [ ] **Task 3.1 — HeroSection**
+- [x] **Task 3.1 — HeroSection**
   - File: `src/components/sections/HeroSection.tsx`
   - Action: `<section id="hero" aria-labelledby="hero-heading" className="bg-dark text-white py-24 lg:py-32">`
   - H1 `id="hero-heading"`: "Tu perds **10h/semaine** sur des tâches que tu pourrais automatiser ?" — "10h/semaine" en `text-primary`
@@ -357,7 +357,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Double CTA centré: Button primary "Réserver un appel gratuit" (`href="/contact"`) + Button secondary "Combien de temps perds-tu ?" (`href={TALLY_QUIZ_URL}` `target="_blank"` `rel="noopener noreferrer"`)
   - Layout: `max-w-3xl mx-auto text-center px-4`
 
-- [ ] **Task 3.2 — TrustBar**
+- [x] **Task 3.2 — TrustBar**
   - File: `src/components/sections/TrustBar.tsx`
   - Action: `<section aria-label="Badges de confiance" className="bg-[#081525] py-6">`
   - 5 badges dans un `<ul role="list" className="flex flex-wrap justify-center gap-6 lg:gap-10">`:
@@ -368,7 +368,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - `User` → "Un seul interlocuteur"
   - Chaque `<li>` utilise le composant `Badge`
 
-- [ ] **Task 3.3 — CaseStudyCards**
+- [x] **Task 3.3 — CaseStudyCards**
   - File: `src/components/sections/CaseStudyCards.tsx`
   - Action: `<section id="cas-clients" aria-labelledby="cases-heading" className="bg-light text-dark py-16 lg:py-24">`
   - H2 `id="cases-heading"` centré: "Ils m'ont fait confiance"
@@ -381,7 +381,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - Stat: `<span className="font-heading text-3xl text-success">{statValue}</span>` + `<span className="text-sm text-text-muted">{statLabel}</span>`
   - Focus: `focus:outline-2 focus:outline-primary focus:outline-offset-2`
 
-- [ ] **Task 3.4 — HonestySection**
+- [x] **Task 3.4 — HonestySection**
   - File: `src/components/sections/HonestySection.tsx`
   - Action: `<section aria-labelledby="honesty-heading" className="bg-dark text-white py-16 lg:py-24">`
   - H2 `id="honesty-heading"` centré: "Ce que je ne ferai pas"
@@ -391,7 +391,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - (2) "Pas de livraison bâclée — itérations illimitées jusqu'à ta satisfaction"
     - (3) "Pas de jargon technique — on parle résultats, pas technologies"
 
-- [ ] **Task 3.5 — MethodTimeline**
+- [x] **Task 3.5 — MethodTimeline**
   - File: `src/components/sections/MethodTimeline.tsx`
   - Action: `<section aria-labelledby="method-heading" className="bg-surface text-dark py-16 lg:py-24">`
   - H2 `id="method-heading"` centré: "Ma méthode en 4 étapes"
@@ -403,7 +403,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - (4) **Paiement** — "Tu ne paies le solde que quand tu es satisfait"
   - Container: `max-w-2xl mx-auto`
 
-- [ ] **Task 3.6 — GuaranteeBlock**
+- [x] **Task 3.6 — GuaranteeBlock**
   - File: `src/components/sections/GuaranteeBlock.tsx`
   - Action: `<section aria-labelledby="guarantee-heading" className="bg-guarantee text-white py-16 lg:py-24">`
   - Centré `text-center max-w-2xl mx-auto`:
@@ -416,7 +416,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
       - "Itérations illimitées incluses"
       - "Aucun engagement au-delà du projet"
 
-- [ ] **Task 3.7 — CTASection**
+- [x] **Task 3.7 — CTASection**
   - File: `src/components/sections/CTASection.tsx`
   - Action: `<section aria-labelledby="cta-heading" className="bg-primary text-white py-16 lg:py-24">`
   - Centré:
@@ -425,7 +425,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - Button inverse "Réserver un créneau" (`href="/contact"`) + Button `border border-white text-white` "Combien de temps perds-tu ?" (`href={TALLY_QUIZ_URL}` `target="_blank"`)
   - CTAs: `flex flex-col sm:flex-row gap-4 justify-center`
 
-- [ ] **Task 3.8 — AboutSection**
+- [x] **Task 3.8 — AboutSection**
   - File: `src/components/sections/AboutSection.tsx`
   - Action: `<section aria-labelledby="about-heading" className="bg-dark text-white py-16 lg:py-24">`
   - Centré `text-center max-w-2xl mx-auto`:
@@ -434,7 +434,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     - Bio: "Développeur web depuis plus de 12 ans et double certifié n8n, j'aide les entrepreneurs à récupérer leur temps en automatisant ce qui peut l'être — et en développant sur-mesure ce qui ne peut pas."
     - Lien YouTube: icône `Youtube` lucide + "Ma chaîne YouTube" → `target="_blank"`
 
-- [ ] **Task 3.9 — Assemblage page d'accueil**
+- [x] **Task 3.9 — Assemblage page d'accueil**
   - File: `src/app/page.tsx`
   - Action: Import et assemblage séquentiel des 8 sections :
     ```tsx
@@ -457,7 +457,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 4 : Contenu MDX & Pages études de cas
 
-- [ ] **Task 4.1 — Fichiers MDX études de cas**
+- [x] **Task 4.1 — Fichiers MDX études de cas**
   - File: `src/content/case-studies/addotour-229.mdx`
   - Action: Frontmatter :
     ```yaml
@@ -479,7 +479,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Action: Frontmatter (title: "MH'D ASSUR & CONSEIL", slug: "mhd-assur", sector: "Assurance", sectorTag: "assurance", problem: "Site web inexistant, gestion données et emails manuels", solution: "Site web + formulaire Tally + automatisation n8n", statValue: "8h", statLabel: "économisées par semaine", excerpt, order: 3)
   - Notes: Le contenu narratif sera réaliste mais placeholder — Guillaume remplacera avec le vrai contenu
 
-- [ ] **Task 4.2 — Lib chargement études de cas (métadonnées uniquement)**
+- [x] **Task 4.2 — Lib chargement études de cas (métadonnées uniquement)**
   - File: `src/lib/case-studies.ts`
   - Action: Ce fichier sert **uniquement à lire les métadonnées frontmatter** (pour le listing des cards et `generateMetadata`). Le rendu MDX est géré par `@next/mdx` via dynamic `import()` dans la page `[slug]` (Task 4.3).
     ```typescript
@@ -514,7 +514,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     ```
   - Notes: `getCaseStudyBySlug` ne retourne que les métadonnées, PAS le contenu MDX brut. Le contenu est rendu via `await import()` côté page (voir Task 4.3).
 
-- [ ] **Task 4.3 — Page étude de cas dynamique**
+- [x] **Task 4.3 — Page étude de cas dynamique**
   - File: `src/app/cas-clients/[slug]/page.tsx`
   - Action:
     - `generateStaticParams()` → `getAllCaseStudySlugs().map(slug => ({ slug }))`
@@ -547,7 +547,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 5 : Page Contact
 
-- [ ] **Task 5.1 — Page Contact**
+- [x] **Task 5.1 — Page Contact**
   - File: `src/app/contact/page.tsx`
   - Action: Export `metadata` : title "Contact | Appvise Consulting", description
   - Layout: fond `bg-light text-dark`, conteneur `max-w-3xl mx-auto px-4 py-16 lg:py-24`
@@ -560,7 +560,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 6 : SEO
 
-- [ ] **Task 6.1 — Sitemap & Robots**
+- [x] **Task 6.1 — Sitemap & Robots**
   - File: `src/app/sitemap.ts`
   - Action:
     ```typescript
@@ -594,14 +594,14 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     }
     ```
 
-- [ ] **Task 6.2 — JSON-LD**
+- [x] **Task 6.2 — JSON-LD**
   - File: `src/components/seo/JsonLd.tsx`
   - Action: Composant Server qui render un `<script type="application/ld+json">` avec :
     - `@type: "Organization"` — name, url, logo, description, founder, contactPoint
     - `@type: "LocalBusiness"` — name, address (France), telephone, url
   - Inséré dans `layout.tsx`
 
-- [ ] **Task 6.3 — Metadata helpers**
+- [x] **Task 6.3 — Metadata helpers**
   - File: `src/lib/metadata.ts`
   - Action: Fonction `createMetadata({ title, description, path })` qui retourne un objet `Metadata` avec :
     - `title` (string ou template)
@@ -612,7 +612,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 7 : Page 404
 
-- [ ] **Task 7.1 — Page 404**
+- [x] **Task 7.1 — Page 404**
   - File: `src/app/not-found.tsx`
   - Action: Fond `bg-dark text-white`, centré `min-h-[60vh] flex items-center justify-center`
   - H1: "Page introuvable"
@@ -621,7 +621,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Phase 8 : Fichiers statiques & Configuration finale
 
-- [ ] **Task 8.1 — Images placeholder**
+- [x] **Task 8.1 — Images placeholder**
   - File: `public/images/og-image.png`
   - Action: Créer une image PNG 1200x630 placeholder (fond `#020F1E` avec texte "Appvise Consulting" en blanc centré). Doit être un vrai fichier PNG (pas SVG) car les crawlers Open Graph nécessitent un raster image.
   - File: `public/images/logo-appvise.svg`
@@ -630,7 +630,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Action: Favicon placeholder (peut être généré depuis le logo ou un simple carré `#bf0050`). Next.js App Router détecte automatiquement `favicon.ico` dans `src/app/`.
   - Notes: Les vrais assets (logo, favicon, photo Guillaume, og-image) seront fournis par Guillaume
 
-- [ ] **Task 8.2 — .env.example**
+- [x] **Task 8.2 — .env.example**
   - File: `.env.example`
   - Action:
     ```
@@ -654,7 +654,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     NEXT_PUBLIC_YOUTUBE_URL=
     ```
 
-- [ ] **Task 8.3 — Vérification build finale**
+- [x] **Task 8.3 — Vérification build finale**
   - Action: Exécuter `pnpm build` et vérifier zéro erreur TypeScript et ESLint
   - Action: Vérifier que toutes les pages sont générées statiquement (output du build)
   - Action: `pnpm dev` et tester manuellement : navigation, responsive, embeds, ancres
@@ -663,79 +663,79 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 #### Happy Path
 
-- [ ] **AC1 — Init & Build**
+- [x] **AC1 — Init & Build**
   - Given le projet est initialisé avec toutes les dépendances
   - When `pnpm build` est exécuté
   - Then le build réussit sans erreur TypeScript ni ESLint et génère 6 pages statiques (/, /contact, /cas-clients/addotour-229, /cas-clients/sidecare, /cas-clients/mhd-assur, /404)
 
-- [ ] **AC2 — Page d'accueil complète**
+- [x] **AC2 — Page d'accueil complète**
   - Given un visiteur accède à `/`
   - When il scrolle la page
   - Then il voit les 8 sections dans l'ordre : Hero → TrustBar → CaseStudyCards → HonestySection → MethodTimeline → GuaranteeBlock → CTASection → AboutSection, chaque section ayant un fond distinct (alternance dark/light). Le CTA quiz ("Combien de temps perds-tu ?") est intégré dans Hero, CTASection et StickyCTA.
 
-- [ ] **AC3 — Navigation desktop**
+- [x] **AC3 — Navigation desktop**
   - Given un visiteur est sur desktop (1024px+)
   - When il regarde la navbar
   - Then il voit le logo, les liens (Cas clients, Quiz, Contact) et le CTA "Appel gratuit", et les liens fonctionnent (ancre scroll, nouvel onglet, navigation)
 
-- [ ] **AC4 — Navigation mobile**
+- [x] **AC4 — Navigation mobile**
   - Given un visiteur est sur mobile (<1024px)
   - When il clique sur le hamburger
   - Then un drawer plein écran s'ouvre avec les liens empilés, se ferme via ✕ ou Escape, et verrouille le scroll du body
 
-- [ ] **AC5 — Études de cas cards → page**
+- [x] **AC5 — Études de cas cards → page**
   - Given un visiteur voit les 3 cards études de cas sur la page d'accueil
   - When il clique sur une card (ex: Addotour 229)
   - Then il est redirigé vers `/cas-clients/addotour-229` avec le contenu complet (titre, tag secteur, stat clé, contenu narratif, CTA audit en bas)
 
-- [ ] **AC6 — Page Contact embeds**
+- [x] **AC6 — Page Contact embeds**
   - Given un visiteur accède à `/contact`
   - When la page charge
   - Then il voit un skeleton pulse puis le calendrier Zcal et le formulaire Tally `https://tally.so/r/7RXkg6`, séparés par "ou"
 
-- [ ] **AC7 — StickyCTA mobile apparition**
+- [x] **AC7 — StickyCTA mobile apparition**
   - Given un visiteur est sur mobile
   - When il scrolle au-delà du hero (hero sort du viewport)
   - Then une barre CTA fixe slide-up en bas d'écran avec "Appel gratuit" + "Quiz", et disparaît quand le hero redevient visible
 
-- [ ] **AC8 — Responsive 3 breakpoints**
+- [x] **AC8 — Responsive 3 breakpoints**
   - Given le site est ouvert sur mobile (320px), tablette (768px), desktop (1024px+)
   - When le layout s'adapte
   - Then : cards études de cas 1→2→3 colonnes, navbar hamburger→liens visibles, CTAs empilés→côte à côte, StickyCTA visible→masqué→masqué
 
-- [ ] **AC9 — SEO complet**
+- [x] **AC9 — SEO complet**
   - Given un moteur de recherche accède au site
   - When il crawle `/sitemap.xml`
   - Then il trouve les 5 URLs du site, chaque page a `<title>` + `<meta description>` + balises Open Graph, et le JSON-LD Organization est présent dans le `<head>`
 
-- [ ] **AC10 — Quiz lien externe**
+- [x] **AC10 — Quiz lien externe**
   - Given un visiteur clique sur le CTA "Combien de temps perds-tu ?" (hero, CTASection, ou StickyCTA)
   - When le lien s'active
   - Then un nouvel onglet s'ouvre vers `https://tally.so/r/7RXkg6` et le site Appvise reste ouvert en arrière-plan
 
 #### Error & Edge Cases
 
-- [ ] **AC11 — Embed fallback**
+- [x] **AC11 — Embed fallback**
   - Given un embed Tally ou Zcal ne charge pas
   - When 10 secondes se sont écoulées
   - Then le skeleton est remplacé par un message fallback avec un lien email/LinkedIn de contact
 
-- [ ] **AC12 — Page 404**
+- [x] **AC12 — Page 404**
   - Given un visiteur accède à une URL inexistante (ex: `/page-qui-existe-pas`)
   - When la page 404 s'affiche
   - Then il voit un message clair et un CTA "Retour à l'accueil"
 
-- [ ] **AC13 — Accessibilité clavier**
+- [x] **AC13 — Accessibilité clavier**
   - Given un utilisateur navigue exclusivement au clavier
   - When il tab à travers la page d'accueil
   - Then : le skip-to-content link est le premier élément focusable, tous les boutons/liens ont un outline visible, le drawer mobile a un focus trap
 
-- [ ] **AC14 — Performance Lighthouse**
+- [x] **AC14 — Performance Lighthouse**
   - Given le site est build et servi
   - When un audit Lighthouse est exécuté sur la page d'accueil
   - Then les scores Performance, SEO, Accessibilité et Best Practices sont > 90 (favicon, og-image, et canonical URL correctement configurés)
 
-- [ ] **AC15 — Headers sécurité**
+- [x] **AC15 — Headers sécurité**
   - Given les headers HTTP de réponse sont inspectés
   - When on vérifie les réponses du serveur
   - Then `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin` sont présents, et la CSP inclut `frame-src 'self' https://tally.so https://zcal.co`
