@@ -45,6 +45,8 @@ files_to_modify:
   - src/lib/constants.ts
   - src/types/case-study.ts
   - next.config.ts
+  - mdx-components.tsx
+  - src/app/favicon.ico
   - .env.local
   - .env.example
 code_patterns:
@@ -68,14 +70,14 @@ Guillaume Occuly (Appvise Consulting) n'a aucune présence web au-delà de Linke
 
 ### Solution
 
-Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de conviction (Pain point → Preuves chiffrées → Garantie paiement à la satisfaction). Le site comprend une page d'accueil one-page avec 9 sections séquentielles, 3 études de cas MDX, une page contact avec embeds Zcal (booking) et Tally (formulaire), un quiz de qualification Tally (lien externe), et les fondations SEO/analytics.
+Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de conviction (Pain point → Preuves chiffrées → Garantie paiement à la satisfaction). Le site comprend une page d'accueil one-page avec 8 sections séquentielles, 3 études de cas MDX, une page contact avec embeds Zcal (booking) et Tally (formulaire), un quiz de qualification Tally (lien externe), et les fondations SEO/analytics.
 
 ### Scope
 
 **In Scope:**
 - Initialisation projet Next.js 16 + config Tailwind tokens + fonts (Space Grotesk + Inter)
 - Layout racine (Navbar sticky, Footer, StickyCTA mobile)
-- Page d'accueil 9 sections : Hero → TrustBar → CaseStudyCards → HonestySection → MethodTimeline → GuaranteeBlock → CTASection → QuizCTA → AboutSection
+- Page d'accueil 8 sections : Hero → TrustBar → CaseStudyCards → HonestySection → MethodTimeline → GuaranteeBlock → CTASection → AboutSection
 - 3 études de cas MDX (Addotour 229, SideCare, MH'D ASSUR & CONSEIL)
 - Pages études de cas dynamiques `/cas-clients/[slug]`
 - Page Contact `/contact` (embed Zcal + embed Tally https://tally.so/r/7RXkg6)
@@ -129,8 +131,10 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - Vercel standard (SSG + edge) — pas d'`output: 'export'`
 
 **Dépendances additionnelles :**
-- `@next/mdx` + `@mdx-js/loader` + `@mdx-js/react` — rendu MDX études de cas
-- `gray-matter` — parsing frontmatter MDX
+- `@next/mdx` + `@mdx-js/loader` + `@mdx-js/react` + `@types/mdx` — rendu MDX études de cas
+- `remark-frontmatter` — plugin remark pour stripper le YAML frontmatter lors de la compilation MDX
+- `gray-matter` — parsing frontmatter pour extraction des métadonnées (listings, generateMetadata)
+- `@tailwindcss/typography` — classes `prose` pour styliser le contenu MDX rendu
 - `lucide-react` — icônes (badges, frise, garantie)
 - `@vercel/analytics` + `@vercel/speed-insights` — analytics
 
@@ -168,22 +172,25 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - [ ] **Task 1.1 — Init projet Next.js**
   - File: `appvise-consulting/` (racine nouveau projet)
   - Action: `pnpm create next-app@latest appvise-consulting --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --use-pnpm`
-  - Action: `pnpm add @next/mdx @mdx-js/loader @mdx-js/react gray-matter lucide-react @vercel/analytics @vercel/speed-insights`
+  - Action: `pnpm add @next/mdx @mdx-js/loader @mdx-js/react @types/mdx gray-matter lucide-react @vercel/analytics @vercel/speed-insights remark-frontmatter @tailwindcss/typography`
   - Action: Créer `.env.local` et `.env.example` :
     ```
     NEXT_PUBLIC_SITE_URL=https://appvise-consulting.fr
     NEXT_PUBLIC_TALLY_QUIZ_URL=https://tally.so/r/7RXkg6
-    NEXT_PUBLIC_TALLY_CONTACT_FORM_ID=7RXkg6
+    NEXT_PUBLIC_TALLY_CONTACT_FORM_URL=https://tally.so/embed/7RXkg6?alignLeft=1&hideTitle=1
     NEXT_PUBLIC_ZCAL_URL=<à configurer>
-    CONTACT_EMAIL=<à configurer>
+    NEXT_PUBLIC_CONTACT_EMAIL=<à configurer>
     ```
-  - Notes: Le quiz et le formulaire de contact utilisent le même Tally `https://tally.so/r/7RXkg6`
+  - Notes: Le formulaire Tally fourni est `https://tally.so/r/7RXkg6`. Si le quiz et le formulaire de contact doivent être des formulaires Tally distincts, mettre à jour `NEXT_PUBLIC_TALLY_CONTACT_FORM_URL` avec l'URL du formulaire de contact séparé. Par défaut, les deux utilisent la même URL.
 
 - [ ] **Task 1.2 — Design tokens & globals.css**
   - File: `src/app/globals.css`
-  - Action: Définir les CSS custom properties :
+  - Action: Configurer les design tokens via `@theme` Tailwind v4 (qui génère automatiquement les utility classes `bg-*`, `text-*`, `font-*`, etc.) :
     ```css
-    :root {
+    @import "tailwindcss";
+
+    @theme {
+      /* Colors */
       --color-primary: #bf0050;
       --color-secondary: #0022ed;
       --color-dark: #020F1E;
@@ -193,21 +200,52 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
       --color-text-muted: #6B7280;
       --color-success: #10B981;
       --color-border: #E5E7EB;
+
+      /* Font families (valeurs injectées par next/font via CSS variables) */
+      --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+      --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 60px;
     }
     ```
-  - Action: Configurer Tailwind v4 pour utiliser ces tokens via `@theme`
-  - Action: Ajouter `scroll-behavior: smooth` sur `html`, `scroll-padding-top: 60px`
+  - Notes: `@theme` remplace `tailwind.config.ts` en Tailwind v4. Les variables `--font-space-grotesk` et `--font-inter` sont injectées par `next/font/google` via l'attribut `variable` sur `<html>`. Les utility classes `font-heading`, `font-body`, `bg-primary`, `text-dark`, `bg-guarantee`, etc. sont automatiquement générées par `@theme`.
 
 - [ ] **Task 1.3 — Configuration Next.js**
   - File: `next.config.ts`
-  - Action: Configurer le plugin MDX (`@next/mdx` avec `@mdx-js/loader`)
+  - Action: Configurer le plugin MDX (`@next/mdx` avec `@mdx-js/loader`), ajouter `remark-frontmatter` comme plugin remark pour stripper le YAML frontmatter à la compilation MDX :
+    ```typescript
+    import createMDX from '@next/mdx'
+
+    const nextConfig = {
+      pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+      // ... headers ci-dessous
+    }
+
+    const withMDX = createMDX({
+      options: {
+        remarkPlugins: ['remark-frontmatter'],
+      },
+    })
+
+    export default withMDX(nextConfig)
+    ```
+  - Action: Créer `mdx-components.tsx` à la racine du projet (requis par `@next/mdx` avec App Router) :
+    ```typescript
+    import type { MDXComponents } from 'mdx/types'
+    export function useMDXComponents(): MDXComponents {
+      return {}
+    }
+    ```
   - Action: Ajouter les headers de sécurité :
     - `X-Frame-Options: DENY`
     - `X-Content-Type-Options: nosniff`
     - `Referrer-Policy: strict-origin-when-cross-origin`
   - Action: Configurer la CSP pour autoriser les iframes `tally.so` et `zcal.co` :
     - `frame-src 'self' https://tally.so https://zcal.co`
-  - Notes: Tailwind v4 n'a plus de `tailwind.config.ts` — config via CSS `@theme`
+  - Notes: `X-Frame-Options: DENY` empêche les AUTRES sites d'embarquer Appvise dans un iframe (protection clickjacking). `frame-src` dans la CSP contrôle quelles sources NOTRE site peut charger comme iframes (Tally, Zcal). Ce sont deux mécanismes complémentaires, pas contradictoires. Tailwind v4 n'a plus de `tailwind.config.ts` — config via CSS `@theme`.
 
 - [ ] **Task 1.4 — Fonts**
   - File: `src/app/layout.tsx`
@@ -221,10 +259,13 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     ```typescript
     export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://appvise-consulting.fr'
     export const TALLY_QUIZ_URL = process.env.NEXT_PUBLIC_TALLY_QUIZ_URL ?? 'https://tally.so/r/7RXkg6'
+    export const TALLY_CONTACT_FORM_URL = process.env.NEXT_PUBLIC_TALLY_CONTACT_FORM_URL ?? 'https://tally.so/embed/7RXkg6?alignLeft=1&hideTitle=1'
     export const ZCAL_URL = process.env.NEXT_PUBLIC_ZCAL_URL ?? ''
+    export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? ''
     export const SITE_NAME = 'Appvise Consulting'
     export const SITE_DESCRIPTION = 'Automatisation et développement sur-mesure pour entrepreneurs'
-    export const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? ''
+    export const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''
+    export const YOUTUBE_URL = process.env.NEXT_PUBLIC_YOUTUBE_URL ?? ''
     ```
   - File: `src/types/case-study.ts`
   - Action: Définir :
@@ -247,6 +288,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - File: `src/components/ui/Button.tsx`
   - Action: Composant polymorphique (rend `<Link>` si `href` interne, `<a>` si externe, `<button>` sinon)
   - Props: `variant: 'primary' | 'secondary' | 'ghost' | 'inverse'`, `size: 'default' | 'sm'`, `href?: string`, `target?: string`, `rel?: string`, `children`, `className?`
+  - Logique `rel` : si `target="_blank"` et pas de `rel` fourni, appliquer automatiquement `rel="noopener noreferrer"`. Assure la cohérence sur tous les liens externes sans avoir à le spécifier manuellement.
   - Styles: primary = `bg-primary text-white`, secondary = `border border-white text-white` (dark) / `border border-border text-dark` (light), ghost = `text-primary`, inverse = `bg-white text-primary`
   - Hover: `scale(1.02) shadow-lg`, Active: `scale(0.98)`, Focus: `outline-2 outline-primary outline-offset-2`
   - Taille tactile min: `py-3.5 px-8` (44px+ hauteur)
@@ -283,7 +325,8 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - [ ] **Task 2.2 — Navbar**
   - File: `src/components/layout/Navbar.tsx` — `"use client"`
   - Action: `<nav aria-label="Navigation principale">` sticky `top-0 z-50`
-  - Layout desktop: Logo (texte "Appvise" en font-heading) gauche → liens centre (Cas clients `#cas-clients`, Quiz `TALLY_QUIZ_URL` external, Contact `/contact`) → CTA droite Button primary sm "Appel gratuit" → `/contact`
+  - Layout desktop: Logo (texte "Appvise" en font-heading, lien `/`) gauche → liens centre (Cas clients `/#cas-clients`, Quiz `TALLY_QUIZ_URL` `target="_blank"`, Contact `/contact`) → CTA droite Button primary sm "Appel gratuit" → `/contact`
+  - Notes: Le lien "Cas clients" pointe toujours vers `/#cas-clients` (ancre sur la page d'accueil), pas vers `/cas-clients` (qui n'a pas de page listing dédiée). Sur la page d'accueil, il fait un smooth scroll. Sur les autres pages, il redirige vers l'accueil puis scrolle.
   - Layout mobile: Logo gauche → hamburger droite (`aria-expanded`, `aria-label="Menu"`)
   - Drawer mobile: `fixed inset-0 bg-dark z-50`, liens empilés 18px, CTA pleine largeur en bas, fermeture ✕ + Escape, focus trap, body scroll lock (`overflow: hidden` sur body)
   - Scroll behavior: `useEffect` + `scroll` event → si `scrollY > 50` → `bg-dark/90 backdrop-blur-md`, sinon `bg-transparent`
@@ -393,7 +436,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 
 - [ ] **Task 3.9 — Assemblage page d'accueil**
   - File: `src/app/page.tsx`
-  - Action: Import et assemblage séquentiel des 9 sections :
+  - Action: Import et assemblage séquentiel des 8 sections :
     ```tsx
     export default function HomePage() {
       return (
@@ -436,9 +479,9 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Action: Frontmatter (title: "MH'D ASSUR & CONSEIL", slug: "mhd-assur", sector: "Assurance", sectorTag: "assurance", problem: "Site web inexistant, gestion données et emails manuels", solution: "Site web + formulaire Tally + automatisation n8n", statValue: "8h", statLabel: "économisées par semaine", excerpt, order: 3)
   - Notes: Le contenu narratif sera réaliste mais placeholder — Guillaume remplacera avec le vrai contenu
 
-- [ ] **Task 4.2 — Lib chargement études de cas**
+- [ ] **Task 4.2 — Lib chargement études de cas (métadonnées uniquement)**
   - File: `src/lib/case-studies.ts`
-  - Action:
+  - Action: Ce fichier sert **uniquement à lire les métadonnées frontmatter** (pour le listing des cards et `generateMetadata`). Le rendu MDX est géré par `@next/mdx` via dynamic `import()` dans la page `[slug]` (Task 4.3).
     ```typescript
     import fs from 'fs'
     import path from 'path'
@@ -458,28 +501,49 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
         .sort((a, b) => a.order - b.order)
     }
 
-    export function getCaseStudyBySlug(slug: string): { meta: CaseStudy; content: string } {
+    export function getCaseStudyBySlug(slug: string): CaseStudy {
       const file = path.join(CASE_STUDIES_DIR, `${slug}.mdx`)
       const raw = fs.readFileSync(file, 'utf-8')
-      const { data, content } = matter(raw)
-      return { meta: data as CaseStudy, content }
+      const { data } = matter(raw)
+      return data as CaseStudy
     }
 
     export function getAllCaseStudySlugs(): string[] {
       return getCaseStudies().map(cs => cs.slug)
     }
     ```
+  - Notes: `getCaseStudyBySlug` ne retourne que les métadonnées, PAS le contenu MDX brut. Le contenu est rendu via `await import()` côté page (voir Task 4.3).
 
 - [ ] **Task 4.3 — Page étude de cas dynamique**
   - File: `src/app/cas-clients/[slug]/page.tsx`
   - Action:
     - `generateStaticParams()` → `getAllCaseStudySlugs().map(slug => ({ slug }))`
-    - `generateMetadata({ params })` → titre dynamique + description + Open Graph
-    - Layout: fond `bg-light text-dark`, conteneur `max-w-prose mx-auto px-4 py-16 lg:py-24`
-    - Header: lien retour "← Voir tous les cas clients" (`/cas-clients` ou `/#cas-clients`), titre h1, tag secteur badge, stat clé en gros
-    - Corps: rendu MDX avec classes prose Tailwind (`prose prose-lg`)
+    - `export const dynamicParams = false` — les slugs non définis dans `generateStaticParams` retournent automatiquement 404, sans risque de crash
+    - `generateMetadata({ params })` → utilise `getCaseStudyBySlug(slug)` pour le titre dynamique + description + Open Graph
+    - Rendu MDX via **dynamic import** (approche officielle Next.js 16) :
+      ```typescript
+      export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+        const { slug } = await params
+        const meta = getCaseStudyBySlug(slug)
+        const { default: Content } = await import(`@/content/case-studies/${slug}.mdx`)
+
+        return (
+          <div className="bg-light text-dark py-16 lg:py-24">
+            <div className="max-w-prose mx-auto px-4">
+              <a href="/#cas-clients" className="text-primary hover:underline">← Voir tous les cas clients</a>
+              {/* Header: titre, tag secteur, stat clé */}
+              <div className="prose prose-lg mt-8">
+                <Content />
+              </div>
+              {/* CTA bas de page */}
+            </div>
+          </div>
+        )
+      }
+      ```
+    - Header: lien retour "← Voir tous les cas clients" (`/#cas-clients`), titre h1, tag secteur badge, stat clé en gros
     - Bas de page: CTA "Tu as un problème similaire ?" + Button primary "Réserver un appel gratuit" → `/contact`
-  - Notes: Le rendu MDX utilise `@next/mdx` — le contenu est importé et compilé au build time. Alternativement, utiliser `next-mdx-remote` si `@next/mdx` ne supporte pas le chargement dynamique par slug.
+  - Notes: `@next/mdx` compile les fichiers `.mdx` en composants React au build time. Le `await import()` charge le composant MDX compilé, pas du texte brut. `dynamicParams = false` garantit qu'un slug invalide retourne 404 sans crash. Il faut ajouter `remark-frontmatter` comme plugin MDX (Task 1.3) pour que le YAML frontmatter soit strippé à la compilation et ne cause pas d'erreur de parsing.
 
 #### Phase 5 : Page Contact
 
@@ -491,7 +555,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Description: "30 minutes pour identifier tes tâches chronophages et te proposer la solution adaptée."
   - Embed Zcal: `<EmbedWrapper src={ZCAL_URL} title="Calendrier de réservation d'appel gratuit" height={400} fallbackMessage="Le calendrier est temporairement indisponible." fallbackContact={CONTACT_EMAIL} />`
   - Séparateur: `<div className="flex items-center gap-4 my-8"><hr className="flex-1 border-border" /><span className="text-text-muted">ou</span><hr className="flex-1 border-border" /></div>`
-  - Embed Tally: `<EmbedWrapper src="https://tally.so/embed/7RXkg6?alignLeft=1&hideTitle=1" title="Formulaire de contact" height={600} fallbackMessage="Le formulaire est temporairement indisponible." fallbackContact={CONTACT_EMAIL} />`
+  - Embed Tally: `<EmbedWrapper src={TALLY_CONTACT_FORM_URL} title="Formulaire de contact" height={600} fallbackMessage="Le formulaire est temporairement indisponible." fallbackContact={CONTACT_EMAIL} />`
   - Rappel process: card `bg-surface border border-border rounded-xl p-6 mt-8` avec texte "Après ta demande : réponse sous 48h, puis diagnostic gratuit de 30 min"
 
 #### Phase 6 : SEO
@@ -542,7 +606,8 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
   - Action: Fonction `createMetadata({ title, description, path })` qui retourne un objet `Metadata` avec :
     - `title` (string ou template)
     - `description`
-    - `openGraph`: title, description, url, siteName, type "website", images `[{ url: '/images/og-image.jpg', width: 1200, height: 630 }]`
+    - `alternates`: `{ canonical: \`${SITE_URL}${path}\` }` — évite le duplicate indexing www vs non-www
+    - `openGraph`: title, description, url `\`${SITE_URL}${path}\``, siteName, type "website", images `[{ url: '/images/og-image.png', width: 1200, height: 630 }]`
     - `twitter`: card "summary_large_image"
 
 #### Phase 7 : Page 404
@@ -557,11 +622,13 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 #### Phase 8 : Fichiers statiques & Configuration finale
 
 - [ ] **Task 8.1 — Images placeholder**
-  - File: `public/images/og-image.jpg`
-  - Action: Image placeholder 1200x630 (peut être un SVG converti ou un placeholder statique)
+  - File: `public/images/og-image.png`
+  - Action: Créer une image PNG 1200x630 placeholder (fond `#020F1E` avec texte "Appvise Consulting" en blanc centré). Doit être un vrai fichier PNG (pas SVG) car les crawlers Open Graph nécessitent un raster image.
   - File: `public/images/logo-appvise.svg`
   - Action: SVG placeholder simple avec texte "Appvise"
-  - Notes: Les vrais assets seront fournis par Guillaume
+  - File: `src/app/favicon.ico`
+  - Action: Favicon placeholder (peut être généré depuis le logo ou un simple carré `#bf0050`). Next.js App Router détecte automatiquement `favicon.ico` dans `src/app/`.
+  - Notes: Les vrais assets (logo, favicon, photo Guillaume, og-image) seront fournis par Guillaume
 
 - [ ] **Task 8.2 — .env.example**
   - File: `.env.example`
@@ -573,14 +640,18 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
     # Tally - Quiz de qualification
     NEXT_PUBLIC_TALLY_QUIZ_URL=https://tally.so/r/7RXkg6
 
-    # Tally - Formulaire de contact (même formulaire que le quiz)
-    NEXT_PUBLIC_TALLY_CONTACT_FORM_ID=7RXkg6
+    # Tally - Formulaire de contact (embed URL, peut être différent du quiz)
+    NEXT_PUBLIC_TALLY_CONTACT_FORM_URL=https://tally.so/embed/7RXkg6?alignLeft=1&hideTitle=1
 
     # Zcal - Réservation audit gratuit
     NEXT_PUBLIC_ZCAL_URL=
 
     # Email de contact (fallback si embeds indisponibles)
-    CONTACT_EMAIL=
+    NEXT_PUBLIC_CONTACT_EMAIL=
+
+    # Réseaux sociaux
+    NEXT_PUBLIC_LINKEDIN_URL=
+    NEXT_PUBLIC_YOUTUBE_URL=
     ```
 
 - [ ] **Task 8.3 — Vérification build finale**
@@ -600,7 +671,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - [ ] **AC2 — Page d'accueil complète**
   - Given un visiteur accède à `/`
   - When il scrolle la page
-  - Then il voit les 8 sections dans l'ordre : Hero → TrustBar → CaseStudyCards → HonestySection → MethodTimeline → GuaranteeBlock → CTASection → AboutSection, chaque section ayant un fond distinct (alternance dark/light)
+  - Then il voit les 8 sections dans l'ordre : Hero → TrustBar → CaseStudyCards → HonestySection → MethodTimeline → GuaranteeBlock → CTASection → AboutSection, chaque section ayant un fond distinct (alternance dark/light). Le CTA quiz ("Combien de temps perds-tu ?") est intégré dans Hero, CTASection et StickyCTA.
 
 - [ ] **AC3 — Navigation desktop**
   - Given un visiteur est sur desktop (1024px+)
@@ -662,7 +733,7 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - [ ] **AC14 — Performance Lighthouse**
   - Given le site est build et servi
   - When un audit Lighthouse est exécuté sur la page d'accueil
-  - Then les scores Performance, SEO, Accessibilité et Best Practices sont > 90
+  - Then les scores Performance, SEO, Accessibilité et Best Practices sont > 90 (favicon, og-image, et canonical URL correctement configurés)
 
 - [ ] **AC15 — Headers sécurité**
   - Given les headers HTTP de réponse sont inspectés
@@ -678,8 +749,10 @@ Site statique Next.js 16 + Tailwind CSS v4 + Vercel structuré en entonnoir de c
 - `react`, `react-dom` (v19.x) — runtime
 - `typescript` — typage
 - `tailwindcss` (v4.2) — styling
-- `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react` — MDX
-- `gray-matter` — parsing frontmatter
+- `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx` — MDX
+- `remark-frontmatter` — strip YAML frontmatter à la compilation MDX
+- `gray-matter` — parsing frontmatter pour extraction métadonnées
+- `@tailwindcss/typography` — classes `prose` pour le rendu MDX
 - `lucide-react` — icônes
 - `@vercel/analytics` — analytics
 - `@vercel/speed-insights` — monitoring perf
