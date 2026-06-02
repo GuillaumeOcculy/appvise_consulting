@@ -1,5 +1,4 @@
 import Button from '@/components/ui/Button'
-import { TALLY_QUIZ_URL } from '@/lib/constants'
 
 export default function HeroSection() {
   return (
@@ -15,7 +14,7 @@ export default function HeroSection() {
           <Button variant="primary" href="/rendez-vous">
             Réserver un appel gratuit
           </Button>
-          <Button variant="secondary" href={TALLY_QUIZ_URL} target="_blank" className="border-white text-white">
+          <Button variant="secondary" href="/quiz" className="border-white text-white">
             Combien de temps perds-tu ?
           </Button>
         </div>

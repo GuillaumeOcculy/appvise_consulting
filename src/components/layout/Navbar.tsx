@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { TALLY_QUIZ_URL } from '@/lib/constants'
 import Button from '@/components/ui/Button'
 
 export default function Navbar() {
@@ -75,9 +74,9 @@ export default function Navbar() {
     }
   }, [menuOpen])
 
-  const navLinks = [
+  const navLinks: { label: string; href: string; external?: boolean }[] = [
     { label: 'Cas clients', href: '/#cas-clients' },
-    { label: 'Quiz', href: TALLY_QUIZ_URL, external: true },
+    { label: 'Quiz', href: '/quiz' },
   ]
 
   return (

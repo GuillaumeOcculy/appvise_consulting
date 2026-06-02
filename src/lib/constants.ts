@@ -1,6 +1,11 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://appvise-consulting.fr'
 export const TALLY_QUIZ_URL = process.env.NEXT_PUBLIC_TALLY_QUIZ_URL ?? 'https://tally.so/r/7RXkg6'
-export const TALLY_CONTACT_FORM_URL = process.env.NEXT_PUBLIC_TALLY_CONTACT_FORM_URL ?? 'https://tally.so/embed/7RXkg6?alignLeft=1&hideTitle=1'
+// Version "embed" (iframe) du quiz, dérivée de l'URL publique du formulaire.
+export const TALLY_QUIZ_EMBED_URL =
+  process.env.NEXT_PUBLIC_TALLY_QUIZ_EMBED_URL ??
+  TALLY_QUIZ_URL.replace('/r/', '/embed/') +
+    (TALLY_QUIZ_URL.includes('?') ? '&' : '?') +
+    'alignLeft=1&hideTitle=1&transparentBackground=1'
 export const ZCAL_URL = process.env.NEXT_PUBLIC_ZCAL_URL ?? ''
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? ''
 export const SITE_NAME = 'Appvise Consulting'
