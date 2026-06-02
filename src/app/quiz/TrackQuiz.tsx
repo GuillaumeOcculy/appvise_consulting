@@ -5,6 +5,12 @@ import { useEffect } from 'react'
 // Tally émet des messages postMessage depuis l'iframe du formulaire.
 // On déclenche l'event Meta Pixel uniquement quand le quiz est soumis.
 export default function TrackQuiz() {
+  // Ouverture du quiz : signal haut de tunnel (retargeting des non-finisseurs).
+  useEffect(() => {
+    window.fbq?.('track', 'ViewContent')
+  }, [])
+
+  // Soumission du quiz : conversion.
   useEffect(() => {
     function onMessage(event: MessageEvent) {
       if (event.origin !== 'https://tally.so') return
