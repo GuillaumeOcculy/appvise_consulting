@@ -1,6 +1,7 @@
 import { createMetadata } from '@/lib/metadata'
 import { ZCAL_URL, CONTACT_EMAIL } from '@/lib/constants'
 import EmbedWrapper from '@/components/ui/EmbedWrapper'
+import TrackRendezVous from './TrackRendezVous'
 
 export const metadata = createMetadata({
   title: 'Réserver un appel gratuit',
@@ -26,6 +27,7 @@ const steps = [
 export default function RendezVousPage() {
   return (
     <div className="bg-light text-dark py-16 lg:py-24">
+      <TrackRendezVous />
       <div className="max-w-3xl mx-auto px-4">
         <h1 className="font-heading font-bold text-3xl md:text-4xl">
           Réserver un appel gratuit
