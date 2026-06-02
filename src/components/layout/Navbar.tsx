@@ -2,12 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { TALLY_QUIZ_URL } from '@/lib/constants'
 import Button from '@/components/ui/Button'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  // La navbar n'est transparente que par-dessus le hero sombre de la home.
+  // Sur les autres pages (fond clair), elle reste solide pour rester lisible.
+  const solid = scrolled || pathname !== '/'
   const menuRef = useRef<HTMLDivElement>(null)
   const openButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -80,7 +85,7 @@ export default function Navbar() {
       <nav
         aria-label="Navigation principale"
         className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-          scrolled ? 'bg-dark/90 backdrop-blur-md' : 'bg-transparent'
+          solid ? 'bg-dark/90 backdrop-blur-md' : 'bg-transparent'
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
