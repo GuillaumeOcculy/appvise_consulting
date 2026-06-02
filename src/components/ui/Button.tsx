@@ -44,14 +44,14 @@ export default function Button({
 
     if (isExternal) {
       return (
-        <a href={href} target={target} rel={autoRel} className={baseClasses}>
+        <a href={href} target={target} rel={autoRel} className={baseClasses} onClick={onClick}>
           {children}
         </a>
       )
     }
 
     return (
-      <Link href={href} target={target} rel={autoRel} className={baseClasses}>
+      <Link href={href} target={target} rel={autoRel} className={baseClasses} onClick={onClick}>
         {children}
       </Link>
     )

@@ -15,11 +15,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://tally.so",
+              "script-src 'self' 'unsafe-inline' https://tally.so https://connect.facebook.net https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
-              "connect-src 'self' https://vitals.vercel-insights.com",
+              "connect-src 'self' https://vitals.vercel-insights.com https://connect.facebook.net https://www.facebook.com",
               "frame-src 'self' https://tally.so https://zcal.co",
             ].join('; '),
           },

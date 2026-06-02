@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { TALLY_QUIZ_URL, ZCAL_URL } from '@/lib/constants'
+import { TALLY_QUIZ_URL } from '@/lib/constants'
 import Button from '@/components/ui/Button'
 
 export default function Navbar() {
@@ -110,7 +110,7 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <Button variant="primary" size="sm" href={ZCAL_URL} target="_blank">
+            <Button variant="primary" size="sm" href="/rendez-vous">
               Appel gratuit
             </Button>
           </div>
@@ -182,7 +182,7 @@ export default function Navbar() {
           </div>
 
           <div className="p-4">
-            <Button variant="primary" href={ZCAL_URL} target="_blank" className="w-full">
+            <Button variant="primary" href="/rendez-vous" className="w-full" onClick={() => setMenuOpen(false)}>
               Appel gratuit
             </Button>
           </div>

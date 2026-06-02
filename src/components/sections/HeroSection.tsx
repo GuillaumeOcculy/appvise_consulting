@@ -1,5 +1,5 @@
 import Button from '@/components/ui/Button'
-import { TALLY_QUIZ_URL, ZCAL_URL } from '@/lib/constants'
+import { TALLY_QUIZ_URL } from '@/lib/constants'
 
 export default function HeroSection() {
   return (
@@ -12,7 +12,7 @@ export default function HeroSection() {
           Automatisation n8n et développement sur-mesure — un seul interlocuteur, de l&apos;audit gratuit à la livraison.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <Button variant="primary" href={ZCAL_URL} target="_blank">
+          <Button variant="primary" href="/rendez-vous">
             Réserver un appel gratuit
           </Button>
           <Button variant="secondary" href={TALLY_QUIZ_URL} target="_blank" className="border-white text-white">

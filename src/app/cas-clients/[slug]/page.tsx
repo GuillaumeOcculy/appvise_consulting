@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getCaseStudyBySlug, getAllCaseStudySlugs } from '@/lib/case-studies'
 import { createMetadata } from '@/lib/metadata'
-import { ZCAL_URL } from '@/lib/constants'
 import Button from '@/components/ui/Button'
 
 export const dynamicParams = false
@@ -59,7 +58,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <h2 className="font-heading font-bold text-xl">Tu as un problème similaire ?</h2>
           <p className="text-text-muted mt-2">Réserve un appel gratuit de 30 minutes pour en discuter.</p>
           <div className="mt-6">
-            <Button variant="primary" href={ZCAL_URL} target="_blank">
+            <Button variant="primary" href="/rendez-vous">
               Réserver un appel gratuit
             </Button>
           </div>

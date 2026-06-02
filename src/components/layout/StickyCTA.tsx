@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button'
-import { TALLY_QUIZ_URL, ZCAL_URL } from '@/lib/constants'
+import { TALLY_QUIZ_URL } from '@/lib/constants'
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false)
@@ -29,7 +29,7 @@ export default function StickyCTA() {
     >
       <div className="bg-dark/95 backdrop-blur-md p-3">
         <div className="flex gap-2">
-          <Button variant="primary" size="sm" href={ZCAL_URL} target="_blank" className="flex-1">
+          <Button variant="primary" size="sm" href="/rendez-vous" className="flex-1">
             Appel gratuit
           </Button>
           <Button variant="secondary" size="sm" href={TALLY_QUIZ_URL} target="_blank" className="flex-1">

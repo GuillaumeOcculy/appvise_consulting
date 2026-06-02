@@ -1,5 +1,5 @@
 import Button from '@/components/ui/Button'
-import { TALLY_QUIZ_URL, ZCAL_URL } from '@/lib/constants'
+import { TALLY_QUIZ_URL } from '@/lib/constants'
 
 export default function CTASection() {
   return (
@@ -12,7 +12,7 @@ export default function CTASection() {
           Appel gratuit &middot; 30 min &middot; Sans engagement
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <Button variant="inverse" href={ZCAL_URL} target="_blank">
+          <Button variant="inverse" href="/rendez-vous">
             Réserver un créneau
           </Button>
           <Button variant="secondary" href={TALLY_QUIZ_URL} target="_blank" className="border-white text-white">
