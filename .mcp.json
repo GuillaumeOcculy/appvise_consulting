@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "systeme-io": {
+      "type": "http",
+      "url": "https://mcp.systeme.io/mcp?mcpKey=${SYSTEME_IO_MCP_KEY}"
+    }
+  }
+}
