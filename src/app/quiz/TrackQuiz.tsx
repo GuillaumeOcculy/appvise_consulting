@@ -1,13 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
+import { fbqTrack } from '@/lib/fbpixel'
 
 // Tally émet des messages postMessage depuis l'iframe du formulaire.
 // On déclenche l'event Meta Pixel uniquement quand le quiz est soumis.
 export default function TrackQuiz() {
   // Ouverture du quiz : signal haut de tunnel (retargeting des non-finisseurs).
   useEffect(() => {
-    window.fbq?.('track', 'ViewContent')
+    fbqTrack('track', 'ViewContent')
   }, [])
 
   // Soumission du quiz : conversion.
@@ -25,7 +26,7 @@ export default function TrackQuiz() {
       }
 
       if (data && data.event === 'Tally.FormSubmitted') {
-        window.fbq?.('trackCustom', 'QuizComplete')
+        fbqTrack('trackCustom', 'QuizComplete')
       }
     }
 

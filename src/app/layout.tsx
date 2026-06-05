@@ -7,6 +7,8 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import StickyCTA from '@/components/layout/StickyCTA'
 import JsonLd from '@/components/seo/JsonLd'
+import PixelPageView from '@/components/analytics/PixelPageView'
+import { FB_PIXEL_ID } from '@/lib/fbpixel'
 import './globals.css'
 
 const inter = Inter({
@@ -53,7 +55,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '4518512965138257');
+fbq('init', '${FB_PIXEL_ID}');
 fbq('track', 'PageView');`}
         </Script>
         <noscript>
@@ -61,7 +63,7 @@ fbq('track', 'PageView');`}
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=4518512965138257&ev=PageView&noscript=1"
+            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
             alt=""
           />
         </noscript>
@@ -71,6 +73,7 @@ fbq('track', 'PageView');`}
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded">
           Aller au contenu principal
         </a>
+        <PixelPageView />
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
