@@ -35,6 +35,11 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: '/images/og-image.png', width: 1200, height: 630 }],
   },
+  verification: {
+    other: {
+      'facebook-domain-verification': 'qqkfnfm8m2aosvygggd3ri46upkows',
+    },
+  },
 }
 
 export default function RootLayout({
