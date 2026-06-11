@@ -5,7 +5,7 @@ export default function CTASection() {
     <section aria-labelledby="cta-heading" className="text-white py-16 lg:py-24">
       <div className="max-w-3xl mx-auto text-center px-4">
         <h2 id="cta-heading" className="font-heading font-semibold text-2xl md:text-4xl">
-          Prêt à récupérer tes heures ?
+          Parlons de votre projet.
         </h2>
         <p className="text-text-muted mt-4 text-lg">
           Appel gratuit &middot; 30 min &middot; Sans engagement

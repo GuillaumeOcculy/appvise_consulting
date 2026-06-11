@@ -3,6 +3,7 @@ import TrustBar from '@/components/sections/TrustBar'
 import CaseStudyCards from '@/components/sections/CaseStudyCards'
 import ClientLogos from '@/components/sections/ClientLogos'
 import Testimonials from '@/components/sections/Testimonials'
+import InlineCTA from '@/components/sections/InlineCTA'
 import HonestySection from '@/components/sections/HonestySection'
 import MethodTimeline from '@/components/sections/MethodTimeline'
 import GuaranteeBlock from '@/components/sections/GuaranteeBlock'
@@ -27,6 +28,7 @@ export default function HomePage() {
       <CaseStudyCards />
       <TrustBar />
       <Testimonials />
+      <InlineCTA />
       <HonestySection />
       <MethodTimeline />
       <GuaranteeBlock />
