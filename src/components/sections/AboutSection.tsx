@@ -1,11 +1,10 @@
 import Image from 'next/image'
-import { Youtube, Briefcase, Globe, Code, Brain } from 'lucide-react'
+import { Youtube, Briefcase, Code, Brain } from 'lucide-react'
 import { YOUTUBE_URL } from '@/lib/constants'
 
 const highlights = [
   { icon: Code, label: '+10 ans de développement web' },
   { icon: Briefcase, label: '15+ missions freelance' },
-  { icon: Globe, label: 'Paris & Londres' },
   { icon: Brain, label: 'Double certifié n8n' },
 ]
 
@@ -34,7 +33,7 @@ export default function AboutSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
           {highlights.map((item) => (
             <div key={item.label} className="flex flex-col items-center text-center gap-2 p-4">
               <span className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
