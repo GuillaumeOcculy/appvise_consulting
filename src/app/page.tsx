@@ -13,11 +13,11 @@ import { createMetadata } from '@/lib/metadata'
 
 export const metadata = {
   ...createMetadata({
-    title: 'Appvise Consulting — Automatisation et développement sur-mesure',
-    description: 'Automatisation n8n et développement sur-mesure pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
+    title: 'Appvise Consulting — Automatisation, développement sur-mesure et IA',
+    description: 'Automatisation n8n, développement sur-mesure et IA pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
     path: '',
   }),
-  title: { absolute: 'Appvise Consulting — Automatisation et développement sur-mesure' },
+  title: { absolute: 'Appvise Consulting — Automatisation, développement sur-mesure et IA' },
 }
 
 export default function HomePage() {

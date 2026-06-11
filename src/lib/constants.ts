@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://appvise-consulting.fr'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.appvise-consulting.com'
 export const TALLY_QUIZ_URL = process.env.NEXT_PUBLIC_TALLY_QUIZ_URL ?? 'https://tally.so/r/7RXkg6'
 // Version "embed" (iframe) du quiz, dérivée de l'URL publique du formulaire.
 export const TALLY_QUIZ_EMBED_URL =
@@ -9,6 +9,6 @@ export const TALLY_QUIZ_EMBED_URL =
 export const ZCAL_URL = process.env.NEXT_PUBLIC_ZCAL_URL ?? ''
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? ''
 export const SITE_NAME = 'Appvise Consulting'
-export const SITE_DESCRIPTION = 'Automatisation et développement sur-mesure pour entrepreneurs'
+export const SITE_DESCRIPTION = 'Automatisation, développement sur-mesure et IA pour entrepreneurs'
 export const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''
 export const YOUTUBE_URL = process.env.NEXT_PUBLIC_YOUTUBE_URL ?? ''

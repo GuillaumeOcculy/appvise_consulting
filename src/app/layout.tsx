@@ -9,6 +9,7 @@ import StickyCTA from '@/components/layout/StickyCTA'
 import JsonLd from '@/components/seo/JsonLd'
 import PixelPageView from '@/components/analytics/PixelPageView'
 import { FB_PIXEL_ID } from '@/lib/fbpixel'
+import { SITE_URL } from '@/lib/constants'
 import './globals.css'
 
 const inter = Inter({
@@ -18,12 +19,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://appvise-consulting.fr'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Appvise Consulting — Automatisation et développement sur-mesure',
+    default: 'Appvise Consulting — Automatisation, développement sur-mesure et IA',
     template: '%s | Appvise Consulting',
   },
-  description: 'Automatisation n8n et développement sur-mesure pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
+  description: 'Automatisation n8n, développement sur-mesure et IA pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
   openGraph: {
     siteName: 'Appvise Consulting',
     type: 'website',
