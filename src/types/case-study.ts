@@ -9,4 +9,7 @@ export interface CaseStudy {
   statLabel: string
   excerpt: string
   order: number
+  logo?: string
+  logoClass?: string
+  logoRaw?: boolean
 }

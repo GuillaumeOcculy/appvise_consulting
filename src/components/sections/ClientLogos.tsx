@@ -6,7 +6,7 @@ type Client = { name: string; src: string; h: string }
 const clients: Client[] = [
   { name: 'Effy', src: '/logos/effy.svg', h: 'h-7 lg:h-8' },
   { name: 'Altares D&B', src: '/logos/altares.svg', h: 'h-5 lg:h-6' },
-  { name: 'Wifirst', src: '/logos/wifirst.svg', h: 'h-12 lg:h-14' },
+  { name: 'Wifirst', src: '/logos/wifirst.svg', h: 'h-16 lg:h-18' },
   { name: 'SideCare', src: '/logos/sidecare.svg', h: 'h-11 lg:h-12' },
   { name: 'Solocal', src: '/logos/solocal.svg', h: 'h-6 lg:h-7' },
   { name: 'Weezevent', src: '/logos/weezevent.svg', h: 'h-7 lg:h-8' },

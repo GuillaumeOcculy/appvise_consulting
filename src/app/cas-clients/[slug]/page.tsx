@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { notFound } from 'next/navigation'
 import { getCaseStudyBySlug, getAllCaseStudySlugs } from '@/lib/case-studies'
 import { createMetadata } from '@/lib/metadata'
@@ -43,7 +44,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
             {meta.sector}
           </span>
-          <h1 className="font-heading font-semibold text-3xl md:text-4xl mt-3">{meta.title}</h1>
+          <h1 className="font-heading font-semibold text-3xl md:text-4xl mt-3">
+            {meta.logo ? (
+              <img
+                src={meta.logo}
+                alt={meta.title}
+                className={`${meta.logoClass ?? 'h-12'} w-auto max-w-[220px] object-contain ${meta.logoRaw ? '' : '[filter:brightness(0)_invert(1)]'}`}
+              />
+            ) : (
+              meta.title
+            )}
+          </h1>
           <div className="mt-4">
             <span className="font-heading font-semibold text-4xl text-primary">{meta.statValue}</span>
             <span className="text-text-muted ml-2">{meta.statLabel}</span>
