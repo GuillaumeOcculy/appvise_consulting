@@ -25,15 +25,15 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ClientLogos />
-      <CaseStudyCards />
       <TrustBar />
+      <CaseStudyCards />
       <Testimonials />
       <InlineCTA />
-      <HonestySection />
       <MethodTimeline />
+      <HonestySection />
       <GuaranteeBlock />
-      <CTASection />
       <AboutSection />
+      <CTASection />
     </>
   )
 }

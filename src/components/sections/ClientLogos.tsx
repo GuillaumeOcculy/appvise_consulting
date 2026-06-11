@@ -36,7 +36,7 @@ export default function ClientLogos() {
           Ils nous font confiance
         </h2>
         <p className="text-text-muted text-center mt-3 text-base">
-          +15 missions réalisées — startups, PME et grands groupes.
+          +15 projets réalisés — startups, PME et grands groupes.
         </p>
       </div>
 
