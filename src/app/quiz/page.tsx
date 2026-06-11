@@ -22,7 +22,7 @@ export default function QuizPage() {
           et identifier les tâches à déléguer en priorité. Moins de 2 minutes.
         </p>
 
-        <div className="mt-10">
+        <div className="mt-10 bg-paper rounded-2xl p-4 sm:p-6 shadow-[0_24px_64px_rgba(2,2,7,0.55)]">
           <EmbedWrapper
             src={TALLY_QUIZ_EMBED_URL}
             title="Quiz : combien de temps perds-tu ?"
