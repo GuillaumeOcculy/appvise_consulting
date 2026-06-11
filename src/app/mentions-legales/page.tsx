@@ -11,15 +11,15 @@ export default function MentionsLegalesPage() {
   const email = CONTACT_EMAIL || 'guillaume@appvise-consulting.com'
 
   return (
-    <div className="bg-light text-dark py-16 lg:py-24">
+    <div className="text-white py-24 lg:py-32">
       <div className="max-w-prose mx-auto px-4">
         <a href="/" className="text-primary hover:underline text-sm">
           &larr; Retour à l&apos;accueil
         </a>
 
-        <h1 className="font-heading font-bold text-3xl md:text-4xl mt-8">Mentions légales</h1>
+        <h1 className="font-heading font-semibold text-3xl md:text-4xl mt-8">Mentions légales</h1>
 
-        <div className="prose prose-lg mt-8">
+        <div className="prose prose-lg prose-invert prose-a:text-primary prose-headings:font-semibold mt-8">
           <h2>Éditeur du site</h2>
           <p>
             Le site <strong>{SITE_URL}</strong> est édité par :

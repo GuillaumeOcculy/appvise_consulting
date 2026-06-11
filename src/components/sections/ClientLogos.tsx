@@ -10,7 +10,7 @@ const clients = [
 
 export default function ClientLogos() {
   return (
-    <section aria-label="Clients" className="bg-surface py-12 lg:py-16">
+    <section aria-label="Clients" className="py-12 lg:py-16">
       <div className="max-w-6xl mx-auto px-4">
         <p className="text-center text-text-muted text-sm font-medium uppercase tracking-wider mb-8">
           +15 missions réalisées — startups, PME et grands groupes
@@ -25,7 +25,7 @@ export default function ClientLogos() {
               className="group flex items-center justify-center"
               aria-label={client.name}
             >
-              <span className="text-lg font-heading font-bold text-text-muted/50 group-hover:text-primary transition-colors duration-200">
+              <span className="text-lg font-heading font-semibold text-text-muted/50 group-hover:text-primary transition-colors duration-200">
                 {client.name}
               </span>
             </a>

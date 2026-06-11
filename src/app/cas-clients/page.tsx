@@ -12,14 +12,14 @@ export default function CaseStudiesPage() {
   const caseStudies = getCaseStudies()
 
   return (
-    <div className="bg-light text-dark py-16 lg:py-24">
+    <div className="text-white py-24 lg:py-32">
       <div className="max-w-6xl mx-auto px-4">
         <a href="/" className="text-primary hover:underline text-sm">
           &larr; Retour à l&apos;accueil
         </a>
 
         <div className="text-center mt-8 mb-12">
-          <h1 className="font-heading font-bold text-3xl md:text-4xl">
+          <h1 className="font-heading font-semibold text-3xl md:text-4xl">
             Cas clients
           </h1>
           <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
@@ -32,16 +32,16 @@ export default function CaseStudiesPage() {
             <Link
               key={cs.slug}
               href={`/cas-clients/${cs.slug}`}
-              className="block bg-surface border border-border rounded-2xl p-6 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 focus:outline-2 focus:outline-primary focus:outline-offset-2"
+              className="block bg-surface border border-border rounded-2xl p-6 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-2 transition-all duration-200 focus:outline-2 focus:outline-primary focus:outline-offset-2"
               aria-label={`Voir l'étude de cas ${cs.title}`}
             >
               <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
                 {cs.sector}
               </span>
-              <h2 className="font-heading font-bold text-lg mt-3">{cs.title}</h2>
+              <h2 className="font-heading font-semibold text-lg mt-3">{cs.title}</h2>
               <p className="text-text-muted text-sm mt-2">{cs.excerpt}</p>
               <div className="mt-4">
-                <span className="font-heading text-3xl text-success">{cs.statValue}</span>
+                <span className="font-heading font-semibold text-3xl text-primary">{cs.statValue}</span>
                 <span className="text-sm text-text-muted ml-2">{cs.statLabel}</span>
               </div>
             </Link>

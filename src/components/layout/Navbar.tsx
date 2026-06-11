@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Button from '@/components/ui/Button'
@@ -84,12 +85,19 @@ export default function Navbar() {
       <nav
         aria-label="Navigation principale"
         className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-          solid ? 'bg-dark/90 backdrop-blur-md' : 'bg-transparent'
+          solid ? 'bg-[#020207]/80 backdrop-blur-md border-b border-border' : 'bg-transparent'
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-          <Link href="/" className="font-heading font-bold text-xl text-white">
-            Appvise Consulting
+          <Link href="/" aria-label="Appvise Consulting — accueil" className="inline-flex items-center">
+            <Image
+              src="/images/wordmark-appvise.png"
+              alt="Appvise Consulting"
+              width={1944}
+              height={200}
+              priority
+              className="h-6 w-auto"
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
@@ -138,15 +146,21 @@ export default function Navbar() {
         <div
           ref={menuRef}
           id="mobile-menu"
-          className="fixed inset-0 bg-dark z-50 flex flex-col"
+          className="fixed inset-0 bg-signature z-50 flex flex-col"
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"
           onKeyDown={handleKeyDown}
         >
           <div className="flex items-center justify-between px-4 h-16">
-            <Link href="/" className="font-heading font-bold text-xl text-white" onClick={() => setMenuOpen(false)}>
-              Appvise Consulting
+            <Link href="/" aria-label="Appvise Consulting — accueil" className="inline-flex items-center" onClick={() => setMenuOpen(false)}>
+              <Image
+                src="/images/wordmark-appvise.png"
+                alt="Appvise Consulting"
+                width={1944}
+                height={200}
+                className="h-6 w-auto"
+              />
             </Link>
             <button
               onClick={() => { setMenuOpen(false); openButtonRef.current?.focus() }}

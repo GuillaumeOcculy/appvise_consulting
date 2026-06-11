@@ -26,7 +26,7 @@ export default function StickyCTA() {
       }`}
       aria-label="Actions rapides"
     >
-      <div className="bg-dark/95 backdrop-blur-md p-3">
+      <div className="bg-[#020207]/95 backdrop-blur-md border-t border-border p-3">
         <div className="flex gap-2">
           <Button variant="primary" size="sm" href="/rendez-vous" className="flex-1">
             Appel gratuit

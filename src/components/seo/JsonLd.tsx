@@ -8,6 +8,7 @@ export default function JsonLd() {
         '@type': 'Organization',
         name: SITE_NAME,
         url: SITE_URL,
+        logo: `${SITE_URL}/images/wordmark-appvise.png`,
         description: SITE_DESCRIPTION,
         founder: {
           '@type': 'Person',

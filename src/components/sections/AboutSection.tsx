@@ -16,7 +16,7 @@ const sectors = [
 
 export default function AboutSection() {
   return (
-    <section aria-labelledby="about-heading" className="bg-dark text-white py-16 lg:py-24">
+    <section aria-labelledby="about-heading" className="text-white py-16 lg:py-24">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center">
           <Image
@@ -26,7 +26,7 @@ export default function AboutSection() {
             height={160}
             className="w-40 h-40 rounded-full mx-auto object-cover"
           />
-          <h2 id="about-heading" className="font-heading font-bold text-2xl md:text-4xl mt-6">
+          <h2 id="about-heading" className="font-heading font-semibold text-2xl md:text-4xl mt-6">
             Guillaume Occuly
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed max-w-2xl mx-auto">

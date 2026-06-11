@@ -11,10 +11,10 @@ export const metadata = createMetadata({
 
 export default function QuizPage() {
   return (
-    <div className="bg-light text-dark py-16 lg:py-24">
+    <div className="text-white py-24 lg:py-32">
       <TrackQuiz />
       <div className="max-w-3xl mx-auto px-4">
-        <h1 className="font-heading font-bold text-3xl md:text-4xl">
+        <h1 className="font-heading font-semibold text-3xl md:text-4xl">
           Combien de temps perds-tu chaque semaine ?
         </h1>
         <p className="text-text-muted text-lg mt-4">

@@ -2,23 +2,105 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors */
-  --color-primary: #bf0050;
-  --color-secondary: #0022ed;
-  --color-dark: #020F1E;
-  --color-light: #F8F9FA;
-  --color-surface: #FFFFFF;
-  --color-guarantee: #0A1628;
-  --color-text-muted: #6B7280;
-  --color-success: #10B981;
-  --color-border: #E5E7EB;
+  /* ── Appvise Consulting — Design System ─────────────────────
+     Dark-first. Corail is an ACCENT only — never a large surface.
+     Exact hex from the charte graphique. */
 
-  /* Font families */
-  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  /* Base / surfaces */
+  --color-dark: #020207;        /* Near Black — base canvas */
+  --color-ink: #0B0B12;         /* text surface */
+  --color-paper: #F4F2EE;       /* light / print contexts */
+  --color-light: #F4F2EE;       /* alias paper (light contexts) */
+  --color-surface: rgba(244, 242, 238, 0.04);   /* raised panel on near-black */
+  --color-surface-2: rgba(244, 242, 238, 0.07);
+  --color-guarantee: #0B0B12;
+
+  /* Accent — Corail ONLY (buttons, links, emphasis, the square dot) */
+  --color-primary: #FF4D6D;
+  --color-primary-press: #E63E5C;
+
+  /* Gradient-only hues (never standalone accents) */
+  --color-secondary: #9C1A50;   /* framboise — gradient + accent-line end */
+  --color-cobalt: #102A8F;
+  --color-framboise: #9C1A50;
+
+  /* Text on dark */
+  --color-white: #FFFFFF;
+  --color-text-primary: #F4F2EE;
+  --color-text-muted: #B4B4BC;  /* secondary text on near-black */
+  --color-text-faint: #6B6B73;  /* muted / captions */
+
+  /* Borders — hairlines on dark */
+  --color-border: rgba(244, 242, 238, 0.12);
+  --color-border-strong: rgba(244, 242, 238, 0.22);
+
+  /* Success → corail (the brand has no green; emphasis is corail) */
+  --color-success: #FF4D6D;
+
+  /* Corner radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* Type — single family: Inter (Semibold titles, Regular body) */
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  /* Signature gradient — reproduce IDENTICALLY, never approximate.
+     framboise dominante bas-gauche · cobalt haut-gauche · base near-black. */
+  --gradient-signature:
+    radial-gradient(640px 560px at 12% 118%, #9C1A50 0%, transparent 62%),
+    radial-gradient(560px 500px at 10% -6%, #102A8F 0%, transparent 62%),
+    #020207;
+  --accent-line: linear-gradient(90deg, #FF4D6D 0%, #9C1A50 100%);
+  --shadow-md: 0 8px 24px rgba(2, 2, 7, 0.45);
+  --shadow-lg: 0 24px 64px rgba(2, 2, 7, 0.55);
+  --shadow-accent: 0 6px 24px rgba(255, 77, 109, 0.28); /* corail glow — primary CTA only */
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 60px;
+}
+
+/* The signature gradient is the page canvas. Fixed so the light source
+   stays anchored lower-left on long pages. */
+body {
+  background:
+    radial-gradient(640px 560px at 12% 118%, #9C1A50 0%, transparent 62%),
+    radial-gradient(560px 500px at 10% -6%, #102A8F 0%, transparent 62%),
+    #020207;
+  background-attachment: fixed;
+}
+
+/* Tight negative tracking + balanced wrapping — essential to the brand feel. */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Helper: apply the signature background to any block. */
+.bg-signature {
+  background:
+    radial-gradient(640px 560px at 12% 118%, #9C1A50 0%, transparent 62%),
+    radial-gradient(560px 500px at 10% -6%, #102A8F 0%, transparent 62%),
+    #020207;
+}
+
+/* The square corail accent dot — sharp corners (radius 0), never rounded.
+   Sized to cap-height, sits at the end of a wordmark. */
+.accent-dot {
+  display: inline-block;
+  width: 0.46em;
+  height: 0.46em;
+  background: var(--color-primary);
+  border-radius: 0;
+  vertical-align: baseline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

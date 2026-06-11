@@ -1,15 +1,22 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Linkedin, Youtube } from 'lucide-react'
 import { LINKEDIN_URL, YOUTUBE_URL } from '@/lib/constants'
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white py-16 lg:py-24">
+    <footer className="text-white py-16 lg:py-24 border-t border-border">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           <div>
-            <Link href="/" className="font-heading font-bold text-xl">
-              Appvise Consulting
+            <Link href="/" aria-label="Appvise Consulting — accueil" className="inline-flex items-center justify-center md:justify-start">
+              <Image
+                src="/images/wordmark-appvise.png"
+                alt="Appvise Consulting"
+                width={1944}
+                height={200}
+                className="h-7 w-auto"
+              />
             </Link>
             <p className="text-text-muted text-sm mt-2">
               Automatisation et développement sur-mesure pour entrepreneurs.
@@ -17,7 +24,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-bold text-sm uppercase tracking-wider mb-4">Navigation</h3>
+            <h3 className="font-heading font-semibold text-sm uppercase tracking-[0.2em] mb-4">Navigation</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-text-muted hover:text-white transition-colors text-sm">Accueil</Link></li>
               <li><Link href="/#cas-clients" className="text-text-muted hover:text-white transition-colors text-sm">Cas clients</Link></li>
@@ -25,7 +32,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-bold text-sm uppercase tracking-wider mb-4">Suivez-moi</h3>
+            <h3 className="font-heading font-semibold text-sm uppercase tracking-[0.2em] mb-4">Suivez-moi</h3>
             <div className="flex gap-4 justify-center md:justify-start">
               {LINKEDIN_URL && (
                 <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-text-muted hover:text-white transition-colors">
