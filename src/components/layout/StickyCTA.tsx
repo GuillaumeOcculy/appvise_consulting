@@ -32,7 +32,7 @@ export default function StickyCTA() {
             Appel gratuit
           </Button>
           <Button variant="secondary" size="sm" href="/quiz" className="flex-1">
-            Quiz
+            Diagnostic
           </Button>
         </div>
       </div>

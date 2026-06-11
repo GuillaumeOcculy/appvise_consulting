@@ -15,7 +15,7 @@ export default function CTASection() {
             Réserver un créneau
           </Button>
           <Button variant="secondary" href="/quiz">
-            Combien de temps perds-tu ?
+            Faire le diagnostic
           </Button>
         </div>
       </div>

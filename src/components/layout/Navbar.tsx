@@ -77,7 +77,7 @@ export default function Navbar() {
 
   const navLinks: { label: string; href: string; external?: boolean }[] = [
     { label: 'Cas clients', href: '/#cas-clients' },
-    { label: 'Quiz', href: '/quiz' },
+    { label: 'Diagnostic', href: '/quiz' },
   ]
 
   return (
