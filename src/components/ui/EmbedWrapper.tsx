@@ -35,8 +35,8 @@ export default function EmbedWrapper({ src, title, height, fallbackMessage, fall
 
   if (timedOut) {
     return (
-      <div className="bg-surface border border-border rounded-xl p-8 text-center">
-        <p className="text-text-muted mb-2">{fallbackMessage}</p>
+      <div className="rounded-xl p-8 text-center">
+        <p className="text-ink/70 mb-2">{fallbackMessage}</p>
         {fallbackContact && (
           <a href={`mailto:${fallbackContact}`} className="text-primary hover:underline">
             {fallbackContact}
@@ -50,7 +50,7 @@ export default function EmbedWrapper({ src, title, height, fallbackMessage, fall
     <div className="relative">
       {!loaded && (
         <div
-          className="bg-border animate-pulse rounded-xl"
+          className="bg-black/5 animate-pulse rounded-xl"
           style={{ height }}
         />
       )}

@@ -41,7 +41,7 @@ const testimonials: Testimonial[] = [
 
 function TestimonialCard({ quote, name, company }: Testimonial) {
   return (
-    <figure className="break-inside-avoid mb-6 bg-surface border border-border rounded-2xl p-6 lg:p-7">
+    <figure className="break-inside-avoid mb-6 bg-surface border border-border rounded-2xl p-6 lg:p-7 transition-colors duration-200 hover:border-border-strong hover:bg-surface-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 text-primary" aria-label="Note 5 sur 5">
           {Array.from({ length: 5 }).map((_, i) => (

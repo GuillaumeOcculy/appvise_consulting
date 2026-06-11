@@ -1,24 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-const clients = [
-  { name: 'Effy', src: '/logos/effy.svg' },
-  { name: 'Altares D&B', src: '/logos/altares.svg' },
-  { name: 'Wifirst', src: '/logos/wifirst.svg' },
-  { name: 'SideCare', src: '/logos/sidecare.svg' },
-  { name: 'Solocal', src: '/logos/solocal.svg' },
-  { name: 'Weezevent', src: '/logos/weezevent.svg' },
-  { name: 'Hubflo', src: '/logos/hubflo.svg' },
-  { name: 'EasyCrowd', src: '/logos/easycrowd.svg' },
-  { name: 'Prium Solutions', src: '/logos/prium.png' },
+// `h` is tuned per-logo so every mark carries the same optical weight:
+// compact/square logos (wifirst, sidecare) sit taller, wide wordmarks shorter.
+type Client = { name: string; src: string; h: string }
+
+const clients: Client[] = [
+  { name: 'Effy', src: '/logos/effy.svg', h: 'h-7 lg:h-8' },
+  { name: 'Altares D&B', src: '/logos/altares.svg', h: 'h-5 lg:h-6' },
+  { name: 'Wifirst', src: '/logos/wifirst.svg', h: 'h-12 lg:h-14' },
+  { name: 'SideCare', src: '/logos/sidecare.svg', h: 'h-11 lg:h-12' },
+  { name: 'Solocal', src: '/logos/solocal.svg', h: 'h-6 lg:h-7' },
+  { name: 'Weezevent', src: '/logos/weezevent.svg', h: 'h-7 lg:h-8' },
+  { name: 'Hubflo', src: '/logos/hubflo.svg', h: 'h-7 lg:h-8' },
+  { name: 'EasyCrowd', src: '/logos/easycrowd.svg', h: 'h-6 lg:h-7' },
+  { name: 'Prium Solutions', src: '/logos/prium.png', h: 'h-6 lg:h-7' },
 ]
 
-function LogoItem({ name, src, hidden = false }: { name: string; src: string; hidden?: boolean }) {
+function LogoItem({ name, src, h, hidden = false }: Client & { hidden?: boolean }) {
   return (
     <li className="flex shrink-0 items-center justify-center px-8 lg:px-12" aria-hidden={hidden || undefined}>
       <img
         src={src}
         alt={hidden ? '' : name}
         loading="lazy"
-        className="h-7 lg:h-8 w-auto max-w-[150px] object-contain opacity-55 transition-opacity duration-200 hover:opacity-100 [filter:brightness(0)_invert(1)]"
+        className={`${h} w-auto max-w-[170px] object-contain opacity-55 transition-opacity duration-200 hover:opacity-100 [filter:brightness(0)_invert(1)]`}
       />
     </li>
   )
@@ -39,10 +43,10 @@ export default function ClientLogos() {
       <div className="marquee-group marquee-mask mt-12 overflow-hidden">
         <ul className="animate-marquee flex w-max items-center">
           {clients.map((c) => (
-            <LogoItem key={c.name} name={c.name} src={c.src} />
+            <LogoItem key={c.name} {...c} />
           ))}
           {clients.map((c) => (
-            <LogoItem key={`dup-${c.name}`} name={c.name} src={c.src} hidden />
+            <LogoItem key={`dup-${c.name}`} {...c} hidden />
           ))}
         </ul>
       </div>

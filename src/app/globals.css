@@ -66,14 +66,23 @@ html {
   scroll-padding-top: 60px;
 }
 
-/* The signature gradient is the page canvas. Fixed so the light source
-   stays anchored lower-left on long pages. */
+/* The signature gradient is the page canvas, rendered as a fixed layer behind
+   content. Using a position:fixed pseudo-element (instead of
+   `background-attachment: fixed`) keeps the light source anchored reliably,
+   including on iOS Safari where attachment:fixed misbehaves. */
 body {
+  background-color: #020207;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(640px 560px at 12% 118%, #9C1A50 0%, transparent 62%),
     radial-gradient(560px 500px at 10% -6%, #102A8F 0%, transparent 62%),
     #020207;
-  background-attachment: fixed;
 }
 
 /* Tight negative tracking + balanced wrapping — essential to the brand feel. */

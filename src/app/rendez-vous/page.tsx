@@ -51,13 +51,15 @@ export default function RendezVousPage() {
 
         <div className="mt-12">
           <h2 className="font-heading font-semibold text-xl mb-4">Choisis ton créneau</h2>
-          <EmbedWrapper
-            src={ZCAL_URL}
-            title="Calendrier de réservation d'appel gratuit"
-            height={650}
-            fallbackMessage="Le calendrier est temporairement indisponible."
-            fallbackContact={CONTACT_EMAIL}
-          />
+          <div className="bg-paper rounded-2xl p-2 sm:p-3 shadow-[0_24px_64px_rgba(2,2,7,0.55)] overflow-hidden">
+            <EmbedWrapper
+              src={ZCAL_URL}
+              title="Calendrier de réservation d'appel gratuit"
+              height={650}
+              fallbackMessage="Le calendrier est temporairement indisponible."
+              fallbackContact={CONTACT_EMAIL}
+            />
+          </div>
         </div>
       </div>
     </div>
