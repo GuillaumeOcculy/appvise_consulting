@@ -11,7 +11,7 @@ export default function HeroSection() {
           On <span className="text-primary">automatise</span> ce qui peut l&apos;être, on <span className="text-primary">développe</span> ce qui ne peut pas.
         </h1>
         <p className="text-text-muted text-lg mt-6 max-w-2xl mx-auto">
-          Automatisation n8n, développement sur-mesure et IA — un seul interlocuteur, de l&apos;audit gratuit à la livraison.
+          Automatisation, développement sur-mesure et IA — un seul interlocuteur, de l&apos;audit gratuit à la livraison.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
           <Button variant="primary" href="/rendez-vous">

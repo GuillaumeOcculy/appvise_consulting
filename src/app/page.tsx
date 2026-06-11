@@ -23,9 +23,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TrustBar />
-      <CaseStudyCards />
       <ClientLogos />
+      <CaseStudyCards />
+      <TrustBar />
       <Testimonials />
       <HonestySection />
       <MethodTimeline />

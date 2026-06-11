@@ -27,7 +27,8 @@ export default function Footer() {
             <h3 className="font-heading font-semibold text-sm uppercase tracking-[0.2em] mb-4">Navigation</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-text-muted hover:text-white transition-colors text-sm">Accueil</Link></li>
-              <li><Link href="/#cas-clients" className="text-text-muted hover:text-white transition-colors text-sm">Cas clients</Link></li>
+              <li><Link href="/quiz" className="text-text-muted hover:text-white transition-colors text-sm">Diagnostic</Link></li>
+              <li><Link href="/rendez-vous" className="text-text-muted hover:text-white transition-colors text-sm">Appel gratuit</Link></li>
             </ul>
           </div>
 
