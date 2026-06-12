@@ -1,38 +1,42 @@
 'use client'
 
 import { useEffect } from 'react'
-import { fbqTrack } from '@/lib/fbpixel'
+import { trackEvent } from '@/lib/track'
 
-// Tally émet des messages postMessage depuis l'iframe du formulaire.
-// On déclenche l'event Meta Pixel uniquement quand le quiz est soumis.
 export default function TrackQuiz() {
   // Ouverture du quiz : signal haut de tunnel (retargeting des non-finisseurs).
   useEffect(() => {
-    fbqTrack('track', 'ViewContent')
+    trackEvent('track', 'ViewContent')
   }, [])
 
-  // Soumission du quiz : conversion.
+  // TEMPORAIRE (debug) : on déclenche QuizComplete au simple chargement de la
+  // page /quiz, sans attendre la soumission du formulaire. Objectif : vérifier
+  // que l'absence de l'event dans Events Manager ne vient pas de l'embed Tally
+  // (postMessage Tally.FormSubmitted qui n'arriverait pas).
+  // À REVERT : rebrancher l'écoute postMessage ci-dessous une fois le test fait.
   useEffect(() => {
-    function onMessage(event: MessageEvent) {
-      if (event.origin !== 'https://tally.so') return
-
-      let data = event.data
-      if (typeof data === 'string') {
-        try {
-          data = JSON.parse(data)
-        } catch {
-          return
-        }
-      }
-
-      if (data && data.event === 'Tally.FormSubmitted') {
-        fbqTrack('trackCustom', 'QuizComplete')
-      }
-    }
-
-    window.addEventListener('message', onMessage)
-    return () => window.removeEventListener('message', onMessage)
+    trackEvent('trackCustom', 'QuizComplete')
   }, [])
+
+  // --- Version normale (réactiver après le test) ---
+  // useEffect(() => {
+  //   function onMessage(event: MessageEvent) {
+  //     if (event.origin !== 'https://tally.so') return
+  //     let data = event.data
+  //     if (typeof data === 'string') {
+  //       try {
+  //         data = JSON.parse(data)
+  //       } catch {
+  //         return
+  //       }
+  //     }
+  //     if (data && data.event === 'Tally.FormSubmitted') {
+  //       trackEvent('trackCustom', 'QuizComplete')
+  //     }
+  //   }
+  //   window.addEventListener('message', onMessage)
+  //   return () => window.removeEventListener('message', onMessage)
+  // }, [])
 
   return null
 }

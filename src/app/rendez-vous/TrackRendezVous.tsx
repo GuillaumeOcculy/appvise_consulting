@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
-import { fbqTrack } from '@/lib/fbpixel'
+import { trackEvent } from '@/lib/track'
 
 export default function TrackRendezVous() {
   useEffect(() => {
-    fbqTrack('track', 'Schedule')
+    trackEvent('track', 'Schedule')
   }, [])
 
   return null
