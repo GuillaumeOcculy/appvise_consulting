@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 // `h` is tuned per-logo so every mark carries the same optical weight:
 // compact/square logos (wifirst, sidecare) sit taller, wide wordmarks shorter.
 type Client = { name: string; src: string; h: string }
@@ -31,12 +33,12 @@ function LogoItem({ name, src, h, hidden = false }: Client & { hidden?: boolean 
 export default function ClientLogos() {
   return (
     <section aria-labelledby="trust-heading" className="text-white py-16 lg:py-24">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 id="trust-heading" className="font-heading font-semibold text-2xl md:text-4xl text-center">
-          Ils nous font confiance
+      <div className="max-w-3xl mx-auto px-4 text-center">
+        <h2 id="trust-heading" className="font-heading font-semibold text-2xl md:text-4xl">
+          Une base technique solide.
         </h2>
-        <p className="text-text-muted text-center mt-3 text-base">
-          +15 projets réalisés — startups, PME et grands groupes.
+        <p className="text-text-muted mt-4 text-lg leading-relaxed">
+          Avant d&apos;automatiser pour des indépendants, j&apos;ai construit des systèmes pour des grands comptes — des APIs qui servent des millions d&apos;utilisateurs. C&apos;est ce qui me permet de diagnostiquer ce dont vous avez vraiment besoin, et de livrer des automatisations qui tiennent.
         </p>
       </div>
 
@@ -49,6 +51,16 @@ export default function ClientLogos() {
             <LogoItem key={`dup-${c.name}`} {...c} hidden />
           ))}
         </ul>
+      </div>
+
+      <div className="text-center mt-12">
+        <Link
+          href="/cas-clients"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors hover:text-primary"
+        >
+          Voir mes références techniques
+          <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+        </Link>
       </div>
     </section>
   )

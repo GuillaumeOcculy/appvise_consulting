@@ -1,8 +1,18 @@
 import createMDX from '@next/mdx'
 import type { NextConfig } from 'next'
+import { REDIRECTED_CASE_SLUGS } from './src/lib/constants'
 
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // Cas clients non publiables : on conserve les pages (.mdx) mais on redirige en 301
+  // permanent vers l'accueil. Le redirect intercepte la route statique avant le rendu.
+  async redirects() {
+    return REDIRECTED_CASE_SLUGS.map((slug) => ({
+      source: `/cas-clients/${slug}`,
+      destination: '/',
+      statusCode: 301,
+    }))
+  },
   async headers() {
     return [
       {

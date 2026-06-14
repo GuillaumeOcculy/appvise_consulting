@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { getCaseStudies } from '@/lib/case-studies'
 import { createMetadata } from '@/lib/metadata'
+import { REDIRECTED_CASE_SLUGS } from '@/lib/constants'
 
 export const metadata = createMetadata({
   title: 'Cas clients',
@@ -10,7 +11,9 @@ export const metadata = createMetadata({
 })
 
 export default function CaseStudiesPage() {
-  const caseStudies = getCaseStudies()
+  // On ne liste que les cas publiables : les 3 cas redirigés (301) sont exclus du listing.
+  const redirected = new Set<string>(REDIRECTED_CASE_SLUGS)
+  const caseStudies = getCaseStudies().filter(cs => !redirected.has(cs.slug))
 
   return (
     <div className="text-white py-24 lg:py-32">

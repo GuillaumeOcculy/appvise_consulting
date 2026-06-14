@@ -2,6 +2,29 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Design System (source de vérité)
+
+Charte/design system officiel Appvise Consulting — **handoff Claude Design** (claude.ai/design) :
+**https://api.anthropic.com/v1/design/h/vtBYVzB2FhkNoPUiHTGbgQ**
+(tar.gz ~115 Mo : `tokens/`, `guidelines/`, `SKILL.md`, `assets/`, `templates/` social + vidéo Reels 9:16.)
+
+Le site **implémente déjà fidèlement** ce système dans `src/app/globals.css` (theme Tailwind v4 `@theme`).
+Quand tu ajoutes ou modifies du code, **réutilise les tokens/classes existants — n'invente pas de styles** :
+classes `bg-surface` / `bg-surface-2`, `border-border` / `border-border-strong`, `text-text-muted`,
+`text-primary` (corail), `font-heading`, radii `rounded-2xl`/`rounded-[24px]`, `shadow-lg`/`shadow-accent`,
+`.bg-signature`, `.accent-dot`.
+
+Non-négociables (dark-first, FR) :
+- Fond **Near Black `#020207`** ou **gradient signature** — reproduire à l'identique, jamais approximer.
+- **Corail `#FF4D6D` = accent uniquement** (boutons, liens, mots d'emphase, point carré) — jamais grande surface.
+- Police unique **Inter** (Semibold titres/logo, Regular corps), tracking titres négatif (`-0.02em`/`-0.03em`).
+- **Point carré corail** : fin de wordmark ou bas-droite d'un bloc, jamais centré, radius 0.
+- Eyebrows/labels en **MAJUSCULES**, tracking `0.2em`, 11px semibold.
+- Voix : directe, concrète, orientée résultat, français, **sans emoji ni buzzword**.
+- Cobalt `#102A8F` + Framboise `#9C1A50` n'existent **que** dans le gradient signature.
+
+Re-télécharger via l'URL ci-dessus pour les assets/templates complets (social, vidéo).
+
 ## Project Overview
 
 This is an **Appvise Consulting** project workspace using the **BMAD Method v6.2.0** (BMad framework) for AI-assisted product development. It is not a traditional codebase — it is a structured methodology workspace with AI agents, workflows, and planning/implementation artifacts.

@@ -9,17 +9,20 @@ export default function GuaranteeBlock() {
           <ShieldCheck size={56} className="text-primary" />
         </div>
         <h2 id="guarantee-heading" className="font-heading font-semibold text-2xl md:text-4xl">
-          Paiement à la satisfaction
+          Vous ne payez que si le résultat vous convient.
         </h2>
         <p className="text-white/80 mt-4 text-lg">
-          Je prends le risque à ta place. Tu ne paies le solde que quand le résultat te convient.
+          La plupart des prestataires encaissent, livrent, et disparaissent. Moi, je prends le risque à votre place.
         </p>
         <div className="text-left inline-block mt-8 space-y-3">
           <CheckItem>Acompte de 30% pour démarrer</CheckItem>
-          <CheckItem>Solde uniquement quand tu es satisfait</CheckItem>
+          <CheckItem>Le solde, seulement quand vous êtes satisfait</CheckItem>
           <CheckItem>Itérations illimitées incluses</CheckItem>
           <CheckItem>Aucun engagement au-delà du projet</CheckItem>
         </div>
+        <p className="text-white/80 mt-8 text-lg leading-relaxed border-t border-border pt-8">
+          Et ce qui me convient, à moi, ce n&apos;est pas que vous payiez. C&apos;est que vous utilisiez encore l&apos;outil dans <span className="text-primary">6 mois.</span> C&apos;est mon seul critère.
+        </p>
       </div>
     </section>
   )

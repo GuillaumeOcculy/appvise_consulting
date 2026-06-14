@@ -12,3 +12,7 @@ export const SITE_NAME = 'Appvise Consulting'
 export const SITE_DESCRIPTION = 'Automatisation, développement sur-mesure et IA pour entrepreneurs'
 export const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''
 export const YOUTUBE_URL = process.env.NEXT_PUBLIC_YOUTUBE_URL ?? ''
+
+// Cas clients non publiables : pages conservées (fichiers .mdx non supprimés) mais
+// redirigées en 301 vers l'accueil et exclues du listing /cas-clients + du sitemap.
+export const REDIRECTED_CASE_SLUGS = ['addotour-229', 'mhd-assur', 'sidecare'] as const

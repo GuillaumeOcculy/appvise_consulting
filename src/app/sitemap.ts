@@ -1,12 +1,16 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/constants'
+import { SITE_URL, REDIRECTED_CASE_SLUGS } from '@/lib/constants'
 import { getAllCaseStudySlugs } from '@/lib/case-studies'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const caseStudies = getAllCaseStudySlugs().map(slug => ({
-    url: `${SITE_URL}/cas-clients/${slug}`,
-    lastModified: new Date(),
-  }))
+  // Les cas redirigés (301) sont exclus du sitemap pour ne pas pointer vers des redirections.
+  const redirected = new Set<string>(REDIRECTED_CASE_SLUGS)
+  const caseStudies = getAllCaseStudySlugs()
+    .filter(slug => !redirected.has(slug))
+    .map(slug => ({
+      url: `${SITE_URL}/cas-clients/${slug}`,
+      lastModified: new Date(),
+    }))
 
   return [
     { url: SITE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },

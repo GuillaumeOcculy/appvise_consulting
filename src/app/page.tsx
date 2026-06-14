@@ -1,4 +1,5 @@
 import HeroSection from '@/components/sections/HeroSection'
+import ProblemSection from '@/components/sections/ProblemSection'
 import TrustBar from '@/components/sections/TrustBar'
 import CaseStudyCards from '@/components/sections/CaseStudyCards'
 import ClientLogos from '@/components/sections/ClientLogos'
@@ -24,14 +25,15 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ProblemSection />
+      <MethodTimeline />
+      <GuaranteeBlock />
+      <Testimonials />
+      <CaseStudyCards />
       <ClientLogos />
       <TrustBar />
-      <CaseStudyCards />
-      <Testimonials />
       <InlineCTA />
-      <MethodTimeline />
       <HonestySection />
-      <GuaranteeBlock />
       <AboutSection />
       <CTASection />
     </>
