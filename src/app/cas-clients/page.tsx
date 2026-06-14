@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { getCaseStudies } from '@/lib/case-studies'
@@ -36,18 +37,23 @@ export default function CaseStudiesPage() {
             <Link
               key={cs.slug}
               href={`/cas-clients/${cs.slug}`}
-              className="group block bg-surface border border-border rounded-2xl p-6 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-2 transition-all duration-200 focus:outline-2 focus:outline-primary focus:outline-offset-2"
+              className="group relative block bg-surface border border-border rounded-2xl p-6 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-2 transition-all duration-200 focus:outline-2 focus:outline-primary focus:outline-offset-2"
               aria-label={`Voir l'étude de cas ${cs.title}`}
             >
               <span className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full font-medium">
                 {cs.sector}
               </span>
-              <h2 className="font-heading font-semibold text-lg mt-3">{cs.title}</h2>
+              {cs.logo && (
+                <img
+                  src={cs.logo}
+                  alt={cs.title}
+                  className={`absolute top-6 right-6 w-auto object-contain ${cs.slug === 'wifirst' ? 'h-[4.5rem] max-w-[88px]' : 'h-6 max-w-[88px]'} ${cs.logoRaw ? '' : '[filter:brightness(0)_invert(1)]'}`}
+                />
+              )}
+              <h2 className="font-heading font-semibold text-2xl mt-4">
+                <span className="text-primary">{cs.statValue}</span> {cs.statLabel}
+              </h2>
               <p className="text-text-muted text-sm mt-2">{cs.excerpt}</p>
-              <div className="mt-4">
-                <span className="font-heading font-semibold text-3xl text-primary">{cs.statValue}</span>
-                <span className="text-sm text-text-muted ml-2">{cs.statLabel}</span>
-              </div>
               <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-text-muted transition-colors group-hover:text-primary">
                 Lire le cas
                 <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
