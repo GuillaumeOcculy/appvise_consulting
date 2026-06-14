@@ -7,7 +7,11 @@ const missions = [
   {
     label: 'Confiserie — Savoirs Sucrés',
     title: 'Connaître le coût réel de chaque produit.',
-    body: 'Site entièrement repensé et un outil sur-mesure pour calculer le prix de revient des matières premières. De quoi piloter ses marges, sans rien connaître à la technique.',
+    body: 'Un outil sur-mesure calcule le prix de revient de ses 10 références. Fini le tableur à la main.',
+    stat: {
+      value: '15–30 min / produit',
+      caption: 'de calcul manuel en moins',
+    },
   },
 ]
 
@@ -29,6 +33,14 @@ export default function CaseStudyCards() {
               </span>
               <h3 className="font-heading font-semibold text-xl mt-3">{m.title}</h3>
               <p className="text-text-muted text-[15px] leading-relaxed mt-3">{m.body}</p>
+              {m.stat && (
+                <div className="mt-6 pt-6 border-t border-border">
+                  <p className="font-heading font-semibold text-primary text-2xl md:text-3xl tracking-[-0.02em]">
+                    {m.stat.value}
+                  </p>
+                  <p className="text-text-muted text-[13px] mt-1">{m.stat.caption}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
