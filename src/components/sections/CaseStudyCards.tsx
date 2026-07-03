@@ -2,7 +2,11 @@ const missions = [
   {
     label: 'Géomètre-expert',
     title: 'Ne parler qu\'aux clients qui ont vraiment besoin de lui.',
-    body: 'Un site clair, un questionnaire qui trie les demandes en amont, des rendez-vous qui se calent seuls. Fini les appels avec des prospects hors cible.',
+    body: 'Un site vitrine professionnel, un questionnaire qui qualifie chaque demande en amont, des rendez-vous qui se calent seuls. Fini les appels avec des prospects hors cible.',
+    stat: {
+      value: 'Tous les jours',
+      caption: 'il s\'en sert pour son activité',
+    },
   },
   {
     label: 'Confiserie — Savoirs Sucrés',
@@ -26,7 +30,7 @@ export default function CaseStudyCards() {
           {missions.map((m) => (
             <div
               key={m.label}
-              className="bg-surface border border-border rounded-2xl p-7 lg:p-8"
+              className="flex flex-col bg-surface border border-border rounded-2xl p-7 lg:p-8"
             >
               <span className="text-primary text-[11px] font-semibold uppercase tracking-[0.2em]">
                 {m.label}
@@ -34,7 +38,7 @@ export default function CaseStudyCards() {
               <h3 className="font-heading font-semibold text-xl mt-3">{m.title}</h3>
               <p className="text-text-muted text-[15px] leading-relaxed mt-3">{m.body}</p>
               {m.stat && (
-                <div className="mt-6 pt-6 border-t border-border">
+                <div className="mt-auto pt-6 border-t border-border">
                   <p className="font-heading font-semibold text-primary text-2xl md:text-3xl tracking-[-0.02em]">
                     {m.stat.value}
                   </p>
