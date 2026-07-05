@@ -24,18 +24,27 @@ const SPECIALITY_PAGES_INCLUDED = 'Vos spécialités prioritaires' // ex. '3 pag
 const BOOKING_OPTION_PRICE = '500' // option prise de RDV en ligne, € HT
 // ───────────────────────────────────────────────────────────────────
 
+const baseMetadata = createMetadata({
+  title:
+    'Création de site internet pour avocat — conforme déontologie & référencé | Appvise Consulting',
+  description:
+    "Un site conforme au RIN, accompagné jusqu'à la validation par votre Ordre, et construit pour être trouvé sur « avocat + spécialité + ville ». Développement sur-mesure, forfait clair.",
+  path: '/avocats',
+})
+
+// On retire l'image générique héritée de createMetadata (clé `images`
+// supprimée, pas mise à `undefined`) pour que Next retombe sur le fichier
+// opengraph-image.tsx et serve l'image de preview dédiée aux avocats.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { images: _genericImage, ...openGraphWithoutImage } = baseMetadata.openGraph!
+
 export const metadata = {
-  ...createMetadata({
-    title:
-      'Création de site internet pour avocat — conforme déontologie & référencé | Appvise Consulting',
-    description:
-      "Un site conforme au RIN, accompagné jusqu'à la validation par votre Ordre, et construit pour être trouvé sur « avocat + spécialité + ville ». Développement sur-mesure, forfait clair.",
-    path: '/avocats',
-  }),
+  ...baseMetadata,
   title: {
     absolute:
       'Création de site internet pour avocat — conforme déontologie & référencé | Appvise Consulting',
   },
+  openGraph: openGraphWithoutImage,
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
