@@ -3,11 +3,14 @@ import Link from 'next/link'
 import { Linkedin, Youtube } from 'lucide-react'
 import { LINKEDIN_URL, YOUTUBE_URL } from '@/lib/constants'
 
+// Pages par métier — en ajouter au fur et à mesure (géomètre, etc.).
+const metiers = [{ label: 'Avocats', href: '/avocats' }]
+
 export default function Footer() {
   return (
     <footer className="text-white py-16 lg:py-24 border-t border-border">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
           <div>
             <Link href="/" aria-label="Appvise Consulting — accueil" className="inline-flex items-center justify-center md:justify-start">
               <Image
@@ -30,6 +33,17 @@ export default function Footer() {
               <li><Link href="/cas-clients" className="text-text-muted hover:text-white transition-colors text-sm">Cas clients</Link></li>
               <li><Link href="/quiz" className="text-text-muted hover:text-white transition-colors text-sm">Diagnostic</Link></li>
               <li><Link href="/rendez-vous" className="text-text-muted hover:text-white transition-colors text-sm">Appel gratuit</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-heading font-semibold text-sm uppercase tracking-[0.2em] mb-4">Métiers</h3>
+            <ul className="space-y-2">
+              {metiers.map((metier) => (
+                <li key={metier.href}>
+                  <Link href={metier.href} className="text-text-muted hover:text-white transition-colors text-sm">{metier.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
