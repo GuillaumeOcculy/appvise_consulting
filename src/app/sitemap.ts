@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: SITE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+    { url: `${SITE_URL}/avocats`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/geometres`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/cas-clients`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/rendez-vous`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/quiz`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
