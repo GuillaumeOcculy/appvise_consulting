@@ -75,9 +75,12 @@ export default function Navbar() {
     }
   }, [menuOpen])
 
-  const navLinks: { label: string; href: string; external?: boolean }[] = [
-    { label: 'Diagnostic', href: '/quiz' },
-  ]
+  // Sur les landing pages métier (/avocats, /geometres), on masque le
+  // raccourci "Diagnostic" pour concentrer la navigation sur le CTA d'appel.
+  const hideDiagnostic = pathname === '/avocats' || pathname === '/geometres'
+  const navLinks: { label: string; href: string; external?: boolean }[] = hideDiagnostic
+    ? []
+    : [{ label: 'Diagnostic', href: '/quiz' }]
 
   return (
     <>
