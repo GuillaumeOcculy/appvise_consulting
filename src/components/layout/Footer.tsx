@@ -3,8 +3,11 @@ import Link from 'next/link'
 import { Linkedin, Youtube } from 'lucide-react'
 import { LINKEDIN_URL, YOUTUBE_URL } from '@/lib/constants'
 
-// Pages par métier — en ajouter au fur et à mesure (géomètre, etc.).
-const metiers = [{ label: 'Avocats', href: '/avocats' }]
+// Pages par métier — en ajouter au fur et à mesure.
+const metiers = [
+  { label: 'Avocats', href: '/avocats' },
+  { label: 'Géomètres-experts', href: '/geometres' },
+]
 
 export default function Footer() {
   return (
