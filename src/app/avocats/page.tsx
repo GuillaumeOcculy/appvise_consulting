@@ -4,8 +4,8 @@ import {
   Scale,
   Coins,
   Newspaper,
-  Mail,
-  MapPin,
+  CalendarClock,
+  Search,
   ShieldCheck,
   FileCheck,
   Lock,
@@ -14,21 +14,20 @@ import Button from '@/components/ui/Button'
 import CheckItem from '@/components/ui/CheckItem'
 import { createMetadata } from '@/lib/metadata'
 
-// ── À compléter avant mise en ligne ────────────────────────────────
-// Le prix et le nombre de pages spécialités ne sont pas encore arrêtés
-// (cf. notes de production : attendre les infos prix des confrères).
-// Renseigner PACK_PRICE ("2 490", "à partir de 2 490"…) pour afficher un
-// tarif ferme ; laisser `null` affiche « communiqué à l'appel de cadrage ».
+// ── Paramètres tarifaires (forfait ferme) ──────────────────────────
 const PACK_PRICE: string | null = '2 000' // prix ferme HT ; `null` → « communiqué au cadrage »
-const SPECIALITY_PAGES_INCLUDED = 'Vos spécialités prioritaires' // ex. '3 pages spécialités'
 const BOOKING_OPTION_PRICE = '500' // option prise de RDV en ligne, € HT
+const EXTRA_SPECIALITY_PRICE = '200' // page spécialité supplémentaire, € HT
+// « Moins de X heures de votre temps » — calibré sur le process réel :
+// cadrage ~1 h + validation maquette/contenus ~1 h + relecture finale ~45 min.
+const CLIENT_TIME = '3 heures'
 // ───────────────────────────────────────────────────────────────────
 
 const baseMetadata = createMetadata({
   title:
-    'Création de site internet pour avocat — conforme déontologie & référencé | Appvise Consulting',
+    'Création de site internet pour avocat — conforme au RIN, validé par votre Ordre | Appvise Consulting',
   description:
-    "Un site conforme au RIN, accompagné jusqu'à la validation par votre Ordre, et construit pour être trouvé sur « avocat + spécialité + ville ». Développement sur-mesure, forfait clair.",
+    "Un site conforme et respectueux de votre déontologie, accompagné jusqu'à la validation par votre Conseil de l'Ordre. Développement sur-mesure, forfait fixe, délai annoncé et respecté.",
   path: '/avocats',
 })
 
@@ -42,7 +41,7 @@ export const metadata = {
   ...baseMetadata,
   title: {
     absolute:
-      'Création de site internet pour avocat — conforme déontologie & référencé | Appvise Consulting',
+      'Création de site internet pour avocat — conforme au RIN, validé par votre Ordre | Appvise Consulting',
   },
   openGraph: openGraphWithoutImage,
 }
@@ -59,32 +58,32 @@ const solutionBlocks = [
   {
     icon: User,
     title: 'Votre présentation',
-    body: 'Photo professionnelle mise en valeur, parcours, barreau d’inscription. Ce que vos clients regardent en premier.',
+    body: 'Photo professionnelle mise en valeur, parcours, ancienneté, domaines et lieux d’intervention. Ce que vos clients regardent en premier.',
   },
   {
     icon: Scale,
-    title: 'Une page par spécialité',
-    body: 'Droit commercial, droit pénal, droit de la famille… Chaque domaine a sa propre page, rédigée pour être trouvée sur Google — pas une liste fourre-tout.',
+    title: 'Vos spécialités mises en avant',
+    body: 'Droit commercial, droit pénal, droit de la famille… Chaque domaine a sa propre page, rédigée pour être trouvée sur Google.',
   },
   {
     icon: Coins,
-    title: 'Vos honoraires, clairement',
-    body: 'Temps passé ou forfait : vos modes de facturation expliqués simplement. C’est la première question de vos clients — le premier facteur de confiance.',
+    title: 'Transparence quant aux honoraires',
+    body: 'Temps passé ou forfait : votre mode de facturation et vos modalités de paiement expliqués simplement. L’une des premières questions de vos clients — et un facteur de confiance.',
   },
   {
     icon: Newspaper,
-    title: 'Vos décisions marquantes & presse',
-    body: 'Les affaires qui font votre réputation et vos parutions, présentées dans le respect du secret professionnel et des règles de communication.',
+    title: 'Actualité & veille juridique',
+    body: 'Vos affaires relayées dans la presse d’un côté, vos parutions, travaux de recherche et d’enseignement de l’autre — présentés dans le respect du secret professionnel et des règles de communication et de publicité.',
   },
   {
-    icon: Mail,
-    title: 'Contact sans friction',
-    body: 'Coordonnées, plan d’accès, formulaire de contact conforme RGPD. En option : prise de rendez-vous en ligne avec consultation prépayée.',
+    icon: CalendarClock,
+    title: 'Accessibilité & disponibilité',
+    body: 'Coordonnées, plan d’accès, formulaire de contact conforme RGPD. En option : prise de rendez-vous en ligne avec consultation prépayée — le client réserve directement depuis le site, selon vos disponibilités.',
   },
   {
-    icon: MapPin,
-    title: 'Référencement local',
-    body: 'Structure technique optimisée pour « avocat + spécialité + ville », fiche Google Business configurée, temps de chargement maîtrisés.',
+    icon: Search,
+    title: 'Référencement qualitatif',
+    body: 'Une structure pensée pour les recherches « spécialité + ville + contentieux », fiche Google Business configurée, temps de chargement maîtrisés. Un site qu’on ne peut ignorer.',
   },
 ]
 
@@ -96,8 +95,8 @@ const complianceCards = [
   },
   {
     icon: ShieldCheck,
-    title: 'Accompagnement Ordre',
-    body: 'Je prépare avec vous le dossier de soumission à votre Conseil de l’Ordre et j’intègre ses éventuelles demandes de modification, incluses dans le forfait.',
+    title: 'Formalités ordinales',
+    body: 'Préparation du dossier à soumettre à votre Conseil de l’Ordre pour validation. Les modifications demandées par l’Ordre sont incluses dans le forfait.',
   },
   {
     icon: Lock,
@@ -106,37 +105,37 @@ const complianceCards = [
   },
 ]
 
-const painPoints = [
+const reasons = [
   {
-    title: 'Le risque déontologique',
-    body: 'Vous connaissez un confrère qui a payé un site… refusé par l’Ordre. Les agences généralistes ignorent le RIN : mentions manquantes, formulations interdites, et c’est vous qui portez le risque.',
+    title: 'Aucun risque déontologique',
+    body: 'Vous connaissez un confrère qui a payé un site refusé par l’Ordre ? Les agences généralistes ignorent le RIN : absence de mentions obligatoires, non-respect du cadre légal de la publicité des avocats. Ici, la conformité est intégrée dès la conception et le dossier de validation est préparé pour votre Conseil de l’Ordre : un process plus court, sans rien recommencer.',
   },
   {
-    title: 'Le site vitrine qui ne sert à rien',
-    body: 'Un site que personne ne trouve, c’est une plaquette chère. Pendant ce temps, vos confrères bien référencés reçoivent des dossiers de clients qui ont simplement tapé leur spécialité sur Google.',
+    title: 'Un site de promotion efficace, pas un beau site invisible',
+    body: 'Vos confrères ont payé cher de très beaux sites, avec de beaux effets… que personne ne trouve. Un site réussi se conçoit dès le départ sur les mots-clés que tapent réellement vos futurs clients : spécialité, ville, contentieux. C’est lui qui travaille pour votre cabinet.',
   },
   {
-    title: 'Le flou sur le prix et le résultat',
-    body: 'Devis vagues, dépassements, livrable qui ne ressemble pas à la promesse. Vous facturez au forfait ou au temps passé avec des règles claires — vous êtes en droit d’attendre la même chose de votre prestataire.',
+    title: 'Transparence : prix et résultats',
+    body: 'Devis précis et concis, forfait fixe et non négociable, délai annoncé et respecté. Vous savez ce que vous payez, ce que vous recevez, et quand.',
   },
 ]
 
 const seoSteps = [
-  'Une page dédiée par domaine d’intervention, rédigée autour des recherches réelles de vos clients',
-  'Fiche Google Business Profile créée ou optimisée (avis, horaires, spécialités)',
-  'Base technique rapide et propre — un critère de classement Google à part entière',
-  'Suivi simple : vous savez combien de contacts arrivent via le site, mois après mois',
+  'Une page dédiée par domaine d’intervention — la structure que Google attend pour ces recherches',
+  'Fiche Google Business Profile créée ou optimisée (horaires, spécialités, lien vers le site)',
+  'Base technique rapide et propre, balises et données structurées en place',
+  'Suivi des visites mensuelles et des contacts entrants via le site',
 ]
 
 const methodSteps = [
   {
     title: 'Cadrage',
     aside: '1 semaine',
-    body: 'Un entretien pour définir vos spécialités prioritaires, votre positionnement et vos contraintes déontologiques spécifiques (certains barreaux ont leurs usages).',
+    body: 'Un entretien pour définir vos attentes et vos besoins, votre positionnement et vos contraintes déontologiques spécifiques.',
   },
   {
     title: 'Conception & rédaction',
-    body: 'Maquette et contenus rédigés pour votre validation. Vous ne partez pas d’une page blanche : je propose, vous ajustez.',
+    body: 'Maquette et contenus rédigés, puis validés par vos soins. Vous ne partez pas d’une page blanche : je propose, vous ajustez.',
   },
   {
     title: 'Développement & mise en ligne',
@@ -144,22 +143,26 @@ const methodSteps = [
   },
   {
     title: 'Validation Ordre & suivi',
-    body: 'Accompagnement de la soumission à votre Conseil de l’Ordre. Modifications demandées par l’Ordre incluses. Point de suivi pour mesurer les contacts entrants.',
+    body: 'Accompagnement de la soumission du dossier à votre Conseil de l’Ordre. Modifications demandées par l’Ordre incluses. Point de suivi pour mesurer les contacts entrants.',
   },
 ]
 
 const faq = [
   {
     q: 'Mon Ordre peut-il refuser le site ?',
-    a: 'Le risque existe avec un site non conforme — c’est précisément ce que la conception RIN-first évite. Si votre Conseil de l’Ordre demande des modifications, elles sont incluses dans le forfait.',
+    a: 'Le risque existe avec un site non conforme — c’est précisément ce que la conception selon le RIN évite. Si votre Conseil de l’Ordre demande des modifications, elles sont incluses dans le forfait, et le solde n’est dû qu’après validation.',
   },
   {
-    q: 'C’est du WordPress ?',
-    a: 'Non. Chaque site est développé sur-mesure : plus rapide, plus sécurisé, sans plugins à maintenir ni failles héritées. Un site conçu pour durer — pas pour être refait dans deux ans.',
+    q: 'C’est un site fait à partir d’un modèle tout prêt ?',
+    a: 'Non. Chaque site est développé sur-mesure et personnalisé : plus rapide, plus sécurisé, sans dépendre d’outils génériques à maintenir. Un site conçu pour durer — pas pour être refait dans deux ans.',
   },
   {
     q: 'Combien de temps pour être visible sur Google ?',
-    a: 'Le site est indexé en quelques jours. Le positionnement sur « avocat + spécialité + ville » se construit sur plusieurs semaines à quelques mois selon la concurrence locale — la structure du site est pensée pour ça dès le départ.',
+    a: 'Le site est indexé en quelques jours et livré avec des fondations saines : une page par spécialité, fiche Google Business, base technique rapide. Le positionnement dépend ensuite de la concurrence locale et du contenu publié dans la durée — aucun prestataire sérieux ne peut garantir une position.',
+  },
+  {
+    q: 'Mes parutions presse servent-elles à quelque chose ?',
+    a: 'Oui — à condition que l’article renvoie vers votre site. Un lien depuis un grand média compte plus pour Google que des milliers d’abonnés sur les réseaux. Le site est conçu pour valoriser vos parutions, et je vous explique le réflexe à adopter lors de vos prochaines interviews pour que ces citations travaillent pour votre référencement.',
   },
   {
     q: 'Qui rédige les contenus ?',
@@ -171,7 +174,7 @@ const faq = [
   },
   {
     q: 'Puis-je ajouter la prise de rendez-vous payée en ligne ?',
-    a: 'Oui, en option : le client choisit un créneau et règle la consultation en ligne. Créneau réservé = consultation encaissée, sans passer par votre secrétariat.',
+    a: 'Oui, en option (+ 500 € HT) : le client choisit un créneau selon vos disponibilités et règle la consultation en ligne, sans passer par votre secrétariat.',
   },
 ]
 
@@ -210,13 +213,19 @@ export default function AvocatsPage() {
             id="hero-heading"
             className="font-heading font-semibold text-[32px] md:text-[44px] lg:text-[56px] leading-[1.05] tracking-[-0.03em] mt-6"
           >
-            Un site conforme à votre déontologie, qui vous amène des clients{' '}
-            <span className="text-primary">sur votre spécialité.</span>
+            Le site de votre cabinet, conforme au RIN, pensé pour le{' '}
+            <span className="text-primary">développement de votre clientèle.</span>
           </h1>
-          <p className="text-text-muted text-lg mt-6 max-w-2xl mx-auto">
-            Conçu selon les règles du RIN, accompagné jusqu&apos;à la validation
-            par votre Conseil de l&apos;Ordre, et construit pour être trouvé sur
-            les recherches qui comptent : votre spécialité, dans votre ville.
+          <div className="text-text-muted text-lg mt-6 max-w-2xl mx-auto space-y-1">
+            <p>— Conçu selon les règles du RIN</p>
+            <p>
+              — Accompagnement jusqu&apos;à la validation de la publication par
+              votre Conseil de l&apos;Ordre
+            </p>
+          </div>
+          <p className="text-text-faint text-[15px] mt-6 max-w-2xl mx-auto leading-relaxed">
+            Construit sur les mots-clés essentiels des moteurs de recherche :
+            spécialité · ville · contentieux · notion juridique
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
             <Button variant="primary" href="/rendez-vous">
@@ -226,6 +235,10 @@ export default function AvocatsPage() {
               Voir ce que comprend l&apos;offre
             </Button>
           </div>
+          <p className="text-text-faint text-sm mt-6 max-w-xl mx-auto">
+            Offre et contenus construits avec des avocats en exercice —
+            jusqu&apos;au vocabulaire.
+          </p>
         </div>
 
         <div className="max-w-4xl mx-auto px-4 mt-14">
@@ -233,8 +246,8 @@ export default function AvocatsPage() {
             {[
               '14 ans de développement',
               'Conformité RIN intégrée',
-              'Hébergement européen (RGPD)',
-              'Forfait sans surprise',
+              'Solde après validation de l’Ordre',
+              'Forfait fixe, délai respecté',
             ].map((item, i) => (
               <li key={item} className="flex items-center gap-3">
                 {i > 0 && (
@@ -249,33 +262,36 @@ export default function AvocatsPage() {
         </div>
       </section>
 
-      {/* ── DOULEURS ─────────────────────────────────────── */}
+      {/* ── POURQUOI NOUS ────────────────────────────────── */}
       <section
-        aria-labelledby="pain-heading"
+        aria-labelledby="reasons-heading"
         className="text-white py-16 lg:py-24"
       >
         <div className="max-w-6xl mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <Eyebrow>Le problème</Eyebrow>
+            <Eyebrow>Pourquoi Appvise</Eyebrow>
             <h2
-              id="pain-heading"
+              id="reasons-heading"
               className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Trois raisons pour lesquelles les avocats repoussent leur site.
+              Trois raisons de nous confier votre site.
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {painPoints.map((point) => (
+            {reasons.map((reason, i) => (
               <div
-                key={point.title}
+                key={reason.title}
                 className="bg-surface border border-border rounded-2xl p-6"
               >
+                <p className="text-primary text-sm font-semibold mb-2">
+                  Raison {i + 1}
+                </p>
                 <h3 className="font-heading font-semibold text-lg text-white">
-                  {point.title}
+                  {reason.title}
                 </h3>
                 <p className="text-text-muted text-[15px] leading-relaxed mt-3">
-                  {point.body}
+                  {reason.body}
                 </p>
               </div>
             ))}
@@ -296,12 +312,14 @@ export default function AvocatsPage() {
               id="solution-heading"
               className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Un site pensé pour le métier d&apos;avocat. Pas un template adapté.
+              Un site pensé pour le métier d&apos;avocat. Personnalisé pour le
+              vôtre.
             </h2>
             <p className="text-text-muted text-lg mt-4">
-              Chaque site est développé sur-mesure, sans CMS générique, autour de
-              ce que vos clients cherchent réellement quand ils choisissent un
-              avocat.
+              Chaque avocat a ses attentes et son positionnement. Chaque site est
+              donc développé sur-mesure et personnalisé — pas un modèle tout fait
+              — autour de ce que vos clients recherchent réellement quand ils
+              choisissent un avocat.
             </p>
           </div>
 
@@ -345,8 +363,7 @@ export default function AvocatsPage() {
               La communication de l&apos;avocat est encadrée : publicité
               personnelle autorisée mais réglementée, mentions obligatoires,
               interdiction du démarchage et des comparatifs. Votre site est conçu
-              en intégrant ces règles dès la première maquette — pas corrigé
-              après coup.
+              en intégrant ces règles dès la première maquette.
             </p>
           </div>
 
@@ -383,14 +400,13 @@ export default function AvocatsPage() {
               id="seo-heading"
               className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Vos futurs clients tapent trois mots. Soyez la réponse.
+              Les fondations pour être trouvé dans votre ville.
             </h2>
             <p className="text-text-muted text-lg mt-4">
               Quand quelqu&apos;un cherche un avocat, il tape sa situation et sa
               ville : « avocat droit commercial Lyon », « avocat divorce
-              Bordeaux ». Pour apparaître sur ces recherches, l&apos;essentiel se
-              joue dès la construction du site : une structure claire et des
-              fondations propres.
+              Bordeaux ». Votre site est livré avec les bases techniques et
+              éditoriales pour exister sur ces recherches.
             </p>
           </div>
 
@@ -403,15 +419,15 @@ export default function AvocatsPage() {
           </div>
 
           <p className="text-text-faint text-sm max-w-2xl mx-auto mt-6 text-center leading-relaxed">
-            Le référencement se construit dans le temps et dépend de la
-            concurrence locale. Ce qui est inclus : des bases solides et bien
-            faites — pas une promesse de première place.
+            Le positionnement dépend ensuite de la concurrence locale et du
+            contenu publié dans la durée. Le site vous donne des fondations
+            saines — pas une promesse de première position.
           </p>
 
           <figure className="bg-signature border border-border-strong rounded-[24px] p-8 lg:p-12 mt-12 relative">
             <blockquote className="font-heading font-semibold text-xl md:text-2xl leading-snug text-white">
-              « Le site sert à quelque chose quand il vous amène des clients — et
-              des dossiers plus importants. C&apos;est le seul critère. »
+              « Un site : développement de clientèle, évolution de carrière,
+              prospérité. »
             </blockquote>
             <span
               aria-hidden
@@ -431,10 +447,18 @@ export default function AvocatsPage() {
             <Eyebrow>La méthode</Eyebrow>
             <h2
               id="method-heading"
-              className="font-heading font-semibold text-2xl md:text-4xl mt-4 mb-12"
+              className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Quatre étapes, un interlocuteur unique.
+              Quatre étapes. Un interlocuteur unique.
             </h2>
+            <p className="text-text-muted text-lg mt-4 mb-12 max-w-xl mx-auto">
+              <span className="text-white font-semibold">
+                Moins de {CLIENT_TIME} de votre temps, du cadrage à la mise en
+                ligne.
+              </span>{' '}
+              Un entretien, deux validations par vos soins. Le reste, c&apos;est
+              notre travail.
+            </p>
           </div>
           <ol role="list" className="relative">
             {methodSteps.map((step, i) => (
@@ -481,11 +505,12 @@ export default function AvocatsPage() {
               id="pricing-heading"
               className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Un forfait. Un prix connu avant de commencer.
+              Un forfait. Un prix connu et fixe.
             </h2>
             <p className="text-text-muted text-lg mt-4">
               Pas de facturation au temps passé, pas de dépassement : un
-              périmètre défini ensemble, un prix fixe, un délai annoncé.
+              périmètre défini ensemble, un prix fixe, un délai annoncé et
+              respecté.
             </p>
           </div>
 
@@ -508,18 +533,20 @@ export default function AvocatsPage() {
             <div className="mt-6 space-y-3">
               <CheckItem>
                 <span className="text-white/85">
-                  Site sur-mesure (présentation, spécialités, honoraires,
-                  décisions/presse, contact)
+                  Site sur-mesure (présentation, honoraires, actualité &amp;
+                  veille juridique, contact)
                 </span>
               </CheckItem>
               <CheckItem>
                 <span className="text-white/85">
-                  {SPECIALITY_PAGES_INCLUDED} incluses
+                  Vos spécialités mises en avant — jusqu&apos;à 3 pages dédiées
+                  incluses
                 </span>
               </CheckItem>
               <CheckItem>
                 <span className="text-white/85">
-                  Conformité RIN + accompagnement validation Ordre
+                  Conformité RIN + préparation du dossier de validation pour
+                  l&apos;Ordre
                 </span>
               </CheckItem>
               <CheckItem>
@@ -533,27 +560,50 @@ export default function AvocatsPage() {
             </div>
 
             <div className="border-t border-border mt-8 pt-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <p className="font-heading font-semibold text-white">
+                  Option — Prise de rendez-vous en ligne
+                </p>
+                <p className="font-heading font-semibold text-primary shrink-0">
+                  + {BOOKING_OPTION_PRICE} € <span className="text-sm">HT</span>
+                </p>
+              </div>
+              <p className="text-[15px] text-text-muted leading-relaxed mt-2">
+                Consultation prépayée : le client réserve un créneau selon vos
+                disponibilités et règle la consultation en ligne. Créneau réservé
+                = consultation encaissée, zéro no-show.
+              </p>
+            </div>
+
+            <div className="border-t border-border mt-8 pt-6">
               <p className="text-sm text-text-faint uppercase tracking-[0.2em] font-semibold mb-4">
-                Options
+                Autres options
               </p>
               <ul className="space-y-3 text-[15px] text-text-muted leading-relaxed">
                 <li>
-                  Prise de rendez-vous en ligne avec consultation prépayée
-                  (créneau réservé = consultation encaissée, zéro no-show)
-                  <span className="text-white/80"> — + {BOOKING_OPTION_PRICE} € HT</span>
+                  Page spécialité supplémentaire
+                  <span className="text-white/80">
+                    {' '}
+                    — {EXTRA_SPECIALITY_PRICE} € HT
+                  </span>
                 </li>
-                <li>Page spécialité supplémentaire</li>
                 <li>
-                  Rédaction d&apos;articles / commentaires de décisions pour
-                  renforcer le référencement
+                  Rédaction d&apos;articles / veille juridique dans la durée
+                  <span className="text-white/80"> — sur devis</span>
                 </li>
               </ul>
             </div>
 
             <p className="text-sm text-text-faint mt-8">
-              Devis détaillé après l&apos;appel de cadrage — le prix annoncé est
-              le prix payé.
+              Devis précis et concis après l&apos;appel de cadrage — le prix
+              annoncé est le prix payé.
             </p>
+
+            <div className="mt-8">
+              <Button variant="primary" href="/rendez-vous">
+                Obtenir mon devis précis en 30 minutes
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -572,14 +622,16 @@ export default function AvocatsPage() {
             id="guarantee-heading"
             className="font-heading font-semibold text-2xl md:text-4xl mt-4"
           >
-            Vous ne soldez que ce qui vous satisfait.
+            Vous ne soldez qu&apos;après validation par votre Conseil de
+            l&apos;Ordre.
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed">
-            Le paiement est lié à votre satisfaction aux étapes clés du projet.
-            Si le résultat ne correspond pas à ce qui a été défini au cadrage,
-            vous ne réglez pas le solde. C&apos;est le fonctionnement
-            d&apos;Appvise sur tous les projets — les avocats n&apos;y font pas
-            exception.
+            Le projet n&apos;est terminé que lorsque votre site est validé et
+            publié. Les modifications demandées par l&apos;Ordre sont incluses
+            dans le forfait : vous ne payez pas deux fois, et vous ne réglez pas
+            le solde tant que la validation n&apos;est pas obtenue. C&apos;est le
+            fonctionnement d&apos;Appvise sur tous les projets — les avocats
+            n&apos;y font pas exception.
           </p>
         </div>
       </section>
@@ -598,21 +650,20 @@ export default function AvocatsPage() {
             className="w-40 h-40 rounded-full mx-auto object-cover"
           />
           <div className="mt-6">
-            <Eyebrow>Qui suis-je</Eyebrow>
+            <Eyebrow>Qui sommes-nous</Eyebrow>
           </div>
           <h2
             id="about-heading"
             className="font-heading font-semibold text-2xl md:text-4xl mt-4"
           >
-            Vous parlez directement au développeur.
+            Un interlocuteur unique, du cadrage à la validation.
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed max-w-2xl mx-auto">
-            Guillaume Occuly, 14 ans de développement. Appvise Consulting
-            accompagne les entreprises sur le développement sur-mesure,
-            l&apos;automatisation et l&apos;IA. Pas de commercial ni de chef de
-            projet intermédiaire : la personne qui conçoit et développe votre
-            site est celle à qui vous parlez — du premier appel à la validation
-            par votre Ordre.
+            Appvise Consulting accompagne les entreprises sur le développement
+            sur-mesure, l&apos;automatisation et l&apos;IA. Votre projet est
+            piloté par Guillaume Occuly, 14 ans de développement : vous parlez
+            directement à la personne qui conçoit votre site — pas à un
+            commercial qui transmet à un prestataire.
           </p>
         </div>
       </section>
