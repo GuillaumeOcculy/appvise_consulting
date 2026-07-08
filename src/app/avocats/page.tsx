@@ -25,9 +25,9 @@ const CLIENT_TIME = '3 heures'
 
 const baseMetadata = createMetadata({
   title:
-    'Création de site internet pour avocat — conforme au RIN, validé par votre Ordre | Appvise Consulting',
+    'Création de site internet pour avocat — conforme au RIN, déclaré à votre Ordre | Appvise Consulting',
   description:
-    "Un site conforme et respectueux de votre déontologie, accompagné jusqu'à la validation par votre Conseil de l'Ordre. Développement sur-mesure, forfait fixe, délai annoncé et respecté.",
+    "Un site conforme et respectueux de votre déontologie, accompagné jusqu'à la déclaration à votre Conseil de l'Ordre. Développement sur-mesure, forfait fixe, délai annoncé et respecté.",
   path: '/avocats',
 })
 
@@ -41,7 +41,7 @@ export const metadata = {
   ...baseMetadata,
   title: {
     absolute:
-      'Création de site internet pour avocat — conforme au RIN, validé par votre Ordre | Appvise Consulting',
+      'Création de site internet pour avocat — conforme au RIN, déclaré à votre Ordre | Appvise Consulting',
   },
   openGraph: openGraphWithoutImage,
 }
@@ -96,7 +96,7 @@ const complianceCards = [
   {
     icon: ShieldCheck,
     title: 'Formalités ordinales',
-    body: 'Préparation du dossier à soumettre à votre Conseil de l’Ordre pour validation. Les modifications demandées par l’Ordre sont incluses dans le forfait.',
+    body: 'Préparation de l’information au conseil de l’Ordre et de la communication du nom de domaine, comme le prévoit le RIN. Les modifications que l’Ordre demanderait sont incluses dans le forfait.',
   },
   {
     icon: Lock,
@@ -105,10 +105,56 @@ const complianceCards = [
   },
 ]
 
+// Points vérifiés sur chaque site avant mise en ligne. Les numéros d'articles
+// (RIN, juillet 2026) sont volontairement visibles : ils rassurent une
+// profession juridique et prouvent la lecture du texte.
+const rinChecklist = [
+  {
+    title: 'Nom de domaine conforme',
+    article: 'art. 10.5',
+    body: 'Il comporte votre nom ou celui du cabinet. Les noms de domaine génériques évoquant un domaine du droit (type « avocat-divorce-ville.fr ») sont interdits — on choisit le vôtre ensemble dès le cadrage.',
+  },
+  {
+    title: 'Mentions obligatoires présentes',
+    article: 'art. 10.2',
+    body: 'Identité, barreau d’inscription, structure d’exercice, moyens de vous localiser et de vous joindre : tout ce que le RIN exige pour une information sincère.',
+  },
+  {
+    title: 'Aucune publicité de tiers',
+    article: 'art. 10.5',
+    body: 'Le site ne contient aucun encart ni bannière publicitaire pour un produit ou service tiers. Vos outils intégrés sont choisis en conséquence.',
+  },
+  {
+    title: 'Liens sortants maîtrisés',
+    article: 'art. 10.5',
+    body: 'Tout lien hypertexte est recensé et vérifié ; ceux qui doivent être déclarés à l’Ordre le sont. Aucun lien vers un contenu contraire aux principes de la profession.',
+  },
+  {
+    title: '« Spécialiste » employé à bon escient',
+    article: 'art. 10.2',
+    body: 'Le mot « spécialiste » n’est utilisé que si vous détenez le certificat de spécialisation correspondant. Sinon, on écrit « intervient en… » ou « domaine d’activité dominante » (trois maximum, art. 10.2).',
+  },
+  {
+    title: 'Secret professionnel préservé',
+    article: 'art. 2',
+    body: 'Aucun nom de client, aucune affaire nominative. Vos résultats sont valorisés via une rubrique presse / actualité juridique renvoyant aux articles publiés.',
+  },
+  {
+    title: 'Pas de comparatif ni de mention trompeuse',
+    article: 'art. 10.2',
+    body: 'Aucune formulation comparative, dénigrante ou de nature à induire le public en erreur. Une information sincère, point.',
+  },
+  {
+    title: 'Déclaration à l’Ordre préparée',
+    article: 'art. 10.5',
+    body: 'À la mise en ligne, l’information au conseil de l’Ordre et la communication du nom de domaine sont préparées pour vous — une formalité simple, faite correctement.',
+  },
+]
+
 const reasons = [
   {
     title: 'Aucun risque déontologique',
-    body: 'Vous connaissez un confrère qui a payé un site refusé par l’Ordre ? Les agences généralistes ignorent le RIN : absence de mentions obligatoires, non-respect du cadre légal de la publicité des avocats. Ici, la conformité est intégrée dès la conception et le dossier de validation est préparé pour votre Conseil de l’Ordre : un process plus court, sans rien recommencer.',
+    body: 'Vous connaissez un confrère qui a payé un site non conforme, épinglé par l’Ordre ? Les agences généralistes ignorent le RIN : absence de mentions obligatoires, non-respect du cadre légal de la publicité des avocats. Ici, la conformité est intégrée dès la conception et la déclaration à votre Conseil de l’Ordre est préparée : le risque est écarté en amont, sans rien recommencer.',
   },
   {
     title: 'Un site de promotion efficace, pas un beau site invisible',
@@ -142,15 +188,15 @@ const methodSteps = [
     body: 'Site développé sur-mesure, testé, mis en ligne sur hébergement européen. Fiche Google configurée.',
   },
   {
-    title: 'Validation Ordre & suivi',
-    body: 'Accompagnement de la soumission du dossier à votre Conseil de l’Ordre. Modifications demandées par l’Ordre incluses. Point de suivi pour mesurer les contacts entrants.',
+    title: 'Déclaration à l’Ordre & suivi',
+    body: 'Accompagnement de la déclaration à votre Conseil de l’Ordre : information et communication du nom de domaine, comme le prévoit le RIN. Modifications éventuellement demandées par l’Ordre incluses. Point de suivi pour mesurer les contacts entrants.',
   },
 ]
 
 const faq = [
   {
-    q: 'Mon Ordre peut-il refuser le site ?',
-    a: 'Le risque existe avec un site non conforme — c’est précisément ce que la conception selon le RIN évite. Si votre Conseil de l’Ordre demande des modifications, elles sont incluses dans le forfait, et le solde n’est dû qu’après validation.',
+    q: 'Mon Ordre doit-il valider le site avant sa mise en ligne ?',
+    a: 'Non. Le RIN n’organise pas de validation préalable : il impose d’informer le conseil de l’Ordre et de lui communiquer le nom de domaine (art. 10.5). Un site conçu selon le RIN écarte le risque en amont. Si l’Ordre demande malgré tout une modification, elle est incluse dans le forfait — et vous ne réglez le solde qu’une fois le site conforme et mis en ligne.',
   },
   {
     q: 'C’est un site fait à partir d’un modèle tout prêt ?',
@@ -219,8 +265,8 @@ export default function AvocatsPage() {
           <div className="text-text-muted text-lg mt-6 max-w-2xl mx-auto space-y-1">
             <p>— Conçu selon les règles du RIN</p>
             <p>
-              — Accompagnement jusqu&apos;à la validation de la publication par
-              votre Conseil de l&apos;Ordre
+              — Accompagnement jusqu&apos;à la déclaration à votre Conseil de
+              l&apos;Ordre
             </p>
           </div>
           <p className="text-text-faint text-[15px] mt-6 max-w-2xl mx-auto leading-relaxed">
@@ -246,7 +292,7 @@ export default function AvocatsPage() {
             {[
               '14 ans de développement',
               'Conformité RIN intégrée',
-              'Solde après validation de l’Ordre',
+              'Solde à la mise en ligne conforme',
               'Forfait fixe, délai respecté',
             ].map((item, i) => (
               <li key={item} className="flex items-center gap-3">
@@ -356,8 +402,8 @@ export default function AvocatsPage() {
               id="compliance-heading"
               className="font-heading font-semibold text-2xl md:text-4xl mt-4"
             >
-              Conforme au RIN dès la conception. Accompagné jusqu&apos;à la
-              validation.
+              Conforme au RIN dès la conception. Déclaré à votre Ordre à la mise
+              en ligne.
             </h2>
             <p className="text-white/80 text-lg mt-4">
               La communication de l&apos;avocat est encadrée : publicité
@@ -385,6 +431,68 @@ export default function AvocatsPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── CHECKLIST RIN ────────────────────────────────── */}
+      <section
+        aria-labelledby="rin-heading"
+        className="text-white py-16 lg:py-24"
+      >
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <Eyebrow>Conformité, point par point</Eyebrow>
+            <h2
+              id="rin-heading"
+              className="font-heading font-semibold text-2xl md:text-4xl mt-4"
+            >
+              Ce que «&nbsp;conforme au RIN&nbsp;» veut dire, concrètement.
+            </h2>
+            <p className="text-text-muted text-lg mt-4">
+              La conformité d&apos;un site d&apos;avocat ne se devine pas : elle
+              répond à des règles précises du Règlement Intérieur National. Voici
+              les points vérifiés sur chaque site avant mise en ligne.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12">
+            {rinChecklist.map((item) => (
+              <details
+                key={item.title}
+                className="group bg-surface border border-border rounded-2xl px-6 py-5 open:border-border-strong"
+              >
+                <summary className="flex items-start gap-3 cursor-pointer list-none marker:hidden">
+                  <ShieldCheck
+                    size={20}
+                    className="text-primary shrink-0 mt-0.5"
+                  />
+                  <span className="flex-1">
+                    <span className="font-heading font-semibold text-[15px] text-white">
+                      {item.title}
+                    </span>
+                    <span className="block text-text-faint text-xs uppercase tracking-[0.15em] mt-1">
+                      {item.article}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="text-primary text-2xl leading-none shrink-0 transition-transform duration-200 group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="text-text-muted text-[15px] leading-relaxed mt-4">
+                  {item.body}
+                </p>
+              </details>
+            ))}
+          </div>
+
+          <p className="text-text-faint text-sm max-w-2xl mx-auto mt-8 text-center leading-relaxed">
+            Chaque barreau peut compléter ces règles par ses propres usages (le
+            Règlement Intérieur du Barreau de Paris, par exemple). Votre barreau
+            est identifié au cadrage pour intégrer ses spécificités.
+          </p>
         </div>
       </section>
 
@@ -545,8 +653,8 @@ export default function AvocatsPage() {
               </CheckItem>
               <CheckItem>
                 <span className="text-white/85">
-                  Conformité RIN + préparation du dossier de validation pour
-                  l&apos;Ordre
+                  Conformité RIN + déclaration à votre Ordre préparée
+                  (information et nom de domaine)
                 </span>
               </CheckItem>
               <CheckItem>
@@ -622,16 +730,16 @@ export default function AvocatsPage() {
             id="guarantee-heading"
             className="font-heading font-semibold text-2xl md:text-4xl mt-4"
           >
-            Vous ne soldez qu&apos;après validation par votre Conseil de
-            l&apos;Ordre.
+            Vous ne soldez que si votre site est conforme au RIN et mis en
+            ligne.
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed">
-            Le projet n&apos;est terminé que lorsque votre site est validé et
-            publié. Les modifications demandées par l&apos;Ordre sont incluses
-            dans le forfait : vous ne payez pas deux fois, et vous ne réglez pas
-            le solde tant que la validation n&apos;est pas obtenue. C&apos;est le
-            fonctionnement d&apos;Appvise sur tous les projets — les avocats
-            n&apos;y font pas exception.
+            Le projet n&apos;est terminé que lorsque votre site est conforme au
+            RIN et mis en ligne. Les modifications que l&apos;Ordre demanderait
+            sont incluses dans le forfait : vous ne payez pas deux fois, et vous
+            ne réglez pas le solde tant que le site n&apos;est pas conforme et
+            publié. C&apos;est le fonctionnement d&apos;Appvise sur tous les
+            projets — les avocats n&apos;y font pas exception.
           </p>
         </div>
       </section>
@@ -656,7 +764,7 @@ export default function AvocatsPage() {
             id="about-heading"
             className="font-heading font-semibold text-2xl md:text-4xl mt-4"
           >
-            Un interlocuteur unique, du cadrage à la validation.
+            Un interlocuteur unique, du cadrage à la mise en ligne.
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed max-w-2xl mx-auto">
             Appvise Consulting accompagne les entreprises sur le développement
