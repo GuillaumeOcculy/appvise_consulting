@@ -1,8 +1,8 @@
 const steps = [
-  { title: 'Diagnostic', description: 'On identifie ensemble tes tâches chronophages' },
-  { title: 'Proposition', description: 'Je te propose la solution adaptée : automatisation ou développement' },
-  { title: 'Réalisation', description: 'Je construis, tu valides à chaque étape' },
-  { title: 'Paiement', description: 'Tu ne paies le solde que quand tu es satisfait' },
+  { title: 'Diagnostic', description: 'On identifie ensemble vos tâches chronophages' },
+  { title: 'Proposition', description: 'Je vous propose la solution adaptée : automatisation, IA ou développement' },
+  { title: 'Réalisation', description: 'Je construis, vous validez à chaque étape' },
+  { title: 'Paiement', description: 'Vous ne payez le solde que quand vous êtes satisfait' },
 ]
 
 export default function MethodTimeline() {

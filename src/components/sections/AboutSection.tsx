@@ -6,7 +6,7 @@ const highlights = [
   { icon: Code, label: '+10 ans de développement web' },
   { icon: Briefcase, label: '15+ projets livrés' },
   { icon: Brain, label: 'Double certifié n8n' },
-  { icon: Sparkles, label: 'Expert IA' },
+  { icon: Sparkles, label: 'Intégrateur IA' },
 ]
 
 const sectors = [
@@ -30,7 +30,7 @@ export default function AboutSection() {
             Guillaume Occuly
           </h2>
           <p className="text-white/80 mt-4 text-lg leading-relaxed max-w-2xl mx-auto">
-            Développeur web depuis plus de 10 ans et double certifié n8n, j&apos;aide les entrepreneurs à récupérer leur temps en automatisant ce qui peut l&apos;être — et en développant sur-mesure ce qui ne peut pas.
+            Développeur web depuis plus de 10 ans et double certifié n8n, j&apos;intègre l&apos;IA et l&apos;automatisation chez les indépendants et TPE : automatiser ce qui peut l&apos;être, développer sur-mesure ce qui ne peut pas — et ne jamais intégrer l&apos;IA pour le principe, seulement là où elle rapporte du temps ou des clients.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function AboutSection() {
 
         <div className="mt-10 text-center max-w-2xl mx-auto">
           <p className="text-white/60 text-sm leading-relaxed">
-            Des startups early-stage aux grands groupes (Effy, Altares D&amp;B, Solocal, Wifirst), j&apos;ai construit des APIs servant des millions d&apos;utilisateurs, lancé mon propre produit mobile, et accompagné des entrepreneurs dans l&apos;automatisation de leur quotidien. Aujourd&apos;hui, je combine cette expérience pour offrir un diagnostic unique : automatiser quand c&apos;est possible, développer quand c&apos;est nécessaire.
+            Des startups early-stage aux grands groupes (Effy, Altares D&amp;B, Solocal, Wifirst), j&apos;ai construit des APIs servant des millions d&apos;utilisateurs, lancé mon propre produit mobile, et j&apos;intègre aujourd&apos;hui l&apos;IA en entreprise : chatbots spécialisés santé, formation d&apos;équipes à l&apos;IA et aux outils comme Claude Code. Je combine cette expérience pour offrir un diagnostic unique : automatiser quand c&apos;est possible, intégrer l&apos;IA quand c&apos;est utile, développer quand c&apos;est nécessaire.
           </p>
         </div>
 

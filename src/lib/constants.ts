@@ -9,7 +9,7 @@ export const TALLY_QUIZ_EMBED_URL =
 export const ZCAL_URL = process.env.NEXT_PUBLIC_ZCAL_URL ?? ''
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? ''
 export const SITE_NAME = 'Appvise Consulting'
-export const SITE_DESCRIPTION = 'Automatisation, développement sur-mesure et IA pour entrepreneurs'
+export const SITE_DESCRIPTION = 'Intégrateur IA & automatisation pour indépendants et TPE'
 export const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''
 export const YOUTUBE_URL = process.env.NEXT_PUBLIC_YOUTUBE_URL ?? ''
 

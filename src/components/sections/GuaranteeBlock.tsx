@@ -21,7 +21,7 @@ export default function GuaranteeBlock() {
           <CheckItem>Aucun engagement au-delà du projet</CheckItem>
         </div>
         <p className="text-white/80 mt-8 text-lg leading-relaxed border-t border-border pt-8">
-          Et ce qui me convient, à moi, ce n&apos;est pas que vous payiez. C&apos;est que vous utilisiez encore l&apos;outil dans <span className="text-primary">6 mois.</span> C&apos;est mon seul critère.
+          Et ce qui me convient, à moi, ce n&apos;est pas que vous payiez. C&apos;est que <span className="text-primary">six mois plus tard,</span> l&apos;outil fasse encore partie de votre quotidien.
         </p>
       </div>
     </section>

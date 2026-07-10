@@ -25,7 +25,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-text-muted text-sm mt-2">
-              Automatisation, développement sur-mesure et IA pour entrepreneurs.
+              Intégrateur IA &amp; automatisation pour indépendants et TPE.
             </p>
           </div>
 

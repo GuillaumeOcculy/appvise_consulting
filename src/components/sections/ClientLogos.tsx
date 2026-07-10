@@ -38,7 +38,7 @@ export default function ClientLogos() {
           Une base technique solide.
         </h2>
         <p className="text-text-muted mt-4 text-lg leading-relaxed">
-          Avant d&apos;automatiser pour des indépendants, j&apos;ai construit des systèmes pour des grands comptes — des APIs qui servent des millions d&apos;utilisateurs. C&apos;est ce qui me permet de diagnostiquer ce dont vous avez vraiment besoin, et de livrer des automatisations qui tiennent.
+          Avant d&apos;automatiser pour des indépendants, j&apos;ai construit des systèmes pour des grands comptes — des APIs qui servent des millions d&apos;utilisateurs. Aujourd&apos;hui, j&apos;intègre l&apos;IA directement dans les produits et les équipes en entreprise. C&apos;est ce qui me permet de diagnostiquer ce dont vous avez vraiment besoin, et de livrer des solutions qui tiennent.
         </p>
       </div>
 

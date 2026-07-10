@@ -6,6 +6,7 @@ import ClientLogos from '@/components/sections/ClientLogos'
 import Testimonials from '@/components/sections/Testimonials'
 import InlineCTA from '@/components/sections/InlineCTA'
 import HonestySection from '@/components/sections/HonestySection'
+import AIIntegration from '@/components/sections/AIIntegration'
 import MethodTimeline from '@/components/sections/MethodTimeline'
 import GuaranteeBlock from '@/components/sections/GuaranteeBlock'
 import CTASection from '@/components/sections/CTASection'
@@ -14,11 +15,11 @@ import { createMetadata } from '@/lib/metadata'
 
 export const metadata = {
   ...createMetadata({
-    title: 'Appvise Consulting — Automatisation, développement sur-mesure et IA',
-    description: 'Automatisation n8n, développement sur-mesure et IA pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
+    title: 'Appvise Consulting — Intégrateur IA & automatisation pour indépendants et TPE',
+    description: 'Intégration IA et automatisation pour indépendants et TPE. Un seul interlocuteur, de l\'audit gratuit à la livraison — et un seul critère de succès : que vous utilisiez encore l\'outil dans 6 mois.',
     path: '',
   }),
-  title: { absolute: 'Appvise Consulting — Automatisation, développement sur-mesure et IA' },
+  title: { absolute: 'Appvise Consulting — Intégrateur IA & automatisation pour indépendants et TPE' },
 }
 
 export default function HomePage() {
@@ -31,6 +32,7 @@ export default function HomePage() {
       <Testimonials />
       <CaseStudyCards />
       <ClientLogos />
+      <AIIntegration />
       <TrustBar />
       <InlineCTA />
       <HonestySection />

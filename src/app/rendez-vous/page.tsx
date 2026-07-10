@@ -5,22 +5,22 @@ import TrackRendezVous from './TrackRendezVous'
 
 export const metadata = createMetadata({
   title: 'Réserver un appel gratuit',
-  description: '30 minutes pour identifier tes tâches chronophages et te proposer la solution adaptée. Gratuit, sans engagement.',
+  description: '30 minutes pour identifier vos tâches chronophages et vous proposer la solution adaptée. Gratuit, sans engagement.',
   path: '/rendez-vous',
 })
 
 const steps = [
   {
-    title: 'Choisis ton créneau',
-    description: 'Sélectionne le moment qui te convient directement dans le calendrier ci-dessous.',
+    title: 'Choisissez votre créneau',
+    description: 'Sélectionnez le moment qui vous convient directement dans le calendrier ci-dessous.',
   },
   {
     title: 'Reçois la confirmation',
-    description: 'Tu reçois un email de confirmation avec le lien de visioconférence.',
+    description: 'Vous recevez un email de confirmation avec le lien de visioconférence.',
   },
   {
     title: 'On échange 30 minutes',
-    description: 'On identifie ensemble tes tâches chronophages et la solution adaptée à ta situation.',
+    description: 'On identifie ensemble vos tâches chronophages et la solution adaptée à votre situation.',
   },
 ]
 
@@ -33,7 +33,7 @@ export default function RendezVousPage() {
           Réserver un appel gratuit
         </h1>
         <p className="text-text-muted text-lg mt-4">
-          30 minutes pour identifier tes tâches chronophages et te proposer la solution adaptée.
+          30 minutes pour identifier vos tâches chronophages et vous proposer la solution adaptée.
           Gratuit, sans engagement.
         </p>
 
@@ -50,7 +50,7 @@ export default function RendezVousPage() {
         </ol>
 
         <div className="mt-12">
-          <h2 className="font-heading font-semibold text-xl mb-4">Choisis ton créneau</h2>
+          <h2 className="font-heading font-semibold text-xl mb-4">Choisissez votre créneau</h2>
           <div className="bg-paper rounded-2xl p-2 sm:p-3 shadow-[0_24px_64px_rgba(2,2,7,0.55)] overflow-hidden">
             <EmbedWrapper
               src={ZCAL_URL}

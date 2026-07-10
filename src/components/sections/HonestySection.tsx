@@ -1,8 +1,8 @@
 import { X } from 'lucide-react'
 
 const items = [
-  'Pas de devis surprise — tu sais exactement ce que tu paies avant de commencer',
-  'Pas de livraison bâclée — itérations illimitées jusqu\'à ta satisfaction',
+  'Pas de devis surprise — vous savez exactement ce que vous payez avant de commencer',
+  'Pas de livraison bâclée — itérations illimitées jusqu\'à votre satisfaction',
   'Pas de jargon technique — on parle résultats, pas technologies',
 ]
 

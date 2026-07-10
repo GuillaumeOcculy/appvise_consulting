@@ -5,7 +5,7 @@ import TrackQuiz from './TrackQuiz'
 
 export const metadata = createMetadata({
   title: 'Diagnostic automatisation',
-  description: 'Quelques questions pour repérer ce qui peut être automatisé dans ton activité et par quoi commencer. Gratuit, moins de 2 minutes.',
+  description: 'Quelques questions pour repérer ce qui peut être automatisé dans votre activité et par quoi commencer. Gratuit, moins de 2 minutes.',
   path: '/quiz',
 })
 
@@ -15,10 +15,10 @@ export default function QuizPage() {
       <TrackQuiz />
       <div className="max-w-3xl mx-auto px-4">
         <h1 className="font-heading font-semibold text-3xl md:text-4xl">
-          Ton diagnostic automatisation en 2 minutes
+          Votre diagnostic automatisation en 2 minutes
         </h1>
         <p className="text-text-muted text-lg mt-4">
-          Quelques questions pour repérer ce qui peut être automatisé dans ton activité
+          Quelques questions pour repérer ce qui peut être automatisé dans votre activité
           — et par quoi commencer.
         </p>
 

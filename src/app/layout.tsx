@@ -21,10 +21,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Appvise Consulting — Automatisation, développement sur-mesure et IA',
+    default: 'Appvise Consulting — Intégrateur IA & automatisation pour indépendants et TPE',
     template: '%s | Appvise Consulting',
   },
-  description: 'Automatisation n8n, développement sur-mesure et IA pour entrepreneurs. Un seul interlocuteur, de l\'audit gratuit à la livraison.',
+  description: 'Intégration IA et automatisation pour indépendants et TPE. Un seul interlocuteur, de l\'audit gratuit à la livraison — et un seul critère de succès : que vous utilisiez encore l\'outil dans 6 mois.',
   openGraph: {
     siteName: 'Appvise Consulting',
     type: 'website',
